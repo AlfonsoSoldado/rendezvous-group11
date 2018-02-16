@@ -314,7 +314,7 @@
 	<property name="rendezvous" ref="rendezvous1" />
 	<property name="answers">
 			<list>
-				<ref ref="answer1" />
+				<ref bean="answer1" />
 			</list>
 		</property>
 </bean>
@@ -325,7 +325,7 @@
 	<property name="rendezvous" ref="rendezvous2" />
 	<property name="answers">
 			<list>
-				<ref ref="answer2" />
+				<ref bean="answer2" />
 			</list>
 		</property>
 </bean>
