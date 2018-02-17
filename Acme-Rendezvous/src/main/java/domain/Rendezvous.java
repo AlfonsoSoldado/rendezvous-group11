@@ -6,6 +6,10 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Future;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -77,5 +81,52 @@ public class Rendezvous extends DomainEntity {
 	public void setAdultOnly(final boolean adultOnly) {
 		this.adultOnly = adultOnly;
 	}
+	
+	//Relationships -------------------------------------------------
 
+	private Comment comment;
+	private User attender;
+	private User creator;
+	private Announcement announcement;
+	private Rendezvous similar;
+	
+	@OneToMany
+	public Comment getComment() {
+		return comment;
+	}
+	public void setComment(Comment comment) {
+		this.comment = comment;
+	}
+
+	@ManyToMany
+	public User getAttender() {
+		return attender;
+	}
+	public void setAttender(User attender) {
+		this.attender = attender;
+	}
+
+	@ManyToOne(optional = true)
+	public User getCreator() {
+		return creator;
+	}
+	public void setCreator(User creator) {
+		this.creator = creator;
+	}
+
+	@OneToMany
+	public Announcement getAnnouncement() {
+		return announcement;
+	}
+	public void setAnnouncement(Announcement announcement) {
+		this.announcement = announcement;
+	}
+
+	@OneToOne(optional = true)
+	public Rendezvous getSimilar() {
+		return similar;
+	}
+	public void setSimilar(Rendezvous similar) {
+		this.similar = similar;
+	}
 }
