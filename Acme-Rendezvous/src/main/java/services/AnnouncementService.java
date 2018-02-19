@@ -22,6 +22,12 @@ public class AnnouncementService {
 	private AnnouncementRepository	announcementRepository;
 
 
+	// Constructor
+
+	public AnnouncementService() {
+		super();
+	}
+
 	// Simple CRUD methods ----------------------------------------------------
 
 	public Announcement create() {
@@ -72,7 +78,7 @@ public class AnnouncementService {
 
 		this.announcementRepository.delete(announcement);
 
-		//TODO Añadir restricción: solo el creador del rendezVous puede elimina  un announcement al mismo (en controlador)
+		//TODO Añadir restricción: solo el creador del rendezVous puede eliminar un announcement al mismo (en controlador)
 	}
 
 }

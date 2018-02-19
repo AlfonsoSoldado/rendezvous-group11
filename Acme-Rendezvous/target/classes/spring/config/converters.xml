@@ -21,6 +21,8 @@
 		<bean class="converters.StringToAnswerConverter" />
 		<bean class="converters.RendezvousToStringConverter" />
 		<bean class="converters.StringToRendezvousConverter" />
+		<bean class="converters.RSVPToStringConverter" />
+		<bean class="converters.StringToRSVPConverter" />
 
 	</util:list>
 
