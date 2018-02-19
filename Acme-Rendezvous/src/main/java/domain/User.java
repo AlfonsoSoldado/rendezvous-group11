@@ -34,6 +34,7 @@ public class User extends Actor {
 	private Comment comment;
 	private Rendezvous rendezvous;
 	private RSVP rsvp;
+	private Question question;
 	
 	@OneToMany(mappedBy = "user")
 	public Comment getComment() {
@@ -60,6 +61,15 @@ public class User extends Actor {
 
 	public void setRsvp(RSVP rsvp) {
 		this.rsvp = rsvp;
+	}
+
+	@OneToMany(mappedBy = "user")
+	public Question getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(Question question) {
+		this.question = question;
 	}
 	
 }

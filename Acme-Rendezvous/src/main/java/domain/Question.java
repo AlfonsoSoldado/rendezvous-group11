@@ -42,7 +42,7 @@ public class Question extends DomainEntity {
 		this.user = user;
 	}
 
-	@OneToMany
+	@OneToMany(mappedBy = "question")
 	public Answer getAnswer() {
 		return answer;
 	}
