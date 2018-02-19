@@ -17,7 +17,9 @@
 		<bean class="converters.StringToAnnouncementConverter" />
 		<bean class="converters.QuestionToStringConverter" />
 		<bean class="converters.StringToQuestionConverter" />
-		
+		<bean class="converters.AnswerToStringConverter" />
+		<bean class="converters.StringToAnswerConverter" />
+
 	</util:list>
 
 </beans>
