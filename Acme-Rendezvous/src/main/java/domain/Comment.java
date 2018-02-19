@@ -19,15 +19,15 @@ public class Comment extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 
-	private String	text;
-	private Date	momentMade;
-	private String	picture;
-
+	private String text;
+	private Date momentMade;
+	private String picture;
 
 	@NotBlank
 	public String getText() {
 		return this.text;
 	}
+
 	public void setText(final String text) {
 		this.text = text;
 	}
@@ -36,6 +36,7 @@ public class Comment extends DomainEntity {
 	public Date getMomentMade() {
 		return this.momentMade;
 	}
+
 	public void setMomentMade(final Date momentMade) {
 		this.momentMade = momentMade;
 	}
@@ -44,18 +45,21 @@ public class Comment extends DomainEntity {
 	public String getPicture() {
 		return this.picture;
 	}
+
 	public void setPicture(final String picture) {
 		this.picture = picture;
 	}
 
-	//Relationships -----------------------------------------------
+	// Relationships -----------------------------------------------
 	
+
 	private Collection<Comment> replies;
 
 	@OneToMany
 	public Collection<Comment> getReplies() {
 		return replies;
 	}
+
 	public void setReplies(Collection<Comment> replies) {
 		this.replies = replies;
 	}

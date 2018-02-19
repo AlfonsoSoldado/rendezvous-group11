@@ -36,7 +36,7 @@ public class User extends Actor {
 	private Collection<RSVP> rsvp;
 	private Collection<Question> question;
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany()
 	public Collection<Comment> getComment() {
 		return comment;
 	}

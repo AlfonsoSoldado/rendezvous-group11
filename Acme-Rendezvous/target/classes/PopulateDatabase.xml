@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
- * PopulateDatabase.xml
- *
- * Copyright (C) 2017 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
+<!-- * PopulateDatabase.xml * * Copyright (C) 2017 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
-	
+
 	<!-- User accounts -->
 
 	<bean id="userAccount1" class="security.UserAccount">
 		<property name="username" value="admin" />
-		<property name="pass" value="admin" />
+		<property name="password" value="admin" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -30,9 +24,18 @@
 		</property>
 	</bean>
 
+<bean id="admin1" class="domain.Administrator">
+		<property name="name" value="ffffff" />
+		<property name="surname" value="López Vázquez" />
+		<property name="email" value="javilv@gmail.com" />
+		<property name="phoneNumber" value="6664323536" />
+		<property name="postalAddress" value="41015" />
+		<property name="userAccount" ref="userAccount1" />
+</bean>
+
 	<bean id="userAccount2" class="security.UserAccount">
 		<property name="username" value="user1" />
-		<property name="pass" value="user1" />
+		<property name="password" value="user1" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -44,7 +47,7 @@
 
 	<bean id="userAccount3" class="security.UserAccount">
 		<property name="username" value="user2" />
-		<property name="pass" value="user2" />
+		<property name="password" value="user2" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -63,20 +66,20 @@
 		<property name="postalAddress" value="41013" />
 		<property name="dateBorn" value="2010/03/12" />
 		<property name="userAccount" ref="userAccount2" />
-		
-		<property name="rendezvouses">
+
+		<property name="rendezvous">
 			<list>
 				<ref bean="rendezvous1" />
 			</list>
 		</property>
 
-	<property name="rsvps">
+		<property name="rsvp">
 			<list>
-				<ref bean="Rsvp1" />
+				<ref bean="RSVP1" />
 			</list>
 		</property>
 
-	<property name="comments">
+		<property name="comment">
 			<list>
 				<ref bean="comment1" />
 				<ref bean="comment2" />
@@ -84,30 +87,37 @@
 			</list>
 		</property>
 
+
+		<property name="question">
+			<list>
+				<ref bean="question1" />
+
+			</list>
+		</property>
 	</bean>
-	
-		<bean id="user2" class="domain.User">
-		<property name="name" value="Rojas" />
+
+	<bean id="user2" class="domain.User">
+		<property name="name" value="Rojassss" />
 		<property name="surname" value="Rojas Rojas" />
 		<property name="email" value="rojas@gmail.com" />
 		<property name="phoneNumber" value="6664323536" />
 		<property name="postalAddress" value="41013" />
 		<property name="dateBorn" value="2010/03/12" />
 		<property name="userAccount" ref="userAccount3" />
-		
-		<property name="rendezvouses">
+
+		<property name="rendezvous">
 			<list>
 				<ref bean="rendezvous2" />
 			</list>
 		</property>
 
-	<property name="rsvps">
+		<property name="rsvp">
 			<list>
-				<ref bean="Rsvp2" />
+				<ref bean="RSVP2" />
 			</list>
 		</property>
 
-	<property name="comments">
+		<property name="comment">
 			<list>
 				<ref bean="comment3" />
 				<ref bean="comment4" />
@@ -119,123 +129,80 @@
 
 	<bean id="rendezvous1" class="domain.Rendezvous">
 		<property name="name" value="rendezvous1" />
-		<property name="description" value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod" />
+		<property name="description"
+			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod" />
 		<property name="moment" value="2020/03/12" />
 		<property name="gpsCoordinate" ref="gps1" />
-		<property name="picture" value="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" />
-		<property name="attendants" >
+		<property name="picture"
+			value="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" />
+		<property name="attendant">
 			<list>
 				<ref bean="user1" />
 			</list>
 		</property>
-
 		<property name="finalMode" value="true" />
-		
 		<property name="adultOnly" value="true" />
-		<property name="display" value="true" />
 		
-
-		<property name="users" >
+		<property name="comment">
 			<list>
-				<ref bean="user1"/>
+				<ref bean="comment1" />
+				<ref bean="comment2" />
 			</list>
 		</property>
+		<property name="Announcement" ref="Announcement1" />
 
-		<property name="comments" >
+		<property name="similar">
 			<list>
-				<ref bean="comment1"/>
-				<ref bean="comment2"/>
-				
+				<ref bean="rendezvous2" />
 			</list>
 		</property>
-
-		
-		<property name="anonoucements" >
-			<list>
-				<ref bean="anonoucement1"/>
-				
-			</list>
-		</property>
-
-
-		<property name="similars" >
-			<list>
-				<ref bean="rendezvous2"/>				
-			</list>
-		</property>
-
 	</bean>
 
 
 	<bean id="rendezvous2" class="domain.Rendezvous">
 		<property name="name" value="rendezvous2" />
-		<property name="description" value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod" />
+		<property name="description"
+			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod" />
 		<property name="moment" value="2020/03/12" />
 		<property name="gpsCoordinate" ref="gps2" />
-		<property name="picture" value="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" />
-		<property name="attendants" >
+		<property name="picture"
+			value="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" />
+		<property name="attendant">
 			<list>
 				<ref bean="user2" />
 			</list>
 		</property>
-
 		<property name="finalMode" value="false" />
-		
 		<property name="adultOnly" value="false" />
-		<property name="display" value="false" />
 		
-
-		<property name="users" >
+		<property name="comment">
 			<list>
-				<ref bean="user2"/>
+				<ref bean="comment3" />
+				<ref bean="comment4" />
+
 			</list>
 		</property>
-
-		<property name="comments" >
+		<property name="Announcement" ref="Announcement2" />
+		<property name="similar">
 			<list>
-				<ref bean="comment3"/>
-				<ref bean="comment4"/>
-				
+				<ref bean="rendezvous1" />
 			</list>
 		</property>
-
-		
-		<property name="anonoucements" >
-			<list>
-				<ref bean="anonoucement2"/>
-				
-			</list>
-		</property>
-
-
-		<property name="similars" >
-			<list>
-				<ref bean="rendezvous1"/>				
-			</list>
-		</property>
-
 	</bean>
 
 
-	<bean id="Rsvp1" class="domain.Rsvp">
+	<bean id="RSVP1" class="domain.RSVP">
 		<property name="confirmed" value="true" />
-		<property name="rendezvouses">
-			<list>
-				<ref bean="rendezvous1"/>
-			</list>
-		</property>
+		<property name="rendezvous" ref="rendezvous1" />
 	</bean>
 
-	<bean id="Rsvp2" class="domain.Rsvp">
+	<bean id="RSVP2" class="domain.RSVP">
 		<property name="confirmed" value="false" />
-		<property name="rendezvouses">
-			<list>
-				<ref bean="rendezvous2"/>
-			</list>
-		</property>
+		<property name="rendezvous" ref="rendezvous2" />
+
 	</bean>
 
-	<bean id="gps1" class="domain.Gps">
+	<bean id="gps1" class="domain.GPS">
 		<property name="latitude" value="10.0" />
 		<property name="longitude" value="10.0" />
 		<property name="name" value="gps1" />
@@ -243,103 +210,123 @@
 	</bean>
 
 
-	<bean id="gps2" class="domain.Gps">
+	<bean id="gps2" class="domain.GPS">
 		<property name="latitude" value="10.0" />
 		<property name="longitude" value="10.0" />
 		<property name="name" value="gps2" />
 
 	</bean>
 
-	<bean id="anonoucement1" class="domain.Anonoucement">
-		<property name="title" value="anonoucement1" />
-		<property name="description" value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod" />
+	<bean id="Announcement1" class="domain.Announcement">
+		<property name="title" value="Announcement1" />
+		<property name="description"
+			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod" />
 		<property name="momentMade" value="2010/10/10" />
 
 	</bean>
 
-	<bean id="anonoucement2" class="domain.Anonoucement">
-		<property name="title" value="anonoucement2" />
-		<property name="description" value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod" />
+	<bean id="Announcement2" class="domain.Announcement">
+		<property name="title" value="Announcement2" />
+		<property name="description"
+			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod" />
 		<property name="momentMade" value="2010/10/10" />
 
 	</bean>
 
-		<bean id="comment1" class="domain.Comment">
-		<property name="text" value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
+	<bean id="comment1" class="domain.Comment">
+		<property name="text"
+			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad min" />
 		<property name="momentMade" value="2010/10/10" />
-		<property name="picture" value="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" />
-		<property name="user" ref="user1" />
-
+		<property name="picture"
+			value="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" />
+		<property name="replies">
+			<list>
+				<ref bean="comment2" />
+			</list>
+		</property>
 	</bean>
 
 
-		<bean id="comment2" class="domain.Comment">
-		<property name="text" value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		 occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
+	<bean id="comment2" class="domain.Comment">
+		<property name="text"
+			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim" />
 		<property name="momentMade" value="2010/10/10" />
-		<property name="picture" value="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" />
-		<property name="user" ref="user1" />
-
+		<property name="picture"
+			value="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" />
+		<property name="replies">
+			<list>
+			</list>
+		</property>
+		
 	</bean>
 
 
-		<bean id="comment3" class="domain.Comment">
-		<property name="text" value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, aborum." />
+	<bean id="comment3" class="domain.Comment">
+		<property name="text"
+			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, aborum." />
 		<property name="momentMade" value="2010/10/10" />
-		<property name="picture" value="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" />
-		<property name="user" ref="user2" />
-
+		<property name="picture"
+			value="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" />
+		<property name="replies">
+			<list>
+				<ref bean="comment4" />
+			</list>
+		</property>
+		
 	</bean>
 
 
-		<bean id="comment4" class="domain.Comment">
-		<property name="text" value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	<bean id="comment4" class="domain.Comment">
+		<property name="text"
+			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 		tempor incididunt ut labore et do" />
 		<property name="momentMade" value="2010/10/10" />
-		<property name="picture" value="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" />
-		<property name="user" ref="user2" />
-
+		<property name="picture"
+			value="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" />
+		<property name="replies">
+			<list>
+			</list>
+		</property>
+		
 	</bean>
 
-<bean  id="question1" class="domain.Question">
-	<property name="text" value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod?" />
-	<property name="user" ref="user1" />
-	<property name="rendezvous" ref="rendezvous1" />
-	<property name="answers">
+	<bean id="question1" class="domain.Question">
+		<property name="text"
+			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod?" />
+		<property name="answer">
 			<list>
 				<ref bean="answer1" />
 			</list>
 		</property>
-</bean>
+	</bean>
 
-<bean  id="question2" class="domain.Question">
-	<property name="text" value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod?" />
-	<property name="user" ref="user2" />
-	<property name="rendezvous" ref="rendezvous2" />
-	<property name="answers">
+	<bean id="question2" class="domain.Question">
+		<property name="text"
+			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod?" />
+		<property name="answer">
 			<list>
 				<ref bean="answer2" />
 			</list>
 		</property>
-</bean>
+	</bean>
 
 
-<bean  id="answer1" class="domain.Answer">
-	<property name="text" value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod?" />
-</bean>
+	<bean id="answer1" class="domain.Answer">
+		<property name="text"
+			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod?" />
+		<property name="question" ref="question1" />
+	</bean>
 
-<bean  id="answer2" class="domain.Answer">
-	<property name="text" value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod?" />
-</bean>
+	<bean id="answer2" class="domain.Answer">
+		<property name="text"
+			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod?" />
+		<property name="question" ref="question2" />
+
+	</bean>
 
 
-	<!-- Other domain beans come here -->	
-	
+	<!-- Other domain beans come here -->
+
 </beans>

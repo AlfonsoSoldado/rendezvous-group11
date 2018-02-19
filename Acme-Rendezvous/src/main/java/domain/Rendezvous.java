@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -30,6 +31,7 @@ public class Rendezvous extends DomainEntity {
 
 
 	@NotBlank
+	@Column(insertable = false, updatable = false)
 	public String getName() {
 		return this.name;
 	}
