@@ -45,6 +45,8 @@ public class RSVPServiceTest extends AbstractTest {
 		final int id = saved.getId();
 		Assert.isTrue(id != 0);
 		Assert.notNull(this.rsvpService.findOne(id));
+		saved.setConfirmed(false);
+		Assert.isTrue(this.rsvpService.findOne(saved.getId()).getConfirmed() == false);
 		Assert.isTrue(this.rsvpService.findAll().contains(saved));
 		this.rsvpService.delete(saved);
 		Assert.isTrue(!this.rsvpService.findAll().contains(saved));

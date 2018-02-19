@@ -37,10 +37,13 @@ public class AnnouncementServiceTest extends AbstractTest {
 		announcement.setTitle(title);
 		announcement.setDescription(description);
 
-		final Announcement saved = this.announcementService.save(announcement);
+		Announcement saved = this.announcementService.save(announcement);
 		final int id = saved.getId();
 		Assert.isTrue(id != 0);
 		Assert.notNull(this.announcementService.findOne(id));
+		saved.setTitle("updated");
+		saved = this.announcementService.save(saved);
+		Assert.isTrue(this.announcementService.findOne(saved.getId()).getTitle() == "updated");
 		Assert.isTrue(this.announcementService.findAll().contains(saved));
 		this.announcementService.delete(saved);
 		Assert.isTrue(!this.announcementService.findAll().contains(saved));

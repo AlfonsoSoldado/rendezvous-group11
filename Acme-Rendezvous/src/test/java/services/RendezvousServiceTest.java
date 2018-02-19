@@ -27,9 +27,6 @@ public class RendezvousServiceTest extends AbstractTest {
 	@Autowired
 	private RendezvousService	rendezvousService;
 
-	@Autowired
-	private CommentService		commentService;
-
 
 	// Tests --------------------
 
@@ -62,6 +59,8 @@ public class RendezvousServiceTest extends AbstractTest {
 		final int id = saved.getId();
 		Assert.isTrue(id != 0);
 		Assert.notNull(this.rendezvousService.findOne(id));
+		saved.setAdultOnly(false);
+		Assert.isTrue(this.rendezvousService.findOne(saved.getId()).getAdultOnly() == false);
 		Assert.isTrue(this.rendezvousService.findAll().contains(saved));
 		this.rendezvousService.delete(saved);
 		Assert.isTrue(!this.rendezvousService.findAll().contains(saved));

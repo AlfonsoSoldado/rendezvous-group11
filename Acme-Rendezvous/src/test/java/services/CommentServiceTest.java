@@ -37,10 +37,13 @@ public class CommentServiceTest extends AbstractTest {
 		comment.setText(text);
 		comment.setPicture(picture);
 
-		final Comment saved = this.commentService.save(comment);
+		Comment saved = this.commentService.save(comment);
 		final int id = saved.getId();
 		Assert.isTrue(id != 0);
 		Assert.notNull(this.commentService.findOne(id));
+		saved.setText("updated");
+		saved = this.commentService.save(saved);
+		Assert.isTrue(this.commentService.findOne(saved.getId()).getText() == "updated");
 		Assert.isTrue(this.commentService.findAll().contains(saved));
 		this.commentService.delete(saved);
 		Assert.isTrue(!this.commentService.findAll().contains(saved));
