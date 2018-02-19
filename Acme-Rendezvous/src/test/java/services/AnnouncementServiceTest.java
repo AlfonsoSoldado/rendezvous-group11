@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Announcement;
@@ -30,5 +31,18 @@ public class AnnouncementServiceTest extends AbstractTest {
 	public void test() {
 
 		final Announcement announcement = this.announcementService.create();
+
+		final String description = "Descripción 1";
+		final String title = "Título 1";
+		announcement.setTitle(title);
+		announcement.setDescription(description);
+
+		final Announcement saved = this.announcementService.save(announcement);
+		final int id = saved.getId();
+		Assert.isTrue(id != 0);
+		Assert.notNull(this.announcementService.findOne(id));
+		Assert.isTrue(this.announcementService.findAll().contains(saved));
+		this.announcementService.delete(saved);
+		Assert.isTrue(!this.announcementService.findAll().contains(saved));
 	}
 }

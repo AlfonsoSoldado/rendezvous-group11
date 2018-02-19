@@ -57,6 +57,8 @@ public class AnnouncementService {
 			Date momentMade;
 			momentMade = new Date(System.currentTimeMillis() - 1000);
 			result.setMomentMade(momentMade);
+
+			//TODO Añadir restricción: solo el creador del rendezVous puede asociar un announcement al mismo (en controlador)
 		}
 
 		result = this.announcementRepository.save(result);
@@ -69,6 +71,8 @@ public class AnnouncementService {
 		Assert.isTrue(announcement.getId() != 0);
 
 		this.announcementRepository.delete(announcement);
+
+		//TODO Añadir restricción: solo el creador del rendezVous puede elimina  un announcement al mismo (en controlador)
 	}
 
 }
