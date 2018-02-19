@@ -19,6 +19,8 @@
 		<bean class="converters.StringToQuestionConverter" />
 		<bean class="converters.AnswerToStringConverter" />
 		<bean class="converters.StringToAnswerConverter" />
+		<bean class="converters.RendezvousToStringConverter" />
+		<bean class="converters.StringToRendezvousConverter" />
 
 	</util:list>
 
