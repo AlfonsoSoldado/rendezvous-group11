@@ -1,12 +1,13 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -47,25 +48,16 @@ public class Comment extends DomainEntity {
 		this.picture = picture;
 	}
 
-	//Relationships
+	//Relationships -----------------------------------------------
 	
-	private User user;
-	private Comment reply;
-	
-	@ManyToOne(optional = true)
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
+	private Collection<Comment> replies;
 
-	@ManyToOne(optional = true)
-	public Comment getReply() {
-		return reply;
+	@OneToMany
+	public Collection<Comment> getReplies() {
+		return replies;
 	}
-	public void setReply(Comment reply) {
-		this.reply = reply;
+	public void setReplies(Collection<Comment> replies) {
+		this.replies = replies;
 	}
 
 }
