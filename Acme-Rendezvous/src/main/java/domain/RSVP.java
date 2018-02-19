@@ -26,7 +26,7 @@ public class RSVP extends DomainEntity {
 
 	private Rendezvous rendezvous;
 	
-	@ManyToOne(optional = true)
+	@ManyToOne(optional = false)
 	public Rendezvous getRendezvous() {
 		return rendezvous;
 	}

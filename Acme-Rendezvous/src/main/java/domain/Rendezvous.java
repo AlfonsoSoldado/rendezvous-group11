@@ -1,13 +1,12 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Future;
@@ -84,49 +83,43 @@ public class Rendezvous extends DomainEntity {
 	
 	//Relationships -------------------------------------------------
 
-	private Comment comment;
-	private User attender;
-	private User creator;
+	private Collection<Comment> comment;
+	private Collection<User> attendant;
 	private Announcement announcement;
-	private Rendezvous similar;
+	private Collection<Rendezvous> similar;
 	
 	@OneToMany
-	public Comment getComment() {
+	public Collection<Comment> getComment() {
 		return comment;
 	}
-	public void setComment(Comment comment) {
+	public void setComment(Collection<Comment> comment) {
 		this.comment = comment;
 	}
-
-	@ManyToMany
-	public User getAttender() {
-		return attender;
-	}
-	public void setAttender(User attender) {
-		this.attender = attender;
-	}
-
-	@ManyToOne(optional = true)
-	public User getCreator() {
-		return creator;
-	}
-	public void setCreator(User creator) {
-		this.creator = creator;
-	}
-
+	
 	@OneToMany
+	public Collection<User> getAttendant() {
+		return attendant;
+	}
+	public void setAttendant(Collection<User> attendant) {
+		this.attendant = attendant;
+	}
+
+	@OneToOne(optional = true)
 	public Announcement getAnnouncement() {
 		return announcement;
 	}
 	public void setAnnouncement(Announcement announcement) {
 		this.announcement = announcement;
 	}
-
-	@OneToOne(optional = true)
-	public Rendezvous getSimilar() {
+	
+	@OneToMany
+	public Collection<Rendezvous> getSimilar() {
 		return similar;
 	}
-	public void setSimilar(Rendezvous similar) {
+	public void setSimilar(Collection<Rendezvous> similar) {
 		this.similar = similar;
 	}
+
+
+
 }

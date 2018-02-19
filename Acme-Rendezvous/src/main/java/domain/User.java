@@ -1,12 +1,12 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,44 +31,44 @@ public class User extends Actor {
 	
 	// Relationships --------------------------------------------------
 
-	private Comment comment;
-	private Rendezvous rendezvous;
-	private RSVP rsvp;
-	private Question question;
+	private Collection<Comment> comment;
+	private Collection<Rendezvous> rendezvous;
+	private Collection<RSVP> rsvp;
+	private Collection<Question> question;
 	
 	@OneToMany(mappedBy = "user")
-	public Comment getComment() {
+	public Collection<Comment> getComment() {
 		return comment;
 	}
 
-	public void setComment(Comment comment) {
+	public void setComment(Collection<Comment> comment) {
 		this.comment = comment;
 	}
 
-	@ManyToMany
-	public Rendezvous getRendezvous() {
+	@OneToMany
+	public Collection<Rendezvous> getRendezvous() {
 		return rendezvous;
 	}
 
-	public void setRendezvous(Rendezvous rendezvous) {
+	public void setRendezvous(Collection<Rendezvous> rendezvous) {
 		this.rendezvous = rendezvous;
 	}
 
 	@OneToMany
-	public RSVP getRsvp() {
+	public Collection<RSVP> getRsvp() {
 		return rsvp;
 	}
 
-	public void setRsvp(RSVP rsvp) {
+	public void setRsvp(Collection<RSVP> rsvp) {
 		this.rsvp = rsvp;
 	}
 
-	@OneToMany(mappedBy = "user")
-	public Question getQuestion() {
+	@OneToMany
+	public Collection<Question> getQuestion() {
 		return question;
 	}
 
-	public void setQuestion(Question question) {
+	public void setQuestion(Collection<Question> question) {
 		this.question = question;
 	}
 	
