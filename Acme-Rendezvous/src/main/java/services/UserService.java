@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.UserRepository;
+import security.LoginService;
+import security.UserAccount;
 import domain.Comment;
 import domain.Question;
 import domain.RSVP;
@@ -78,4 +80,38 @@ public class UserService {
 
 		this.userRepository.delete(user);
 	}
+
+	public User findByPrincipal() {
+		User e;
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+		e = this.userRepository.findByPrincipal(userAccount.getId());
+		return e;
+	}
+
+	public User findCreator(final int rendezvousId) {
+		User result;
+		result = this.userRepository.findCreator(rendezvousId);
+		Assert.notNull(result);
+
+		return result;
+	}
+
+	public Collection<User> findAttendants(final int rendezvousId) {
+		Collection<User> result;
+		result = this.userRepository.findAttendants(rendezvousId);
+		Assert.notNull(result);
+
+		return result;
+	}
+
+	public Collection<User> findRUserSVPbyRendezvous(final int rendezvousId) {
+		Collection<User> result;
+		result = this.userRepository.findUserRSVPbyRendezvous(rendezvousId);
+		Assert.notNull(result);
+
+		return result;
+	}
+
 }
