@@ -23,8 +23,8 @@
 
 <%-- Attributes --%> 
  
-<%@ attribute name="path" required="true" %>
-<%@ attribute name="poperty" required="true" %>
+<%@ attribute name="code" required="true" %>
+<%@ attribute name="property" required="true" %>
 
 <%@ attribute name="sortable" required="false" %>
 
