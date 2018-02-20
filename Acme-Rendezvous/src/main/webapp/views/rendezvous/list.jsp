@@ -18,25 +18,24 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <!-- Listing grid -->
 
-<display:table pagesize="${numPage}" class="displaytag" keepStatus="true"
+<display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="rendezvous" requestURI="${requestUri}" id="row">
 	
 	<!-- Attributes -->
 	
 	<acme:column code="rendezvous.name" property="name" />
+	<acme:column code="rendezvous.description" property="description" />
+	<acme:column code="rendezvous.moment" property="moment" />
+	<acme:column code="rendezvous.finalMode" property="finalMode" />
 	
 </display:table>
 
 <!-- Action links -->
 
-<security:authorize access="hasRole('MANAGER')">
-	<div>
-		<a href="trip/manager/create.do"> <spring:message
-				code="trip.create" />
-		</a>
-	</div>
+<security:authorize access="hasRole('USER')">
+	<acme:links url="rendezvous/create.do" code="rendezvous.create" />
 </security:authorize>
