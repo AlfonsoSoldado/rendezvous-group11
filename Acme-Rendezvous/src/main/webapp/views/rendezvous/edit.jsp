@@ -36,9 +36,7 @@
 	<!-- Buttons -->
 	
 	<acme:submit name="save" code="rendezvous.save"/>
-	
-	
-	
+	<acme:delete confirmationCode="rendezvous.confirm.delete" buttonCode="rendezvous.delete" id="${rendezvous.id }"/>
 	<acme:cancel url="rendezvous/list.do" code="rendezvous.cancel"/>
 	
 	</security:authorize>
