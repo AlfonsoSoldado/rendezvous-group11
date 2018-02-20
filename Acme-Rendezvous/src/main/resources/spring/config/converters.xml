@@ -23,6 +23,8 @@
 		<bean class="converters.StringToRendezvousConverter" />
 		<bean class="converters.RSVPToStringConverter" />
 		<bean class="converters.StringToRSVPConverter" />
+		<bean class="converters.CommentToStringConverter" />
+		<bean class="converters.StringToCommentConverter" />
 
 	</util:list>
 

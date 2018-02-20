@@ -61,5 +61,13 @@ public class AnswerService {
 		Assert.isTrue(answer.getId() != 0);
 		this.answerRepository.delete(answer);
 	}
+	
+	// Other business method --------------------------------------------------
+	
+	public Collection<Answer> findAnswersByQuestion(int id) {
+		Collection<Answer> res;
+		res = this.answerRepository.findAnswersByQuestion(id);
+		return res;
+	}
 
 }

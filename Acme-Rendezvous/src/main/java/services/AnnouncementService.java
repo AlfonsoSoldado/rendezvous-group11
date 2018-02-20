@@ -1,4 +1,3 @@
-
 package services;
 
 import java.util.Collection;
@@ -18,9 +17,9 @@ import domain.Announcement;
 public class AnnouncementService {
 
 	// Managed repository -----------------------------------------------------
-	@Autowired
-	private AnnouncementRepository	announcementRepository;
 
+	@Autowired
+	private AnnouncementRepository announcementRepository;
 
 	// Constructor
 
@@ -64,7 +63,8 @@ public class AnnouncementService {
 			momentMade = new Date(System.currentTimeMillis() - 1000);
 			result.setMomentMade(momentMade);
 
-			//TODO Añadir restricción: solo el creador del rendezVous puede asociar un announcement al mismo (en controlador)
+			// TODO Añadir restricción: solo el creador del rendezVous puede
+			// asociar un announcement al mismo (en controlador)
 		}
 
 		result = this.announcementRepository.save(result);
@@ -78,7 +78,8 @@ public class AnnouncementService {
 
 		this.announcementRepository.delete(announcement);
 
-		//TODO Añadir restricción: solo el creador del rendezVous puede eliminar un announcement al mismo (en controlador)
+		// TODO Añadir restricción: solo el creador del rendezVous puede
+		// eliminar un announcement al mismo (en controlador)
 	}
 
 }
