@@ -1,4 +1,3 @@
-
 package services;
 
 import java.util.Collection;
@@ -19,10 +18,9 @@ public class AnswerService {
 	// Managed repository -----------------------------------------------------
 
 	@Autowired
-	private AnswerRepository	answerRepository;
+	private AnswerRepository answerRepository;
 
-
-	// Constructor
+	// Constructor ------------------------------------------------------------
 
 	public AnswerService() {
 		super();
@@ -61,9 +59,9 @@ public class AnswerService {
 		Assert.isTrue(answer.getId() != 0);
 		this.answerRepository.delete(answer);
 	}
-	
+
 	// Other business method --------------------------------------------------
-	
+
 	public Collection<Answer> findAnswersByQuestion(int id) {
 		Collection<Answer> res;
 		res = this.answerRepository.findAnswersByQuestion(id);
