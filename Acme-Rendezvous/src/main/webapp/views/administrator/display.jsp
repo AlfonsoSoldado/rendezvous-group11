@@ -7,76 +7,74 @@
  * TDG Licence, a copy of which you may download from 
  * http://www.tdg-seville.info/License.html
  --%>
-
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-
+<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
+<spring:message code="administrator.averageRedezvousUser"
+	var="averageRedezvousUser" />
 
-<base
-	href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
+<spring:message code="administrator.EstandardDesviationRedezvousUser"
+	var="EstandardDesviationRedezvousUser" />
 
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<spring:message
+	code="administrator.ratioCreateAndNoCreateRendezvousUser"
+	var="ratioCreateAndNoCreateRendezvousUser" />
 
-<link rel="shortcut icon" href="favicon.ico"/> 
+<spring:message code="administrator.ratioUserConRendezvous"
+	var="ratioUserConRendezvous" />
 
-<script type="text/javascript" src="scripts/jquery.js"></script>
-<script type="text/javascript" src="scripts/jquery-ui.js"></script>
-<script type="text/javascript" src="scripts/jmenu.js"></script>
+<spring:message code="administrator.ratioUserSinRendezvous"
+	var="ratioUserSinRendezvous" />
 
-<link rel="stylesheet" href="styles/common.css" type="text/css">
-<link rel="stylesheet" href="styles/jmenu.css" media="screen" type="text/css" />
-<link rel="stylesheet" href="styles/displaytag.css" type="text/css">
+<spring:message code="administrator.averageUsersRendezvous"
+	var="averageUsersRendezvous" />
 
-<title><tiles:insertAttribute name="title" ignore="true" /></title>
+<spring:message code="administrator.EstandardDesviationUsersRendezvous"
+	var="EstandardDesviationUsersRendezvous" />
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#jMenu").jMenu();
-	});
+<spring:message code="administrator.averageRendezvousRSVPTruePerUser"
+	var="averageRendezvousRSVPTruePerUser" />
 
-	function askSubmission(msg, form) {
-		if (confirm(msg))
-			form.submit();
-	}
-	
-	function relativeRedir(loc) {	
-		var b = document.getElementsByTagName('base');
-		if (b && b[0] && b[0].href) {
-  			if (b[0].href.substr(b[0].href.length - 1) == '/' && loc.charAt(0) == '/')
-    		loc = loc.substr(1);
-  			loc = b[0].href + loc;
-		}
-		window.location.replace(loc);
-	}
-</script>
+<spring:message
+	code="administrator.EstandardDesviationRendezvousRSVPTruePerUser"
+	var="EstandardDesviationRendezvousRSVPTruePerUser" />
 
-</head>
+<spring:message code="administrator.topRendezvous" var="topRendezvous" />
 
-<body>
 
-	<div>
-		<tiles:insertAttribute name="header" />
-	</div>
-	<div>
-		<h1>
-			<tiles:insertAttribute name="title" />
-		</h1>
-		<tiles:insertAttribute name="body" />	
-		<jstl:if test="${message != null}">
-			<br />
-			<span class="message"><spring:message code="${message}" /></span>
-		</jstl:if>	
-	</div>
-	<div>
-		<tiles:insertAttribute name="footer" />
-	</div>
+<h3>
+	<jstl:out value="${averageRedezvousUser}" />
+</h3>
+<h3>
+	<jstl:out value="${EstandardDesviationRedezvousUser}" />
+</h3>
+<h3>
+	<jstl:out value="${ratioCreateAndNoCreateRendezvousUser}" />
+</h3>
+<h3>
+	<jstl:out value="${ratioUserConRendezvous}" />
+</h3>
+<h3>
+	<jstl:out value="${ratioUserSinRendezvous}" />
+</h3>
+<h3>
+	<jstl:out value="${averageUsersRendezvous}" />
+</h3>
+<h3>
+	<jstl:out value="${EstandardDesviationUsersRendezvous}" />
+</h3>
+<h3>
+	<jstl:out value="${averageRendezvousRSVPTruePerUser}" />
+</h3>
+<h3>
+	<jstl:out value="${EstandardDesviationRendezvousRSVPTruePerUser}" />
+</h3>
+<h3>
+	<jstl:out value="${topRendezvous}" />
+</h3>
 
-</body>
-</html>

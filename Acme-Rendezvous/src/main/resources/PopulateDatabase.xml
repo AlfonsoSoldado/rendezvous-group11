@@ -300,6 +300,7 @@
 				<ref bean="answer1" />
 			</list>
 		</property>
+		<property name="rendezvous" ref="rendezvous1"/>
 	</bean>
 
 	<bean id="question2" class="domain.Question">
@@ -310,6 +311,7 @@
 				<ref bean="answer2" />
 			</list>
 		</property>
+		<property name="rendezvous" ref="rendezvous2"/>
 	</bean>
 
 
