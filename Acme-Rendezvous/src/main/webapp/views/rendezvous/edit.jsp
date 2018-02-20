@@ -1,5 +1,5 @@
 <%--
- * trip.jsp
+ * edit.jsp
  *
  * Copyright (C) 2017 Universidad de Sevilla
  * 
@@ -15,114 +15,29 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="trip/manager/edit.do" modelAttribute="trip">
-
-	<security:authorize access="hasRole('MANAGER')">
+<form:form action="rendezvous/user/edit.do" modelAttribute="rendezvous">
+	<security:authorize access="hasRole('USER')">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	
-	<form:hidden path="ticker"/>
-	<form:hidden path="publication" />
-	<form:hidden path="reason" />
-	<form:hidden path="cancelled" />
-	<form:hidden path="price" />
+	<acme:textbox code="rendezvous.name" path="name"/>
+	<acme:textbox code="rendezvous.description" path="description"/>
+	<acme:date code="rendezvous.moment" path="moment" placeholder="dd/MM/yyyy HH:mm"/>
+	<acme:textbox code="rendezvous.gpsCoordinate.latitude" path="gpsCoordinate.latitude"/>
+	<acme:textbox code="rendezvous.gpsCoordinate.longitude" path="gpsCoordinate.longitude"/>
+	<acme:textbox code="rendezvous.gpsCoordinate.name" path="gpsCoordinate.name"/>
+	<acme:textbox code="rendezvous.picture" path="picture"/>
+	<acme:textbox code="rendezvous.finalMode" path="finalMode"/>
+	<acme:textbox code="rendezvous.adultOnly" path="adultOnly"/>
 	
-	<form:hidden path="manager" />
-	<form:hidden path="application" />
+	<!-- Buttons -->
 	
-	<form:label path="title">
-		<spring:message code="trip.title" />:
-	</form:label>
-	<form:input path="title" />
-	<form:errors cssClass="error" path="title" />
-	<br />
+	<acme:submit name="save" code="rendezvous.save"/>
+	<acme:delete confirmationCode="rendezvous.confirm.delete" buttonCode="rendezvous.delete" id="${rendezvous.id }"/>
+	<acme:cancel url="rendezvous/list.do" code="rendezvous.cancel"/>
 	
-	<form:label path="description">
-		<spring:message code="trip.description" />:
-	</form:label>
-	<form:input path="description" />
-	<form:errors cssClass="error" path="description" />
-	<br />
-	
-	<form:label path="requirement">
-		<spring:message code="trip.requirement" />:
-	</form:label>
-	<form:input path="requirement" />
-	<form:errors cssClass="error" path="requirement" />
-	<br />
-	
-	<form:label path="tripStart">
-		<spring:message code="trip.tripStart" />:
-	</form:label>
-	<form:input path="tripStart" />
-	<form:errors cssClass="error" path="tripStart" />
-	<br />
-	
-	<form:label path="tripEnd">
-		<spring:message code="trip.tripEnd" />:
-	</form:label>
-	<form:input path="tripEnd" />
-	<form:errors cssClass="error" path="tripEnd" />
-	<br />
-	
-	<form:label path="category">
-		<spring:message code="trip.category" />:
-	</form:label>
-	<form:select path="category">
-		<form:options items="${category}" itemLabel="name"/>
-	</form:select>
-	<form:errors cssClass="error" path="category" />
-	<br />
-	
-	<form:label path="ranger">
-		<spring:message code="trip.ranger" />:
-	</form:label>
-	<form:select path="ranger">
-		<form:option item="null" value="0" label="----"/>
-        <form:options items="${ranger}" itemLabel="name"/>
-	</form:select>
-	<form:errors cssClass="error" path="ranger" />
-	<br />
-
-	<form:label path="stage">
-		<spring:message code="trip.stage"/>:
-	</form:label>
-	<form:select path="stage">
-		<form:options items="${stage}" itemLabel="title"/>
-	</form:select>
-	<form:errors cssClass="error" path="stage" />
-	<br />
-	
-	<form:label path="legalText">
-		<spring:message code="trip.legalText"/>:
-	</form:label>
-	<form:select path="legalText">
-		<form:options items="${legalText}" itemLabel="title"/>
-	</form:select>
-	<form:errors cssClass="error" path="legalText" />
-	<br />
-	
-	<form:label path="value">
-		<spring:message code="trip.value"/>:
-	</form:label>
-	<form:select path="value">
-		<form:options items="${values}"/>
-	</form:select>
-	<form:errors cssClass="error" path="value" />
-	<br />
-	
-	<input type="submit" name="save"
-		value="<spring:message code="trip.save" />" />&nbsp; 
-	<jstl:if test="${trip.id != 0}">
-		<input type="submit" name="delete"
-			value="<spring:message code="trip.delete" />"
-			onclick="javascript: return confirm('<spring:message code="trip.confirm.delete" />')" />&nbsp;
-	</jstl:if>
-	<input type="button" name="cancel"
-		value="<spring:message code="trip.cancel" />"
-		onclick="javascript: relativeRedir('/');" />
-	<br />
 	</security:authorize>
 </form:form>
