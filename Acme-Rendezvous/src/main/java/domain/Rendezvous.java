@@ -9,7 +9,6 @@ import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.Future;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -82,46 +81,46 @@ public class Rendezvous extends DomainEntity {
 	public void setAdultOnly(final boolean adultOnly) {
 		this.adultOnly = adultOnly;
 	}
-	
+
+
 	//Relationships -------------------------------------------------
 
-	private Collection<Comment> comment;
-	private Collection<User> attendant;
-	private Announcement announcement;
-	private Collection<Rendezvous> similar;
-	
+	private Collection<Comment>			comment;
+	private Collection<User>			attendant;
+	private Collection<Announcement>	announcement;
+	private Collection<Rendezvous>		similar;
+
+
 	@OneToMany
 	public Collection<Comment> getComment() {
-		return comment;
+		return this.comment;
 	}
-	public void setComment(Collection<Comment> comment) {
+	public void setComment(final Collection<Comment> comment) {
 		this.comment = comment;
 	}
-	
+
 	@OneToMany
 	public Collection<User> getAttendant() {
-		return attendant;
+		return this.attendant;
 	}
-	public void setAttendant(Collection<User> attendant) {
+	public void setAttendant(final Collection<User> attendant) {
 		this.attendant = attendant;
 	}
 
-	@OneToOne(optional = true)
-	public Announcement getAnnouncement() {
-		return announcement;
+	@OneToMany
+	public Collection<Announcement> getAnnouncement() {
+		return this.announcement;
 	}
-	public void setAnnouncement(Announcement announcement) {
+	public void setAnnouncement(final Collection<Announcement> announcement) {
 		this.announcement = announcement;
 	}
-	
+
 	@OneToMany
 	public Collection<Rendezvous> getSimilar() {
-		return similar;
+		return this.similar;
 	}
-	public void setSimilar(Collection<Rendezvous> similar) {
+	public void setSimilar(final Collection<Rendezvous> similar) {
 		this.similar = similar;
 	}
-
-
 
 }

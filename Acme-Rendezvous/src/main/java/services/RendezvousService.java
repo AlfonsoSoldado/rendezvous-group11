@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.RendezvousRepository;
+import domain.Announcement;
 import domain.Comment;
 import domain.Rendezvous;
 import domain.User;
@@ -40,6 +41,7 @@ public class RendezvousService {
 		res.setComment(new ArrayList<Comment>());
 		res.setAttendant(new ArrayList<User>());
 		res.setSimilar(new ArrayList<Rendezvous>());
+		res.setAnnouncement(new ArrayList<Announcement>());
 
 		return res;
 	}

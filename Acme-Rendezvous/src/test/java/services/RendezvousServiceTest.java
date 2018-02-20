@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
+import domain.Announcement;
 import domain.GPS;
 import domain.Rendezvous;
 
@@ -27,9 +28,13 @@ public class RendezvousServiceTest extends AbstractTest {
 	@Autowired
 	private RendezvousService	rendezvousService;
 
+	@Autowired
+	private AnnouncementService	announcementService;
+
 
 	// Tests --------------------
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void test() {
 
@@ -47,6 +52,13 @@ public class RendezvousServiceTest extends AbstractTest {
 		final boolean finalMode = false;
 		final boolean adultOnly = true;
 
+		final Announcement announcement = this.announcementService.create();
+		final String description2 = "Descripción 1";
+		final String title = "Título 1";
+		announcement.setTitle(title);
+		announcement.setDescription(description2);
+		final Announcement saved2 = this.announcementService.save(announcement);
+
 		rendezvous.setName(name);
 		rendezvous.setDescription(description);
 		rendezvous.setMoment(moment);
@@ -54,6 +66,7 @@ public class RendezvousServiceTest extends AbstractTest {
 		rendezvous.setPicture(picture);
 		rendezvous.setFinalMode(finalMode);
 		rendezvous.setAdultOnly(adultOnly);
+		rendezvous.getAnnouncement().add(saved2);
 
 		final Rendezvous saved = this.rendezvousService.save(rendezvous);
 		final int id = saved.getId();

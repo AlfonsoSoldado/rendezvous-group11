@@ -24,14 +24,14 @@
 		</property>
 	</bean>
 
-<bean id="admin1" class="domain.Administrator">
+	<bean id="admin1" class="domain.Administrator">
 		<property name="name" value="ffffff" />
 		<property name="surname" value="López Vázquez" />
 		<property name="email" value="javilv@gmail.com" />
 		<property name="phoneNumber" value="6664323536" />
 		<property name="postalAddress" value="41015" />
 		<property name="userAccount" ref="userAccount1" />
-</bean>
+	</bean>
 
 	<bean id="userAccount2" class="security.UserAccount">
 		<property name="username" value="user1" />
@@ -142,15 +142,18 @@
 		</property>
 		<property name="finalMode" value="true" />
 		<property name="adultOnly" value="true" />
-		
+
 		<property name="comment">
 			<list>
 				<ref bean="comment1" />
 				<ref bean="comment2" />
 			</list>
 		</property>
-		<property name="Announcement" ref="Announcement1" />
-
+		<property name="Announcement">
+			<list>
+				<ref bean="Announcement1" />
+			</list>
+		</property>
 		<property name="similar">
 			<list>
 				<ref bean="rendezvous2" />
@@ -174,7 +177,7 @@
 		</property>
 		<property name="finalMode" value="false" />
 		<property name="adultOnly" value="false" />
-		
+
 		<property name="comment">
 			<list>
 				<ref bean="comment3" />
@@ -182,7 +185,11 @@
 
 			</list>
 		</property>
-		<property name="Announcement" ref="Announcement2" />
+		<property name="Announcement">
+			<list>
+				<ref bean="Announcement2" />
+			</list>
+		</property>
 		<property name="similar">
 			<list>
 				<ref bean="rendezvous1" />
@@ -259,7 +266,7 @@
 			<list>
 			</list>
 		</property>
-		
+
 	</bean>
 
 
@@ -274,7 +281,7 @@
 				<ref bean="comment4" />
 			</list>
 		</property>
-		
+
 	</bean>
 
 
@@ -289,7 +296,7 @@
 			<list>
 			</list>
 		</property>
-		
+
 	</bean>
 
 	<bean id="question1" class="domain.Question">
@@ -300,7 +307,7 @@
 				<ref bean="answer1" />
 			</list>
 		</property>
-		<property name="rendezvous" ref="rendezvous1"/>
+		<property name="rendezvous" ref="rendezvous1" />
 	</bean>
 
 	<bean id="question2" class="domain.Question">
@@ -311,7 +318,7 @@
 				<ref bean="answer2" />
 			</list>
 		</property>
-		<property name="rendezvous" ref="rendezvous2"/>
+		<property name="rendezvous" ref="rendezvous2" />
 	</bean>
 
 
