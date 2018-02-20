@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.Collection;
@@ -18,7 +19,14 @@ public class AnswerService {
 	// Managed repository -----------------------------------------------------
 
 	@Autowired
-	private AnswerRepository answerRepository;
+	private AnswerRepository	answerRepository;
+
+
+	// Constructor
+
+	public AnswerService() {
+		super();
+	}
 
 	// Simple CRUD methods ----------------------------------------------------
 
