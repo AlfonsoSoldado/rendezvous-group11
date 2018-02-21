@@ -60,8 +60,8 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	//revisar
 	@Query(" select ((count(m)*1.0)/(select count(h) from Rendezvous h))from Question m where m.rendezvous.id in (select r.id from Rendezvous r)")
 	double averageNumberOfQuestionsPerRendezvous();
+	
 	//revisar
-
 	@Query("select stddev(m.question.size*1.0) from Rendezvous m")
 	double estandardDesviationOfQuestionsPerRendezvous();
 	
@@ -78,15 +78,18 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select r from Rendezvous r where r.announcement.size >(select avg(n.announcement.size)*0.75 from Rendezvous n)")
 	Collection<Rendezvous> RendezvousConMas075Announcement();
 	
+	@Query("select avg(m.replies.size) from Comment m")
+	double averageRepliesComment();
+	
+	@Query("select stddev(m.replies.size) from Comment m")
+	double estandardDesviationRepliesComment();
+	
 	/*
 	 * preguntar a muller si es más eficiente sacar la media y la desviacion en una sola consulta o en varias
 	 * 
 	 * The average and the standard deviation of announcements per rendezvous. revisar
+	 * 
 
-
-
- The average and the standard deviation of the number of answers to the questions per rendezvous.
- The average and the standard deviation of replies per comment
 	 * */
 	
 }

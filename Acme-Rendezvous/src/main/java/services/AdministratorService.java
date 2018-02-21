@@ -110,8 +110,8 @@ public class AdministratorService {
 		return new PageRequest(0, 10);
 	}
 
-	public double averageannouncementsUser() {
-		return administratorRepository.averageannouncementsUser();
+	public double averageannouncementsRendezvous() {
+		return administratorRepository.averageAnnouncementsRendezvous();
 	}
 
 	/*
