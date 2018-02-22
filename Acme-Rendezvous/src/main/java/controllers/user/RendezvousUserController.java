@@ -54,26 +54,22 @@ public class RendezvousUserController extends AbstractController {
 
 		return result;
 	}
+	
+	// Saving --------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Rendezvous rendezvous,
 			final BindingResult binding) {
 		ModelAndView res;
 		if (binding.hasErrors())
-			res = this.createEditModelAndView(rendezvous,
-					"rendezvous.params.error");
+			res = this.createEditModelAndView(rendezvous, "rendezvous.params.error");
 		else
 			try {
 				this.rendezvousService.save(rendezvous);
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
-				System.out.println(oops.getMessage());
-				System.out.println(oops.getCause());
-				System.out.println(oops.getStackTrace());
-				res = this.createEditModelAndView(rendezvous,
-						"rendezvous.commit.error");
+				res = this.createEditModelAndView(rendezvous, "rendezvous.commit.error");
 			}
-
 		return res;
 	}
 
@@ -83,14 +79,12 @@ public class RendezvousUserController extends AbstractController {
 	public ModelAndView delete(@Valid final Rendezvous rendezvous,
 			final BindingResult binding) {
 		ModelAndView res;
-
 		try {
 			this.rendezvousService.delete(rendezvous);
-			res = new ModelAndView("redirect:list.do");
+			res = new ModelAndView("redirect:../../");
 		} catch (final Throwable oops) {
 			res = this.createEditModelAndView(rendezvous, "stage.commit.error");
 		}
-
 		return res;
 	}
 
@@ -107,11 +101,12 @@ public class RendezvousUserController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Rendezvous rendezvous,
 			final String message) {
 		ModelAndView result;
+		
 		result = new ModelAndView("rendezvous/edit");
 		result.addObject("rendezvous", rendezvous);
 		result.addObject("message", message);
 		result.addObject("requestUri", "rendezvous/edit.do");
+		
 		return result;
-
 	}
 }
