@@ -1,12 +1,11 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -67,12 +66,8 @@ public class AdministratorService {
 		return administratorRepository.averageRedezvousUser();
 	}
 
-	public double EstandardDesviationRedezvousUser() {
+	public double estandardDesviationRedezvousUser() {
 		return administratorRepository.EstandardDesviationRedezvousUser();
-	}
-
-	public double ratioCreateAndNoCreateRendezvousUser() {
-		return administratorRepository.ratioCreateAndNoCreateRendezvousUser();
 	}
 
 	public double ratioUserConRendezvous() {
@@ -88,7 +83,7 @@ public class AdministratorService {
 		return administratorRepository.averageUsersRendezvous();
 	}
 
-	public double EstandardDesviationUsersRendezvous() {
+	public double estandardDesviationUsersRendezvous() {
 		return administratorRepository.estandardDesviationUsersRendezvous();
 	}
 
@@ -97,32 +92,63 @@ public class AdministratorService {
 
 	}
 
-	public double EstandardDesviationRendezvousRSVPTruePerUser() {
+	public double estandardDesviationRendezvousRSVPTruePerUser() {
 		return administratorRepository.estandardDesviationRendezvousRSVPTruePerUser();
 	}
 
-//	public Collection<Rendezvous> topRendezvous() {
-//		return administratorRepository.topRendezvous(createPageableRequest());
-//
-//	}
+	// public Collection<Rendezvous> topRendezvous() {
+	// return administratorRepository.topRendezvous(createPageableRequest());
+	//
+	// }
 
-	private Pageable createPageableRequest() {
-		return new PageRequest(0, 10);
-	}
+	// private Pageable createPageableRequest() {
+	// return new PageRequest(0, 10);
+	// }
 
 	public double averageannouncementsRendezvous() {
 		return administratorRepository.averageAnnouncementsRendezvous();
 	}
 
-	/*
-	 * The average and the standard deviation of announcements per rendezvous. The
-	 * rendezvouses that whose number of announcements is above 75% the average
-	 * number of announcements per rendezvous. The rendezvouses that are linked to a
-	 * number of rendezvouses that is great-er than the average plus 10%. The
-	 * average and the standard deviation of the number of questions per
-	 * ren-dezvous. The average and the standard deviation of the number of answers
-	 * to the questions per rendezvous. The average and the standard deviation of
-	 * replies per comment
-	 */
+	public double estandardDesviationAnnouncementsUser() {
+		return this.administratorRepository.estandardDesviationAnnouncementsUser();
+	}
+
+	public Collection<Rendezvous> redezvousSimiliars10() {
+		Collection<Rendezvous> res = new ArrayList<>();
+		if (!this.administratorRepository.redezvousSimiliars10().isEmpty()
+				&& this.administratorRepository.redezvousSimiliars10() != null) {
+			res.addAll(this.administratorRepository.redezvousSimiliars10());
+
+		}
+		return res;
+	}
+
+	public double averageNumberOfQuestionsPerRendezvous() {
+		return this.administratorRepository.averageNumberOfQuestionsPerRendezvous();
+	}
+
+	public double estandardDesviationOfQuestionsPerRendezvous() {
+		return this.administratorRepository.estandardDesviationOfQuestionsPerRendezvous();
+	}
+
+	public double averageOfAnswerPerQuestionsPerRendezvous() {
+		return this.administratorRepository.averageOfAnswerPerQuestionsPerRendezvous();
+	}
+
+	public double estandardDesviationOfAnswerPerQuestionsPerRendezvous() {
+		return this.administratorRepository.estandardDesviationOfAnswerPerQuestionsPerRendezvous();
+	}
+
+	public Collection<Rendezvous> RendezvousConMas075Announcement() {
+		return this.administratorRepository.RendezvousConMas075Announcement();
+	}
+
+	public double averageRepliesComment() {
+		return this.administratorRepository.averageRepliesComment();
+	}
+
+	public double estandardDesviationRepliesComment() {
+		return this.administratorRepository.estandardDesviationRepliesComment();
+	}
 
 }
