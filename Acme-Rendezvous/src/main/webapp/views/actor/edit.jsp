@@ -21,25 +21,31 @@
 
 <form:form action="${requestUri}" modelAttribute="actor">
 
-		<form:form action="actor/user/edit.do" modelAttribute="actor">
+	<form:hidden path="id" />
+	<form:hidden path="version" />
+	<form:hidden path="userAccount"/>
+	<form:hidden path="userAccount.password"/>
+	<form:hidden path="userAccount.authorities"/>
+
+	<acme:textbox code="actor.name" path="name" />
+	<acme:textbox code="actor.surname" path="surname" />
+	<acme:textbox code="actor.email" path="email" />
+	<acme:textbox code="actor.phoneNumber" path="phoneNumber" />
+	<acme:textbox code="actor.postalAddress" path="postalAddress" />
+
+	<security:authorize access="hasRole('USER')">
 		
-			<acme:textbox code="actor.name" path="name" />
-			<acme:textbox code="actor.surname" path="surname" />
-			<acme:textbox code="actor.email" path="email" />
-			<acme:textbox code="actor.phoneNumber" path="phoneNumber" />
-			<acme:textbox code="actor.postalAddress" path="postalAddress" />
-			
-			<security:authorize access="hasRole('USER')">
-			
-			<acme:textbox code="actor.dateBorn" path="dateBorn" />
-			
-			</security:authorize>
-			
-		</form:form>
-		
-		<acme:submit name="save" code="actor.submit"/>
-		<acme:cancel url="/" code="answer.cancel"/>
-		
+		<form:hidden path="comment"/>
+		<form:hidden path="rendezvous"/>
+		<form:hidden path="rsvp"/>
+		<form:hidden path="question"/>
+		<acme:date code="actor.dateBorn" path="dateBorn"  placeholder="dd/MM/yyyy"/>
+
+	</security:authorize>
+
+	<acme:submit name="save" code="actor.submit" />
+	<acme:cancel url="/" code="answer.cancel" />
+
 </form:form>
 
 

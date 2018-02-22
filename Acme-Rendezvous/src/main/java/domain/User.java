@@ -12,6 +12,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Past;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class User extends Actor {
@@ -21,6 +23,7 @@ public class User extends Actor {
 
 	@Temporal(TemporalType.DATE)
 	@Past
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getDateBorn() {
 		return this.dateBorn;
 	}

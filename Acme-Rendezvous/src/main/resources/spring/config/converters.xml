@@ -25,6 +25,10 @@
 		<bean class="converters.StringToRSVPConverter" />
 		<bean class="converters.CommentToStringConverter" />
 		<bean class="converters.StringToCommentConverter" />
+		<bean class="converters.ActorToStringConverter" />
+		<bean class="converters.StringToActorConverter" />
+		<bean class="converters.UserToStringConverter" />
+		<bean class="converters.StringToUserConverter" />
 
 	</util:list>
 

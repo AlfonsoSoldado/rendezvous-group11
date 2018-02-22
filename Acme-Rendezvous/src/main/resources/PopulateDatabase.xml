@@ -64,7 +64,7 @@
 		<property name="email" value="javilv@gmail.com" />
 		<property name="phoneNumber" value="6664323536" />
 		<property name="postalAddress" value="41013" />
-		<property name="dateBorn" value="2010/03/12" />
+		<property name="dateBorn" value="25/10/2010" />
 		<property name="userAccount" ref="userAccount2" />
 
 		<property name="rendezvous">
@@ -102,7 +102,7 @@
 		<property name="email" value="rojas@gmail.com" />
 		<property name="phoneNumber" value="6664323536" />
 		<property name="postalAddress" value="41013" />
-		<property name="dateBorn" value="2010/03/12" />
+		<property name="dateBorn" value="25/10/2000" />
 		<property name="userAccount" ref="userAccount3" />
 
 		<property name="rendezvous">
@@ -131,7 +131,7 @@
 		<property name="name" value="rendezvous1" />
 		<property name="description"
 			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod" />
-		<property name="moment" value="2020/03/12" />
+		<property name="moment" value="25/10/2020" />
 		<property name="gpsCoordinate" ref="gps1" />
 		<property name="picture"
 			value="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" />
@@ -166,7 +166,7 @@
 		<property name="name" value="rendezvous2" />
 		<property name="description"
 			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod" />
-		<property name="moment" value="2020/03/12" />
+		<property name="moment" value="30/10/2020" />
 		<property name="gpsCoordinate" ref="gps2" />
 		<property name="picture"
 			value="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" />
@@ -228,7 +228,7 @@
 		<property name="title" value="Announcement1" />
 		<property name="description"
 			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod" />
-		<property name="momentMade" value="2010/10/10" />
+		<property name="momentMade" value="10/10/2010" />
 
 	</bean>
 
@@ -236,7 +236,7 @@
 		<property name="title" value="Announcement2" />
 		<property name="description"
 			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod" />
-		<property name="momentMade" value="2010/10/10" />
+		<property name="momentMade" value="10/10/2010" />
 
 	</bean>
 
@@ -244,7 +244,7 @@
 		<property name="text"
 			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad min" />
-		<property name="momentMade" value="2010/10/10" />
+		<property name="momentMade" value="10/10/2010" />
 		<property name="picture"
 			value="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" />
 		<property name="replies">
@@ -259,7 +259,7 @@
 		<property name="text"
 			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 		tempor incididunt ut labore et dolore magna aliqua. Ut enim" />
-		<property name="momentMade" value="2010/10/10" />
+		<property name="momentMade" value="10/10/2010" />
 		<property name="picture"
 			value="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" />
 		<property name="replies">
@@ -273,7 +273,7 @@
 	<bean id="comment3" class="domain.Comment">
 		<property name="text"
 			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, aborum." />
-		<property name="momentMade" value="2010/10/10" />
+		<property name="momentMade" value="10/10/2010" />
 		<property name="picture"
 			value="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" />
 		<property name="replies">
@@ -289,7 +289,7 @@
 		<property name="text"
 			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 		tempor incididunt ut labore et do" />
-		<property name="momentMade" value="2010/10/10" />
+		<property name="momentMade" value="10/10/2010" />
 		<property name="picture"
 			value="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" />
 		<property name="replies">
