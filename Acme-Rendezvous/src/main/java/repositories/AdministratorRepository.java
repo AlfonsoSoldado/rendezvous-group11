@@ -57,13 +57,11 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select m from Rendezvous m where m.similar.size > (select avg(v.similar.size)*1.1 from Rendezvous v)")
 	double redezvousSimiliars10();
 	
-	//revisar
-	@Query(" select ((count(m)*1.0)/(select count(h) from Rendezvous h))from Question m where m.rendezvous.id in (select r.id from Rendezvous r)")
+	@Query("select avg(m.question.size*1.0/m.rendezvous.size) from User m")
 	double averageNumberOfQuestionsPerRendezvous();
 	
-	//revisar
-//	@Query("select stddev(m.question.size*1.0) from Rendezvous m")
-//	double estandardDesviationOfQuestionsPerRendezvous();
+	@Query("select stddev(m.question.size*1.0/m.rendezvous.size) from User m")
+	double estandardDesviationOfQuestionsPerRendezvous();
 	
 	//revisar
 	@Query("select count(m.answer.size)/(select count(f) from Rendezvous f)*1.0 from Question m")
