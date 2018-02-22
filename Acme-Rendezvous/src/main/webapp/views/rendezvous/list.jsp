@@ -27,6 +27,10 @@
 	
 	<!-- Attributes -->
 	
+	<security:authorize access="hasRole('USER')">
+	<display:column> <acme:links url="rendezvous/user/edit.do?rendezvousId=${row.id}" code="rendezvous.edit" /> </display:column>
+	</security:authorize>
+	
 	<acme:column code="rendezvous.name" property="name" />
 	<acme:column code="rendezvous.description" property="description" />
 	<acme:column code="rendezvous.moment" property="moment" />
@@ -37,5 +41,5 @@
 <!-- Action links -->
 
 <security:authorize access="hasRole('USER')">
-	<acme:links url="rendezvous/create.do" code="rendezvous.create" />
+	<acme:links url="rendezvous/user/create.do" code="rendezvous.create" />
 </security:authorize>
