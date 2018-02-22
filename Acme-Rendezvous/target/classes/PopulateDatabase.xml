@@ -124,7 +124,12 @@
 
 			</list>
 		</property>
+		<property name="question">
+			<list>
+				<ref bean="question2" />
 
+			</list>
+		</property>
 	</bean>
 
 	<bean id="rendezvous1" class="domain.Rendezvous">
