@@ -23,23 +23,18 @@
 <!-- Listing grid -->
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="rendezvous" requestURI="${requestUri}" id="row">
+	name="announcement" requestURI="${requestUri}" id="row">
 	
 	<!-- Attributes -->
 	
-	<security:authorize access="hasRole('USER')">
-	<display:column> <acme:links url="rendezvous/user/edit.do?rendezvousId=${row.id}" code="rendezvous.edit" /> </display:column>
-	</security:authorize>
-	
-	<acme:column code="rendezvous.name" property="name" />
-	<acme:column code="rendezvous.description" property="description" />
-	<acme:column code="rendezvous.moment" property="moment" />
-	<acme:column code="rendezvous.finalMode" property="finalMode" />
+	<acme:column code="announcement.title" property="title" />
+	<acme:column code="announcement.description" property="description" />
+	<acme:column code="announcement.momentMade" property="momentMade" />
 	
 </display:table>
 
 <!-- Action links -->
 
 <security:authorize access="hasRole('USER')">
-	<acme:links url="rendezvous/user/create.do" code="rendezvous.create" />
+	<acme:links url="announcement/user/create.do" code="announcement.create" />
 </security:authorize>

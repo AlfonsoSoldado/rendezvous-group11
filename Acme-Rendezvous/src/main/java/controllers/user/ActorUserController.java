@@ -45,10 +45,6 @@ public class ActorUserController extends AbstractController {
 	public ModelAndView save(@Valid final User user,
 			final BindingResult binding) {
 		ModelAndView res;
-		System.out.println(binding.getFieldError());
-		System.out.println(binding.getGlobalErrors());
-		System.out.println(binding.getFieldErrors());
-		System.out.println(binding.getGlobalError());
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(user, "actor.params.error");
 		else
