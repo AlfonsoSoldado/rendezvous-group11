@@ -18,10 +18,9 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="question" requestURI="${requestUri}" id="row">
+	name="answer" requestURI="${requestUri}" id="row">
 	
-	<acme:column property="text" code="question.text"/>
-	<acme:links url="answer/list.do?questionId=${row.id }" code="question.answer"/>
+	<acme:column property="text" code="answer.text"/>
 	
 </display:table>
 	
