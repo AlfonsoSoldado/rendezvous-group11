@@ -14,20 +14,23 @@
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <form:form action="question/user/edit.do" modelAttribute="question">
 	<security:authorize access="hasRole('USER')">
-		<form:form action="question/user/edit.do" modelAttribute="question">
-			<acme:textbox code="question.text" path="text" />
-		</form:form>
-		
-		<acme:submit name="save" code="question.submit"/>
-		<acme:cancel url="question/list.do" code="question.cancel"/>
-		<acme:delete confirmationCode="question.confirmationCode" buttonCode="question.delete" id="${question.id }"/>
+	
+		<form:hidden path="id" />
+		<form:hidden path="version" />
+		<form:hidden path="rendezvous" />
+		<form:hidden path="answer" />
+
+		<acme:textbox code="question.text" path="text" />
+
+		<acme:submit name="save" code="question.submit" />
+		<acme:cancel url="question/list.do" code="question.cancel" />
+		<acme:delete confirmationCode="question.confirmationCode" buttonCode="question.delete" id="${question.id }" />
 	</security:authorize>
 </form:form>
 

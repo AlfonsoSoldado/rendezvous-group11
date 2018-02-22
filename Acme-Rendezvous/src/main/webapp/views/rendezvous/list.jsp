@@ -36,6 +36,10 @@
 	<acme:column code="rendezvous.moment" property="moment" />
 	<acme:column code="rendezvous.finalMode" property="finalMode" />
 	
+	<security:authorize access="hasRole('USER')">
+	<display:column> <acme:links url="question/user/create.do?rendezvousId=${row.id}" code="rendezvous.question.create" /> </display:column>
+	</security:authorize>
+	
 </display:table>
 
 <!-- Action links -->

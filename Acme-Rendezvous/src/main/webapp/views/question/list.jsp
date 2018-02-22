@@ -21,7 +21,12 @@
 	name="question" requestURI="${requestUri}" id="row">
 	
 	<acme:column property="text" code="question.text"/>
+	
 	<acme:links url="answer/list.do?questionId=${row.id }" code="question.answer"/>
+	
+	<security:authorize access="hasRole('USER')">
+	<display:column> <acme:links url="answer/user/create.do?questionId=${row.id}" code="question.answer.create" /> </display:column>
+	</security:authorize>
 	
 </display:table>
 	
