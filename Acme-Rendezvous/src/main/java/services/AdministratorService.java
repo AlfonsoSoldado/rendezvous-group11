@@ -71,9 +71,9 @@ public class AdministratorService {
 		return administratorRepository.EstandardDesviationRedezvousUser();
 	}
 
-//	public double ratioCreateAndNoCreateRendezvousUser() {
-//		return administratorRepository.ratioCreateAndNoCreateRendezvousUser();
-//	}
+	public double ratioCreateAndNoCreateRendezvousUser() {
+		return administratorRepository.ratioCreateAndNoCreateRendezvousUser();
+	}
 
 	public double ratioUserConRendezvous() {
 		return administratorRepository.ratioUserConRendezvous();

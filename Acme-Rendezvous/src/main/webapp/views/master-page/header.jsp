@@ -46,11 +46,12 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="profile/action-1.do"><spring:message code="master.page.profile.action.1" /></a></li>
-					<li><a href="profile/action-2.do"><spring:message code="master.page.profile.action.2" /></a></li>
-					<li><a href="profile/action-3.do"><spring:message code="master.page.profile.action.3" /></a></li>					
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>
+			<li><a class="fNiv" href="rendezvous/list.do"><spring:message code="master.page.rendezvous" /></a></li>
+			<li><a class="fNiv" href="question/list.do"><spring:message code="master.page.question" /></a></li>
+			<li><a class="fNiv" href="answer/list.do"><spring:message code="master.page.answer" /></a></li>
 		</security:authorize>
 	</ul>
 </div>

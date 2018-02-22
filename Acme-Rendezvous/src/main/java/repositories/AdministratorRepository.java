@@ -20,8 +20,8 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select  stddev(m.rendezvous.size*1.0) from User m")
 	double EstandardDesviationRedezvousUser();
 
-//	@Query("select (select count(a) from User a where a.rendezvous.size>=1)/count(ap)*1.0 from User ap;")
-//	double ratioCreateAndNoCreateRendezvousUser();
+	@Query("select (select count(a) from User a where a.rendezvous.size>=1)/count(ap)*1.0 from User ap")
+	double ratioCreateAndNoCreateRendezvousUser();
 
 	
 	@Query("select (select count(a) from User a where a.rendezvous.size>0)/count(ap)*1.0 from User ap")
