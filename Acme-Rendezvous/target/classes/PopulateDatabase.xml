@@ -131,7 +131,7 @@
 		<property name="name" value="rendezvous1" />
 		<property name="description"
 			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod" />
-		<property name="moment" value="25/10/2020" />
+		<property name="moment" value="10/25/2020" />
 		<property name="gpsCoordinate" ref="gps1" />
 		<property name="picture"
 			value="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" />
@@ -166,7 +166,7 @@
 		<property name="name" value="rendezvous2" />
 		<property name="description"
 			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod" />
-		<property name="moment" value="30/10/2020" />
+		<property name="moment" value="10/30/2020" />
 		<property name="gpsCoordinate" ref="gps2" />
 		<property name="picture"
 			value="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" />
