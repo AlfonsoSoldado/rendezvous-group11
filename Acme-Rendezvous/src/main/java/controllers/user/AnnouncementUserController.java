@@ -40,6 +40,24 @@ public class AnnouncementUserController extends AbstractController {
 
 		return res;
 	}
+	
+	// Saving --------------------------------------------------------------
+
+		@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+		public ModelAndView save(@Valid final Announcement announcement,
+				final BindingResult binding) {
+			ModelAndView res;
+			if (binding.hasErrors())
+				res = this.createEditModelAndView(announcement, "announcement.params.error");
+			else
+				try {
+					this.announcementService.save(announcement);
+					res = new ModelAndView("redirect:../../");
+				} catch (final Throwable oops) {
+					res = this.createEditModelAndView(announcement, "announcement.commit.error");
+				}
+			return res;
+		}
 
 	// Deleting --------------------------------------------------------------
 
@@ -71,7 +89,7 @@ public class AnnouncementUserController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Announcement announcement,
 			final String message) {
 		ModelAndView result;
-		result = new ModelAndView("announcement/edit");
+		result = new ModelAndView("announcement/user/create");
 		result.addObject("announcement", announcement);
 		result.addObject("message", message);
 		result.addObject("requestUri", "announcement/edit.do");

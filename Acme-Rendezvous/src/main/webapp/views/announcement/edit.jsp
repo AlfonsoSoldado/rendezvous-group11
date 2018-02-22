@@ -17,27 +17,21 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="rendezvous/user/edit.do" modelAttribute="rendezvous">
+<form:form action="announcement/user/edit.do" modelAttribute="announcement">
 	<security:authorize access="hasRole('USER')">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="momentMade" />
 	
-	<acme:textbox code="rendezvous.name" path="name"/>
-	<acme:textbox code="rendezvous.description" path="description"/>
-	<acme:date code="rendezvous.moment" path="moment" placeholder="dd/MM/yyyy HH:mm"/>
-	<acme:textbox code="rendezvous.gpsCoordinate.latitude" path="gpsCoordinate.latitude"/>
-	<acme:textbox code="rendezvous.gpsCoordinate.longitude" path="gpsCoordinate.longitude"/>
-	<acme:textbox code="rendezvous.gpsCoordinate.name" path="gpsCoordinate.name"/>
-	<acme:textbox code="rendezvous.picture" path="picture"/>
-	<acme:textbox code="rendezvous.finalMode" path="finalMode"/>
-	<acme:textbox code="rendezvous.adultOnly" path="adultOnly"/>
+	<acme:textbox code="announcement.title" path="title"/>
+	<acme:textbox code="announcement.description" path="description"/>
 	
 	<!-- Buttons -->
 	
-	<acme:submit name="save" code="rendezvous.save"/>
-	<acme:delete confirmationCode="rendezvous.confirm.delete" buttonCode="rendezvous.delete" id="${rendezvous.id }"/>
-	<acme:cancel url="rendezvous/list.do" code="rendezvous.cancel"/>
+	<acme:submit name="save" code="announcement.save"/>
+	<acme:delete confirmationCode="announcement.confirm.delete" buttonCode="announcement.delete" id="${announcement.id }"/>
+	<acme:cancel url="announcement/list.do" code="announcement.cancel"/>
 	
 	</security:authorize>
 </form:form>
