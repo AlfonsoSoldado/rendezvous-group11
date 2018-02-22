@@ -71,9 +71,9 @@ public class AdministratorService {
 		return administratorRepository.EstandardDesviationRedezvousUser();
 	}
 
-	public double ratioCreateAndNoCreateRendezvousUser() {
-		return administratorRepository.ratioCreateAndNoCreateRendezvousUser();
-	}
+//	public double ratioCreateAndNoCreateRendezvousUser() {
+//		return administratorRepository.ratioCreateAndNoCreateRendezvousUser();
+//	}
 
 	public double ratioUserConRendezvous() {
 		return administratorRepository.ratioUserConRendezvous();
@@ -101,10 +101,10 @@ public class AdministratorService {
 		return administratorRepository.estandardDesviationRendezvousRSVPTruePerUser();
 	}
 
-	public Collection<Rendezvous> topRendezvous() {
-		return administratorRepository.topRendezvous(createPageableRequest());
-
-	}
+//	public Collection<Rendezvous> topRendezvous() {
+//		return administratorRepository.topRendezvous(createPageableRequest());
+//
+//	}
 
 	private Pageable createPageableRequest() {
 		return new PageRequest(0, 10);

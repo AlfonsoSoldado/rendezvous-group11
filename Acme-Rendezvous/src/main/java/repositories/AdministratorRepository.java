@@ -20,8 +20,8 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select  stddev(m.rendezvous.size*1.0) from User m")
 	double EstandardDesviationRedezvousUser();
 
-	@Query("select (select count(a) from User a where a.rendezvous.size>=1)/count(ap)*1.0 from User ap;")
-	double ratioCreateAndNoCreateRendezvousUser();
+//	@Query("select (select count(a) from User a where a.rendezvous.size>=1)/count(ap)*1.0 from User ap;")
+//	double ratioCreateAndNoCreateRendezvousUser();
 
 	
 	@Query("select (select count(a) from User a where a.rendezvous.size>0)/count(ap)*1.0 from User ap")
@@ -44,8 +44,8 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	double estandardDesviationRendezvousRSVPTruePerUser();
 	
 	
-	@Query("select m.rendezvous from User m join m.rsvp e where e.confirmed=true order by m.rsvp.size")
-	Collection<Rendezvous> topRendezvous(Pageable a);
+//	@Query("select m.rendezvous from User m join m.rsvp e where e.confirmed=true order by m.rsvp.size")
+//	Collection<Rendezvous> topRendezvous(Pageable a);
 	
 	@Query("select avg(e.announcement.size*1.0) from Rendezvous e")
 	double averageAnnouncementsRendezvous();
@@ -62,8 +62,8 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	double averageNumberOfQuestionsPerRendezvous();
 	
 	//revisar
-	@Query("select stddev(m.question.size*1.0) from Rendezvous m")
-	double estandardDesviationOfQuestionsPerRendezvous();
+//	@Query("select stddev(m.question.size*1.0) from Rendezvous m")
+//	double estandardDesviationOfQuestionsPerRendezvous();
 	
 	//revisar
 	@Query("select count(m.answer.size)/(select count(f) from Rendezvous f)*1.0 from Question m")

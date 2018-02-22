@@ -31,8 +31,8 @@
 	<!-- Indexing information -->
 
 	<name>Acme-Rendezvous</name>
-	<url>http://www.sample-project.com</url>
-	<description>This is D&amp;T's sample project.</description>
+	<url>http://www.acme-rendezvous.com</url>
+	<description>This is D&amp;T's Acme Rendezvous.</description>
 	
 	<!-- Build commands -->
 
