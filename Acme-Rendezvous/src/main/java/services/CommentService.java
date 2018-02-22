@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -34,6 +35,7 @@ public class CommentService {
 		Comment result;
 
 		result = new Comment();
+		result.setReplies(new ArrayList<Comment>());
 
 		return result;
 	}

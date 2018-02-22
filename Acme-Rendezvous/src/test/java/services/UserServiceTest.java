@@ -34,6 +34,7 @@ public class UserServiceTest extends AbstractTest {
 
 	@Test
 	public void test() {
+		this.authenticate("user1");
 
 		final User user = this.userService.create();
 
@@ -64,5 +65,11 @@ public class UserServiceTest extends AbstractTest {
 		Assert.isTrue(this.userService.findAll().contains(saved));
 		this.userService.delete(saved);
 		Assert.isTrue(!this.userService.findAll().contains(saved));
+
+		Assert.isTrue(this.userService.findByPrincipal().getUserAccount().getUsername().equals("user1"));
+		Assert.isTrue(this.userService.findCreator(27).getId() == 25);
+		//TODO
+		//Assert.isTrue(this.userService.findAttendants(28).contains(this.userService.findOne(26)));
+
 	}
 }

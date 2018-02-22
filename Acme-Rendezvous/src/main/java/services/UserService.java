@@ -106,6 +106,7 @@ public class UserService {
 		return result;
 	}
 
+	//TODO Test por hacer 
 	public Collection<User> findRUserSVPbyRendezvous(final int rendezvousId) {
 		Collection<User> result;
 		result = this.userRepository.findUserRSVPbyRendezvous(rendezvousId);
