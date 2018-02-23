@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.UserService;
+import domain.Announcement;
 import domain.User;
 
 @Controller
@@ -38,6 +40,20 @@ public class UserController extends AbstractController {
 		result = new ModelAndView("user/list");
 		result.addObject("user", user);
 		result.addObject("requestURI", "user/list.do");
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/listCreator", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam final int rendezvousId) {
+		ModelAndView result;
+		User user;
+
+		user = userService.findCreator(rendezvousId);
+
+		result = new ModelAndView("user/listCreator");
+		result.addObject("user", user);
+		result.addObject("requestURI", "user/listCreator.do");
 
 		return result;
 	}
