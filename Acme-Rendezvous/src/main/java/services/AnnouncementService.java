@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -80,6 +81,16 @@ public class AnnouncementService {
 
 		// TODO Añadir restricción: solo el creador del rendezVous puede
 		// eliminar un announcement al mismo (en controlador)
+	}
+	
+	public Collection<Announcement> findAnnouncementsByRendezvous(int id) {
+		Collection<Announcement> res = new ArrayList<Announcement>();
+		res.addAll(announcementRepository.findAnnouncementsByRendezvous(id));
+		res = announcementRepository.findAnnouncementsByRendezvous(id);
+		
+		Assert.notNull(res);
+		return res;
+
 	}
 
 }

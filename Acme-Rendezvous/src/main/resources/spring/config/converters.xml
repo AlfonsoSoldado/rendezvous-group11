@@ -33,15 +33,10 @@
 		<bean class="converters.StringToAuthorityConverter" />
 		<bean class="converters.UserAccountToStringConverter" />
 		<bean class="converters.StringToUserAccountConverter" />
-<<<<<<< HEAD
 		<bean class="converters.GPSToStringConverter" />
 		<bean class="converters.StringToGPSConverter" />
-=======
 		<bean class="converters.AdministratorToStringConverter" />
 		<bean class="converters.StringToAdministratorConverter" />
-
-
->>>>>>> d64e4e33240fff77f36d296b58c12717dec87a60
 
 	</util:list>
 

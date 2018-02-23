@@ -54,7 +54,6 @@
 			<li><a class="fNiv" href="rendezvous/list.do"><spring:message code="master.page.rendezvous" /></a></li>
 			<li><a class="fNiv" href="question/list.do"><spring:message code="master.page.question" /></a></li>
 			<li><a class="fNiv" href="answer/list.do"><spring:message code="master.page.answer" /></a></li>
-			<li><a class="fNiv" href="announcement/list.do"><spring:message code="master.page.announcement" /></a></li>
 		</security:authorize>
 	</ul>
 </div>

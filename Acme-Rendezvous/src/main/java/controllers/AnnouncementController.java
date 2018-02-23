@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AnnouncementService;
@@ -27,11 +28,11 @@ public class AnnouncementController extends AbstractController {
 	// Listing --------------------------------------------------------------
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	public ModelAndView list(@RequestParam final int rendezvousId) {
 		ModelAndView result;
 		Collection<Announcement> announcement;
 
-		announcement = announcementService.findAll();
+		announcement = announcementService.findAnnouncementsByRendezvous(rendezvousId);
 
 		result = new ModelAndView("announcement/list");
 		result.addObject("announcement", announcement);
