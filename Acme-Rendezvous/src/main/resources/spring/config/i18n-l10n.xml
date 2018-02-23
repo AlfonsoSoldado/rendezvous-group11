@@ -25,6 +25,7 @@
 		<value>/views/actor/messages</value>
 		<value>/views/announcement/messages</value>
 		<value>/views/administrator/messages</value>
+		<value>/views/comment/messages</value>
 
 	</util:list>
 
