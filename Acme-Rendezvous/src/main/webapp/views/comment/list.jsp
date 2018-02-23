@@ -21,7 +21,7 @@
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="comment" requestURI="${requestUri}" id="row">
 	
-	<acme:column property="comment" code="comment.text"/>
+	<acme:column property="text" code="comment.text"/>
 	<acme:column property="momentMade" code="comment.momentMade"/>
 	<acme:column property="picture" code="comment.picture"/>
 	
