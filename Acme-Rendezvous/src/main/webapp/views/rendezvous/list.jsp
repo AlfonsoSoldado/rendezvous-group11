@@ -37,7 +37,7 @@
 	<acme:column code="rendezvous.finalMode" property="finalMode" />
 	<display:column><acme:links url="rendezvous/listSimilar.do?rendezvousId=${row.id }" code="rendezvous.similar"/></display:column>
 	<display:column> <acme:links url="announcement/list.do?rendezvousId=${row.id}" code="rendezvous.announcement" /> </display:column>
-	<display:column> <acme:links url="user/list.do?rendezvousId=${row.id}" code="rendezvous.user" /> </display:column>
+	<display:column> <acme:links url="user/listCreator.do?rendezvousId=${row.id}" code="rendezvous.user" /> </display:column>
 	
 	<security:authorize access="hasRole('USER')">
 	<display:column> <acme:links url="question/user/create.do?rendezvousId=${row.id}" code="rendezvous.question.create" /> </display:column>
