@@ -76,4 +76,11 @@ public class RendezvousService {
 		Assert.isTrue(this.rendezvousRepository.exists(rendezvous.getId()));
 		this.rendezvousRepository.delete(rendezvous);
 	}
+	
+	public Rendezvous findRendezvousByComment(int commentId){
+		Rendezvous res;
+		res = rendezvousRepository.findRendezvousByComment(commentId);
+		
+		return res;
+	}
 }

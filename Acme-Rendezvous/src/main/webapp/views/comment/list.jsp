@@ -25,7 +25,8 @@
 	<acme:column property="momentMade" code="comment.momentMade"/>
 	<acme:column property="picture" code="comment.picture"/>
 	
-	<display:column> <acme:links url="comment/user/create.do?commentId=${row.id}" code="comment.reply" /> </display:column>
+	<display:column> <acme:links url="comment/user/createReply.do?commentId=${row.id}" code="comment.createReply" /> </display:column>
+	<display:column> <acme:links url="comment/user/listReplies.do?commentId=${row.id}" code="comment.reply" /> </display:column>
 	
 </display:table>
 </security:authorize>

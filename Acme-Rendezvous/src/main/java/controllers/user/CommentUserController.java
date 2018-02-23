@@ -52,6 +52,22 @@ public class CommentUserController extends AbstractController {
 
 		return result;
 	}
+	
+	@RequestMapping(value = "/listReplies", method = RequestMethod.GET)
+	public ModelAndView listReplies(@RequestParam final int commentId) {
+		ModelAndView result;
+		Collection<Comment> comment;
+		
+		Comment c = commentService.findOne(commentId);
+
+		comment = c.getReplies();
+
+		result = new ModelAndView("comment/list");
+		result.addObject("comment", comment);
+		result.addObject("requestURI", "comment/list.do");
+
+		return result;
+	}
 
 	// Creation ---------------------------------------------------------------
 
@@ -70,6 +86,28 @@ public class CommentUserController extends AbstractController {
 		rendezvous.setComment(comments);
 		
 		res = this.createEditModelAndView(comment);
+
+		return res;
+	}
+	
+	@RequestMapping(value = "/createReply", method = RequestMethod.GET)
+	public ModelAndView createReply(@RequestParam final int commentId) {
+		ModelAndView res;
+		
+		Comment result;
+		
+		Comment comment;
+		Collection<Comment> replies = new ArrayList<Comment>();
+
+		comment = commentService.findOne(commentId);
+		
+		result = commentService.create();
+		
+		replies.addAll(comment.getReplies());
+		replies.add(result);
+		comment.setReplies(replies);
+		
+		res = this.createEditModelAndView(result);
 
 		return res;
 	}
@@ -101,6 +139,7 @@ public class CommentUserController extends AbstractController {
 				this.commentService.save(comment);
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
+				System.out.println(oops.getMessage());
 				res = this.createEditModelAndView(comment,
 						"rendezvous.commit.error");
 			}
@@ -136,7 +175,7 @@ public class CommentUserController extends AbstractController {
 			final String message) {
 		ModelAndView result;
 
-		result = new ModelAndView("comment/user/edit");
+		result = new ModelAndView("comment/edit");
 		result.addObject("comment", comment);
 		result.addObject("message", message);
 		result.addObject("requestUri", "comment/user/edit.do");
