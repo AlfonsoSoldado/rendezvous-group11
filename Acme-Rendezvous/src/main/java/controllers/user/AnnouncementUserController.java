@@ -70,7 +70,7 @@ public class AnnouncementUserController extends AbstractController {
 			this.announcementService.delete(announcement);
 			res = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
-			res = this.createEditModelAndView(announcement, "stage.commit.error");
+			res = this.createEditModelAndView(announcement, "announcement.commit.error");
 		}
 
 		return res;

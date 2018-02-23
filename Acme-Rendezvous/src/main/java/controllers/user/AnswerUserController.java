@@ -91,7 +91,7 @@ public class AnswerUserController extends AbstractController {
 			this.answerService.delete(answer);
 			res = new ModelAndView("redirect:../../");
 		} catch (final Throwable oops) {
-			res = this.createEditModelAndView(answer, "stage.commit.error");
+			res = this.createEditModelAndView(answer, "rendezvous.commit.error");
 		}
 		return res;
 	}

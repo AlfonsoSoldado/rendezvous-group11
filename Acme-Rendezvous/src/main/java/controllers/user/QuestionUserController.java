@@ -70,13 +70,13 @@ public class QuestionUserController extends AbstractController {
 			final BindingResult binding) {
 		ModelAndView res;
 		if (binding.hasErrors())
-			res = this.createEditModelAndView(question, "rendezvous.params.error");
+			res = this.createEditModelAndView(question, "question.params.error");
 		else
 			try {
 				this.questionService.save(question);
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(question, "rendezvous.commit.error");
+				res = this.createEditModelAndView(question, "question.commit.error");
 			}
 		return res;
 	}
@@ -91,7 +91,7 @@ public class QuestionUserController extends AbstractController {
 			this.questionService.delete(question);
 			res = new ModelAndView("redirect:../../");
 		} catch (final Throwable oops) {
-			res = this.createEditModelAndView(question, "stage.commit.error");
+			res = this.createEditModelAndView(question, "question.commit.error");
 		}
 		return res;
 	}

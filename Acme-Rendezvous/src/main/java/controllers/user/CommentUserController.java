@@ -157,7 +157,7 @@ public class CommentUserController extends AbstractController {
 			this.commentService.delete(comment);
 			res = new ModelAndView("redirect:../../");
 		} catch (final Throwable oops) {
-			res = this.createEditModelAndView(comment, "stage.commit.error");
+			res = this.createEditModelAndView(comment, "comment.commit.error");
 		}
 		return res;
 	}

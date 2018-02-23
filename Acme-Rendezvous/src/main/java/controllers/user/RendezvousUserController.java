@@ -83,7 +83,7 @@ public class RendezvousUserController extends AbstractController {
 			this.rendezvousService.delete(rendezvous);
 			res = new ModelAndView("redirect:../../");
 		} catch (final Throwable oops) {
-			res = this.createEditModelAndView(rendezvous, "stage.commit.error");
+			res = this.createEditModelAndView(rendezvous, "rendezvous.commit.error");
 		}
 		return res;
 	}
