@@ -37,6 +37,6 @@
 	<form:label path="${path}">
 		<spring:message code="${code}" />
 	</form:label>
-	<form:textarea path="${path}" placeholder="${placeholder }" />
+	<form:input path="${path}" placeholder="${placeholder }" />
 	<form:errors path="${path}" cssClass="error" />
 </div>

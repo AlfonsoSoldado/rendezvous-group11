@@ -7,10 +7,12 @@ import java.util.Collection;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.UserRepository;
+import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Comment;
@@ -40,10 +42,17 @@ public class UserService {
 		User result;
 
 		result = new User();
+		UserAccount userAccount = new UserAccount();
+		Authority authority = new Authority();
+		
 		result.setComment(new ArrayList<Comment>());
 		result.setRendezvous(new ArrayList<Rendezvous>());
 		result.setRsvp(new ArrayList<RSVP>());
 		result.setQuestion(new ArrayList<Question>());
+		
+		authority.setAuthority(Authority.USER);
+		userAccount.addAuthority(authority);
+		result.setUserAccount(userAccount);
 
 		return result;
 	}
@@ -68,6 +77,16 @@ public class UserService {
 	public User save(final User user) {
 		User result = user;
 		Assert.notNull(user);
+		
+		if (user.getId() == 0) {
+			String pass = user.getUserAccount().getPassword();
+			
+			final Md5PasswordEncoder code = new Md5PasswordEncoder();
+			
+			pass = code.encodePassword(pass, null);
+			
+			user.getUserAccount().setPassword(pass);
+		}
 
 		result = this.userRepository.save(result);
 
