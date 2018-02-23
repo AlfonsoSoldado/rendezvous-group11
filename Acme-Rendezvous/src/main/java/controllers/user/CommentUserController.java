@@ -103,6 +103,7 @@ public class CommentUserController extends AbstractController {
 		
 		result = commentService.create();
 		
+		result.setComment(comment);
 		replies.addAll(comment.getReplies());
 		replies.add(result);
 		comment.setReplies(replies);
