@@ -33,5 +33,6 @@
 	<acme:column code="actor.email" property="email" />
 	<acme:column code="actor.phoneNumber" property="phoneNumber" />
 	<acme:column code="actor.postalAddress" property="postalAddress" />
+	<display:column><acme:links url="rendezvous/listByUser.do?userId=${row.id }" code="actor.rendezvous"/></display:column>
 	
 </display:table>
