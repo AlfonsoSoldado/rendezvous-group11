@@ -40,4 +40,9 @@
 	<acme:cancel url="rendezvous/list.do" code="rendezvous.cancel"/>
 	
 	</security:authorize>
+	
+	<security:authorize access="hasRole('ADMIN')">
+	<acme:delete confirmationCode="rendezvous.confirm.delete" buttonCode="rendezvous.delete" id="${rendezvous.id }"/>
+	<acme:cancel url="rendezvous/list.do" code="rendezvous.cancel"/>
+	</security:authorize>
 </form:form>
