@@ -66,6 +66,8 @@ public class AdministratorController extends AbstractController {
 		result.addObject("averageRepliesComment", administratorService.averageRepliesComment());
 		result.addObject("estandardDesviationRepliesComment", administratorService.estandardDesviationRepliesComment());
 
+
+//*********
 		return result;
 	}
 
