@@ -47,7 +47,7 @@ public class LoginController extends AbstractController {
 		Assert.notNull(bindingResult);
 
 		ModelAndView result;
-
+		
 		result = new ModelAndView("security/login");
 		result.addObject("credentials", credentials);
 		result.addObject("showError", showError);

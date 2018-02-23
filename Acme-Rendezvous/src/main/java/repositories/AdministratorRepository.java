@@ -2,7 +2,6 @@ package repositories;
 
 import java.util.Collection;
 
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -20,8 +19,7 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select  stddev(m.rendezvous.size*1.0) from User m")
 	double EstandardDesviationRedezvousUser();
 
-	@Query("select (select count(a) from User a where a.rendezvous.size>=1)/count(ap)*1.0 from User ap")
-	double ratioCreateAndNoCreateRendezvousUser();
+
 
 	
 	@Query("select (select count(a) from User a where a.rendezvous.size>0)/count(ap)*1.0 from User ap")
@@ -55,7 +53,7 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	
 	
 	@Query("select m from Rendezvous m where m.similar.size > (select avg(v.similar.size)*1.1 from Rendezvous v)")
-	double redezvousSimiliars10();
+	Collection<Rendezvous> redezvousSimiliars10();
 	
 	@Query("select avg(m.question.size*1.0/m.rendezvous.size) from User m")
 	double averageNumberOfQuestionsPerRendezvous();
