@@ -2,6 +2,8 @@ package repositories;
 
 import java.util.Collection;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -41,9 +43,8 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select stddev(m.rsvp.size*1.0) from User m join m.rsvp e where e.confirmed=true")
 	double estandardDesviationRendezvousRSVPTruePerUser();
 	
-	
-//	@Query("select m.rendezvous from User m join m.rsvp e where e.confirmed=true order by m.rsvp.size")
-//	Collection<Rendezvous> topRendezvous(Pageable a);
+	@Query("select r from Rendezvous r where r.attendant.size!=0 order by r.attendant.size desc")
+	Page<Rendezvous> topRendezvous(Pageable a);
 	
 	@Query("select avg(e.announcement.size*1.0) from Rendezvous e")
 	double averageAnnouncementsRendezvous();

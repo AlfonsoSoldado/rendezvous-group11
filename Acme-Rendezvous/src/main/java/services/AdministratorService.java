@@ -6,13 +6,15 @@ import java.util.Collection;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import repositories.AdministratorRepository;
 import domain.Administrator;
 import domain.Rendezvous;
-import repositories.AdministratorRepository;
 
 @Service
 @Transactional
@@ -93,24 +95,30 @@ public class AdministratorService {
 	}
 
 	public double estandardDesviationRendezvousRSVPTruePerUser() {
-		return administratorRepository.estandardDesviationRendezvousRSVPTruePerUser();
+		return administratorRepository
+				.estandardDesviationRendezvousRSVPTruePerUser();
 	}
 
-	// public Collection<Rendezvous> topRendezvous() {
-	// return administratorRepository.topRendezvous(createPageableRequest());
-	//
-	// }
+	public Collection<Rendezvous> topRendezvous() {
+		Collection<Rendezvous> res;
+		final Page<Rendezvous> pages;
+		final Pageable pageable;
 
-	// private Pageable createPageableRequest() {
-	// return new PageRequest(0, 10);
-	// }
+		pageable = new PageRequest(0, 10);
+		pages = this.administratorRepository.topRendezvous(pageable);
+		res = pages.getContent();
+
+		return res;
+
+	}
 
 	public double averageannouncementsRendezvous() {
 		return administratorRepository.averageAnnouncementsRendezvous();
 	}
 
 	public double estandardDesviationAnnouncementsUser() {
-		return this.administratorRepository.estandardDesviationAnnouncementsUser();
+		return this.administratorRepository
+				.estandardDesviationAnnouncementsUser();
 	}
 
 	public Collection<Rendezvous> redezvousSimiliars10() {
@@ -124,19 +132,23 @@ public class AdministratorService {
 	}
 
 	public double averageNumberOfQuestionsPerRendezvous() {
-		return this.administratorRepository.averageNumberOfQuestionsPerRendezvous();
+		return this.administratorRepository
+				.averageNumberOfQuestionsPerRendezvous();
 	}
 
 	public double estandardDesviationOfQuestionsPerRendezvous() {
-		return this.administratorRepository.estandardDesviationOfQuestionsPerRendezvous();
+		return this.administratorRepository
+				.estandardDesviationOfQuestionsPerRendezvous();
 	}
 
 	public double averageOfAnswerPerQuestionsPerRendezvous() {
-		return this.administratorRepository.averageOfAnswerPerQuestionsPerRendezvous();
+		return this.administratorRepository
+				.averageOfAnswerPerQuestionsPerRendezvous();
 	}
 
 	public double estandardDesviationOfAnswerPerQuestionsPerRendezvous() {
-		return this.administratorRepository.estandardDesviationOfAnswerPerQuestionsPerRendezvous();
+		return this.administratorRepository
+				.estandardDesviationOfAnswerPerQuestionsPerRendezvous();
 	}
 
 	public Collection<Rendezvous> RendezvousConMas075Announcement() {
