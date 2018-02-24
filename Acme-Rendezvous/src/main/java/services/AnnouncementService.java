@@ -79,11 +79,12 @@ public class AnnouncementService {
 	public void delete(final Announcement announcement) {
 		Assert.notNull(announcement);
 		Assert.isTrue(announcement.getId() != 0);
+		
+		Rendezvous rendezvous;
+		rendezvous = announcement.getRendezvous();
+		rendezvous.getAnnouncement().remove(announcement);
 
 		this.announcementRepository.delete(announcement);
-
-		// TODO Añadir restricción: solo el creador del rendezVous puede
-		// eliminar un announcement al mismo (en controlador)
 	}
 	
 	public Collection<Announcement> findAnnouncementsByRendezvous(int id) {

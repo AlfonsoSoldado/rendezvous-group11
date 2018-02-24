@@ -17,7 +17,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="announcement/user/edit.do" modelAttribute="announcement">
+<form:form action="${requestUri}" modelAttribute="announcement">
 	<security:authorize access="hasRole('USER')">
 
 	<form:hidden path="id" />
@@ -34,5 +34,10 @@
 	<acme:delete confirmationCode="announcement.confirm.delete" buttonCode="announcement.delete" id="${announcement.id }"/>
 	<acme:cancel url="announcement/list.do" code="announcement.cancel"/>
 	
+	</security:authorize>
+	
+	<security:authorize access="hasRole('ADMIN')">
+	<acme:delete confirmationCode="announcement.confirm.delete" buttonCode="announcement.delete" id="${announcement.id }"/>
+	<acme:cancel url="announcement/list.do" code="announcement.cancel"/>
 	</security:authorize>
 </form:form>

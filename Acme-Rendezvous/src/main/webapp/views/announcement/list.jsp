@@ -31,10 +31,13 @@
 	<acme:column code="announcement.title" property="title" />
 	<acme:column code="announcement.description" property="description" />
 	<acme:column code="announcement.momentMade" property="momentMade" sortable="true" />
-
+	
+	<security:authorize access="hasRole('ADMIN')">
+	<display:column> <acme:links url="announcement/administrator/edit.do?announcementId=${row.id}" code="announcement.delete" /> </display:column>
+	</security:authorize>
+	
 </display:table>
 
 <!-- Action links -->
 
-</br>
 <acme:links url="rendezvous/list.do" code="announcement.back" />

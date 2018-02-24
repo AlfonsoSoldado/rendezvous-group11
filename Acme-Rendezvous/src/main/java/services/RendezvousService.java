@@ -30,10 +30,6 @@ public class RendezvousService {
 	@Autowired
 	private UserService				userService;
 
-	@Autowired
-	private QuestionService			questionService;
-
-
 	// Constructor
 
 	public RendezvousService() {
@@ -85,8 +81,8 @@ public class RendezvousService {
 		res = this.rendezvousRepository.save(rendezvous);
 		return res;
 
-		//TODO Añadir restricción de future para date en controlador
 	}
+	
 	public void delete(final Rendezvous rendezvous) {
 		Assert.notNull(rendezvous);
 		Assert.isTrue(rendezvous.getId() != 0);

@@ -33,6 +33,10 @@
 					<li><a href="administrator/action-2.do"><spring:message
 								code="master.page.administrator.action.2" /></a></li>
 				</ul></li>
+			<li><a class="fNiv" href="rendezvous/list.do"><spring:message
+						code="master.page.rendezvous" /></a></li>
+			<li><a class="fNiv" href="user/list.do"><spring:message
+						code="master.page.user.list" /></a></li>
 		</security:authorize>
 
 		<security:authorize access="hasRole('USER')">
@@ -51,7 +55,8 @@
 						code="master.page.rendezvous" /></a></li>
 			<li><a class="fNiv" href="rendezvous/user/listMyRendezvous.do"><spring:message
 						code="master.page.myRendezvous" /></a></li>
-			<li><a class="fNiv" href="rendezvous/user/listAttendRendezvous.do"><spring:message
+			<li><a class="fNiv"
+				href="rendezvous/user/listAttendRendezvous.do"><spring:message
 						code="master.page.attendedRendezvous" /></a></li>
 			<li><a class="fNiv" href="user/list.do"><spring:message
 						code="master.page.user.list" /></a></li>
