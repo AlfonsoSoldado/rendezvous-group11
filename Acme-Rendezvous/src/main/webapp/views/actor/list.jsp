@@ -35,4 +35,14 @@
 	<acme:column code="actor.postalAddress" property="postalAddress" />
 	<display:column><acme:links url="rendezvous/listByUser.do?userId=${row.id }" code="actor.rendezvous"/></display:column>
 	
+
+
+
+	<spring:message var="displayHeader" code="user.display" />
+		<display:column title="${displayHeader}">
+		<a href="user/display.do?userId=${row.id}"> <spring:message
+				code="user.display" />
+		</a>
+	</display:column>
+
 </display:table>

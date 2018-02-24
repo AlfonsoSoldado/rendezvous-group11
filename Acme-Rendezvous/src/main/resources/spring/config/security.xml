@@ -46,6 +46,7 @@
 		<security:intercept-url pattern="/announcement/**" access="permitAll" />
 		<security:intercept-url pattern="/user/register_User.do" access="permitAll" /> 
 		<security:intercept-url pattern="/user/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/user/display.do" access="permitAll" /> 
 		<security:intercept-url pattern="/user/listCreator.do" access="permitAll" /> 
 
 		<security:intercept-url pattern="/administrator/display.do" access="hasRole('ADMIN')" /> 

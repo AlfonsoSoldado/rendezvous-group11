@@ -1,3 +1,4 @@
+
 package controllers;
 
 import java.util.Collection;
@@ -19,7 +20,8 @@ public class UserController extends AbstractController {
 	// Services -------------------------------------------------------------
 
 	@Autowired
-	private UserService userService;
+	private UserService	userService;
+
 
 	// Constructors ---------------------------------------------------------
 
@@ -34,7 +36,7 @@ public class UserController extends AbstractController {
 		ModelAndView result;
 		Collection<User> user;
 
-		user = userService.findAll();
+		user = this.userService.findAll();
 
 		result = new ModelAndView("user/list");
 		result.addObject("user", user);
@@ -42,13 +44,27 @@ public class UserController extends AbstractController {
 
 		return result;
 	}
-	
+
+	// Display --------------------------------------------
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int userId) {
+		ModelAndView result;
+
+		final User user = this.userService.findOne(userId);
+
+		result = new ModelAndView("user/display");
+		result.addObject("user", user);
+		result.addObject("requestURI", "user/display.do");
+
+		return result;
+	}
+
 	@RequestMapping(value = "/listCreator", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam final int rendezvousId) {
 		ModelAndView result;
 		User user;
 
-		user = userService.findCreator(rendezvousId);
+		user = this.userService.findCreator(rendezvousId);
 
 		result = new ModelAndView("user/listCreator");
 		result.addObject("user", user);
