@@ -22,7 +22,7 @@
 	
 	<acme:column property="text" code="question.text"/>
 	
-	<acme:links url="answer/list.do?questionId=${row.id }" code="question.answer"/>
+	<display:column> <acme:links url="answer/list.do?questionId=${row.id }" code="question.answer"/> </display:column>
 	
 	<security:authorize access="hasRole('USER')">
 	<display:column> <acme:links url="answer/user/create.do?questionId=${row.id}" code="question.answer.create" /> </display:column>

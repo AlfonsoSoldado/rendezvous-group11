@@ -81,8 +81,8 @@ public class QuestionService {
 	}
 
 	
-	public Question findQuestionByRendezvous(final int rendezvousId) {
-		Question result;
+	public Collection<Question> findQuestionByRendezvous(final int rendezvousId) {
+		Collection<Question> result;
 		result = this.questionRepository.findQuestionByRendezvous(rendezvousId);
 		Assert.notNull(result);
 

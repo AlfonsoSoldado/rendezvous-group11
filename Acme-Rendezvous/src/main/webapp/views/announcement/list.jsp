@@ -30,7 +30,7 @@
 
 	<acme:column code="announcement.title" property="title" />
 	<acme:column code="announcement.description" property="description" />
-	<acme:column code="announcement.momentMade" property="momentMade" />
+	<acme:column code="announcement.momentMade" property="momentMade" sortable="true" />
 
 </display:table>
 
