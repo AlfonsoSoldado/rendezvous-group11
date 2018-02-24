@@ -23,7 +23,7 @@
 	
 	<definition name="rendezvous/listSimilar" extends="master.page">	
 		<put-attribute name="title" value="List of similar rendezvous" />
-		<put-attribute name="body" value="/views/rendezvous/list.jsp" />
+		<put-attribute name="body" value="/views/rendezvous/listSimilar.jsp" />
 	</definition>
 	
 	<definition name="rendezvous/edit" extends="master.page">	
@@ -43,7 +43,17 @@
 	
 	<definition name="rendezvous/listByUser" extends="master.page">	
 		<put-attribute name="title" value="List rendezvous by users" />
-		<put-attribute name="body" value="/views/rendezvous/list.jsp" />
+		<put-attribute name="body" value="/views/rendezvous/listByUser.jsp" />
+	</definition>
+	
+	<definition name="rendezvous/user/listMyRendezvous" extends="master.page">	
+		<put-attribute name="title" value="My rendezvous" />
+		<put-attribute name="body" value="/views/rendezvous/listMyRendezvous.jsp" />
+	</definition>
+	
+	<definition name="rendezvous/user/listAttendRendezvous" extends="master.page">	
+		<put-attribute name="title" value="Attended rendezvous" />
+		<put-attribute name="body" value="/views/rendezvous/listAttendRendezvous.jsp" />
 	</definition>
 	
 </tiles-definitions>

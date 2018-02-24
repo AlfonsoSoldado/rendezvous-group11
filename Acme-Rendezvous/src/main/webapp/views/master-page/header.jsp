@@ -36,32 +36,6 @@
 		</security:authorize>
 
 		<security:authorize access="hasRole('USER')">
-			<li><a class="fNiv"><spring:message code="master.page.user" /></a>
-				<ul>
-					<li class="arrow"></li>
-				</ul>
-			<li><a href="comment/user/list.do"><spring:message
-						code="master.page.comment.list" /></a></li>
-			<li><a class="fNiv" href="user/list.do"><spring:message
-						code="master.page.user.list" /></a></li>
-		</security:authorize>
-
-		<security:authorize access="isAnonymous()">
-			<li><a class="fNiv" href="security/login.do"><spring:message
-						code="master.page.login" /></a></li>
-			<li><a class="fNiv" href="user/register_User.do"><spring:message
-						code="master.page.register.user" /></a></li>
-			<li><a class="fNiv" href="rendezvous/list.do"><spring:message
-						code="master.page.rendezvous" /></a></li>
-			<li><a class="fNiv" href="question/list.do"><spring:message
-						code="master.page.question" /></a></li>
-			<li><a class="fNiv" href="answer/list.do"><spring:message
-						code="master.page.answer" /></a></li>
-			<li><a class="fNiv" href="user/list.do"><spring:message
-						code="master.page.user.list" /></a></li>
-		</security:authorize>
-
-		<security:authorize access="isAuthenticated()">
 			<li><a class="fNiv"> <spring:message
 						code="master.page.profile" /> (<security:authentication
 						property="principal.username" />)
@@ -75,11 +49,25 @@
 				</ul></li>
 			<li><a class="fNiv" href="rendezvous/list.do"><spring:message
 						code="master.page.rendezvous" /></a></li>
-			<li><a class="fNiv" href="question/list.do"><spring:message
-						code="master.page.question" /></a></li>
-			<li><a class="fNiv" href="answer/list.do"><spring:message
-						code="master.page.answer" /></a></li>
+			<li><a class="fNiv" href="rendezvous/user/listMyRendezvous.do"><spring:message
+						code="master.page.myRendezvous" /></a></li>
+			<li><a class="fNiv" href="rendezvous/user/listAttendRendezvous.do"><spring:message
+						code="master.page.attendedRendezvous" /></a></li>
+			<li><a class="fNiv" href="user/list.do"><spring:message
+						code="master.page.user.list" /></a></li>
 		</security:authorize>
+
+		<security:authorize access="isAnonymous()">
+			<li><a class="fNiv" href="security/login.do"><spring:message
+						code="master.page.login" /></a></li>
+			<li><a class="fNiv" href="user/register_User.do"><spring:message
+						code="master.page.register.user" /></a></li>
+			<li><a class="fNiv" href="rendezvous/list.do"><spring:message
+						code="master.page.rendezvous" /></a></li>
+			<li><a class="fNiv" href="user/list.do"><spring:message
+						code="master.page.user.list" /></a></li>
+		</security:authorize>
+
 	</ul>
 </div>
 

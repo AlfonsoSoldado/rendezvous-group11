@@ -103,4 +103,11 @@ public class RendezvousService {
 
 		return res;
 	}
+
+	public Collection<Rendezvous> findByAttendantId(final int attendantId) {
+		Collection<Rendezvous> res;
+		res = this.rendezvousRepository.findByAttendantId(attendantId);
+
+		return res;
+	}
 }

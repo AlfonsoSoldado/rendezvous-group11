@@ -25,7 +25,9 @@
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="rendezvous" requestURI="${requestUri}" id="row">
 	
-	<!-- Attributes -->	
+	<!-- Attributes -->
+
+	
 	<acme:column code="rendezvous.name" property="name" />
 	<acme:column code="rendezvous.description" property="description" />
 	<acme:column code="rendezvous.moment" property="moment" />
@@ -38,15 +40,6 @@
 	<display:column> <acme:links url="question/user/create.do?rendezvousId=${row.id}" code="rendezvous.question.create" /> </display:column>
 	</security:authorize>
 	
-	<security:authorize access="hasRole('ADMIN')">
-	<jstl:if test="row.deleted == false">
-	<display:column> <acme:links url="rendezvous/administrator/edit.do?rendezvousId=${row.id}" code="rendezvous.delete" /> </display:column>
-	</jstl:if>
-	</security:authorize>
 </display:table>
 
 <!-- Action links -->
-
-<security:authorize access="hasRole('USER')">
-	<acme:links url="rendezvous/user/create.do" code="rendezvous.create" />
-</security:authorize>

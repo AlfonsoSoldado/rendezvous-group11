@@ -25,28 +25,29 @@
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="rendezvous" requestURI="${requestUri}" id="row">
 	
-	<!-- Attributes -->	
+	<!-- Attributes -->
+	<security:authorize access="hasRole('USER')">
+		<display:column> 	
+		<jstl:if test="${row.finalMode == false}">
+		<acme:links url="rendezvous/user/edit.do?rendezvousId=${row.id}" code="rendezvous.edit" /> 
+		</jstl:if>
+		</display:column>
+
+	</security:authorize>
+	
 	<acme:column code="rendezvous.name" property="name" />
 	<acme:column code="rendezvous.description" property="description" />
 	<acme:column code="rendezvous.moment" property="moment" />
 	<acme:column code="rendezvous.finalMode" property="finalMode" />
 	<display:column><acme:links url="rendezvous/listSimilar.do?rendezvousId=${row.id }" code="rendezvous.similar" /></display:column>
 	<display:column> <acme:links url="announcement/list.do?rendezvousId=${row.id}" code="rendezvous.announcement" /> </display:column>
-	<display:column> <acme:links url="user/displayByRendezvous.do?rendezvousId=${row.id}" code="rendezvous.user" /> </display:column>
-	
-	<security:authorize access="hasRole('USER')">
 	<display:column> <acme:links url="question/user/create.do?rendezvousId=${row.id}" code="rendezvous.question.create" /> </display:column>
-	</security:authorize>
 	
-	<security:authorize access="hasRole('ADMIN')">
-	<jstl:if test="row.deleted == false">
-	<display:column> <acme:links url="rendezvous/administrator/edit.do?rendezvousId=${row.id}" code="rendezvous.delete" /> </display:column>
-	</jstl:if>
-	</security:authorize>
 </display:table>
 
 <!-- Action links -->
 
 <security:authorize access="hasRole('USER')">
+	</br>
 	<acme:links url="rendezvous/user/create.do" code="rendezvous.create" />
 </security:authorize>

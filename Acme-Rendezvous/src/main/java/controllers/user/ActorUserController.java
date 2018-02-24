@@ -1,3 +1,4 @@
+
 package controllers.user;
 
 import javax.validation.Valid;
@@ -20,7 +21,8 @@ public class ActorUserController extends AbstractController {
 	// Services -------------------------------------------------------------
 
 	@Autowired
-	private UserService userService;
+	private UserService	userService;
+
 
 	// Constructors ---------------------------------------------------------
 
@@ -42,8 +44,7 @@ public class ActorUserController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final User user,
-			final BindingResult binding) {
+	public ModelAndView save(@Valid final User user, final BindingResult binding) {
 		ModelAndView res;
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(user, "actor.params.error");
@@ -57,7 +58,6 @@ public class ActorUserController extends AbstractController {
 				System.out.println(oops.getStackTrace());
 				res = this.createEditModelAndView(user, "actor.commit.error");
 			}
-
 		return res;
 	}
 
@@ -71,8 +71,7 @@ public class ActorUserController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final User user,
-			final String message) {
+	protected ModelAndView createEditModelAndView(final User user, final String message) {
 		ModelAndView result;
 		result = new ModelAndView("actor/user/edit");
 		result.addObject("actor", user);

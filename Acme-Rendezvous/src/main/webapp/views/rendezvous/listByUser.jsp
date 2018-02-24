@@ -25,7 +25,16 @@
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="rendezvous" requestURI="${requestUri}" id="row">
 	
-	<!-- Attributes -->	
+	<!-- Attributes -->
+	<security:authorize access="hasRole('USER')">
+		<display:column> 	
+		<jstl:if test="${row.finalMode == false}">
+		<acme:links url="rendezvous/user/edit.do?rendezvousId=${row.id}" code="rendezvous.edit" /> 
+		</jstl:if>
+		</display:column>
+
+	</security:authorize>
+	
 	<acme:column code="rendezvous.name" property="name" />
 	<acme:column code="rendezvous.description" property="description" />
 	<acme:column code="rendezvous.moment" property="moment" />
@@ -50,3 +59,6 @@
 <security:authorize access="hasRole('USER')">
 	<acme:links url="rendezvous/user/create.do" code="rendezvous.create" />
 </security:authorize>
+
+</br>
+<acme:links url="user/list.do" code="rendezvous.back" />

@@ -55,6 +55,34 @@ public class RendezvousUserController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/listMyRendezvous", method = RequestMethod.GET)
+	public ModelAndView listMyRendezVous(final String message) {
+		ModelAndView result;
+		Collection<Rendezvous> rendezvous;
+		final User main = this.userService.findByPrincipal();
+		rendezvous = main.getRendezvous();
+
+		result = new ModelAndView("rendezvous/user/listMyRendezvous");
+		result.addObject("rendezvous", rendezvous);
+		result.addObject("requestURI", "rendezvous/user/listMyRendezvous.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/listAttendRendezvous", method = RequestMethod.GET)
+	public ModelAndView listAttendRendezvous(final String message) {
+		ModelAndView result;
+		Collection<Rendezvous> rendezvous;
+		final User main = this.userService.findByPrincipal();
+		rendezvous = this.rendezvousService.findByAttendantId(main.getId());
+
+		result = new ModelAndView("rendezvous/user/listAttendRendezvous");
+		result.addObject("rendezvous", rendezvous);
+		result.addObject("requestURI", "rendezvous/user/listAttendRendezvous.do");
+
+		return result;
+	}
+
 	// Creation ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -103,6 +131,8 @@ public class RendezvousUserController extends AbstractController {
 					final User user = this.userService.findByPrincipal();
 					user.getRendezvous().add(saved);
 					this.userService.save(user);
+					saved.getAttendant().add(user);
+					this.rendezvousService.save(saved);
 				}
 				res = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {

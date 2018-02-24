@@ -65,3 +65,10 @@
 	<jstl:out value="${user.postalAddress }" />
 </p>
 </form:form>
+
+</br>
+<div>
+	<a href="#" onClick="history.back();"> <spring:message
+			code="actor.back" />
+	</a>
+</div>
