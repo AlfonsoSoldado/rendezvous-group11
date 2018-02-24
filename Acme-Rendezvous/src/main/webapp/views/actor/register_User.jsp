@@ -30,7 +30,7 @@
 	<form:hidden path="question"/>
 
 	<acme:textbox code="actor.username" path="userAccount.username" />
-	<acme:textbox code="actor.password" path="userAccount.password" />
+	<acme:password code="actor.password" path="userAccount.password"/>
 	
 	<acme:textbox code="actor.name" path="name" />
 	<acme:textbox code="actor.surname" path="surname" />

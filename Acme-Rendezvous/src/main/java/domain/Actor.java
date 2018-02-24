@@ -1,4 +1,3 @@
-
 package domain;
 
 import javax.persistence.Access;
@@ -8,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -20,12 +20,11 @@ public abstract class Actor extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 
-	private String	name;
-	private String	surname;
-	private String	email;
-	private String	phoneNumber;
-	private Integer	postalAddress;
-
+	private String name;
+	private String surname;
+	private String email;
+	private String phoneNumber;
+	private Integer postalAddress;
 
 	@NotBlank
 	public String getName() {
@@ -46,6 +45,7 @@ public abstract class Actor extends DomainEntity {
 	}
 
 	@Email
+	@NotBlank
 	public String getEmail() {
 		return this.email;
 	}
@@ -54,6 +54,7 @@ public abstract class Actor extends DomainEntity {
 		this.email = email;
 	}
 
+	@Pattern(regexp = "\\d+")
 	public String getPhoneNumber() {
 		return this.phoneNumber;
 	}
@@ -69,10 +70,8 @@ public abstract class Actor extends DomainEntity {
 	public void setPostalAddress(final Integer postalAddress) {
 		this.postalAddress = postalAddress;
 	}
-	
-	
-	private UserAccount				userAccount;
 
+	private UserAccount userAccount;
 
 	@NotNull
 	@Valid
