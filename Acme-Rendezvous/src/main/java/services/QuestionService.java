@@ -80,4 +80,12 @@ public class QuestionService {
 		this.questionRepository.delete(question);
 	}
 
+	
+	public Question findQuestionByRendezvous(final int rendezvousId) {
+		Question result;
+		result = this.questionRepository.findQuestionByRendezvous(rendezvousId);
+		Assert.notNull(result);
+
+		return result;
+	}
 }

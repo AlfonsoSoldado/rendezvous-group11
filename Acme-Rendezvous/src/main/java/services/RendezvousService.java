@@ -27,6 +27,12 @@ public class RendezvousService {
 
 
 	// Suporting services
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private QuestionService questionService;
 
 	// Constructor
 
@@ -63,6 +69,15 @@ public class RendezvousService {
 
 	public Rendezvous save(final Rendezvous rendezvous) {
 		Assert.notNull(rendezvous);
+		
+		User principal;
+		principal = userService.findByPrincipal();
+		
+		User creator;
+		creator = userService.findCreator(rendezvous.getId());
+		
+		Assert.isTrue(principal.equals(creator));
+		
 		Rendezvous res;
 		res = this.rendezvousRepository.save(rendezvous);
 		return res;
@@ -74,6 +89,27 @@ public class RendezvousService {
 		Assert.notNull(rendezvous);
 		Assert.isTrue(rendezvous.getId() != 0);
 		Assert.isTrue(this.rendezvousRepository.exists(rendezvous.getId()));
+		
+//		User principal;
+//		principal = userService.findByPrincipal();
+//		
+//		User creator;
+//		creator = userService.findCreator(rendezvous.getId());
+		
+		//Assert.isTrue(principal.equals(creator));
+
+//		Collection<Rendezvous> rendezvousCreator = new ArrayList<Rendezvous>();
+//		rendezvousCreator = creator.getRendezvous();
+//		
+//		rendezvousCreator.remove(rendezvous);
+//		
+//		creator.setRendezvous(rendezvousCreator);
+//		
+//		Question question;
+//		question = questionService.findQuestionByRendezvous(rendezvous.getId());
+//		
+//		questionService.delete(question);
+		
 		this.rendezvousRepository.delete(rendezvous);
 	}
 	

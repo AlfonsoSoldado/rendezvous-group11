@@ -26,9 +26,13 @@
 	name="rendezvous" requestURI="${requestUri}" id="row">
 	
 	<!-- Attributes -->
-	
 	<security:authorize access="hasRole('USER')">
-	<display:column> <acme:links url="rendezvous/user/edit.do?rendezvousId=${row.id}" code="rendezvous.edit" /> </display:column>
+		<display:column> 	
+		<jstl:if test="${row.finalMode == false}">
+		<acme:links url="rendezvous/user/edit.do?rendezvousId=${row.id}" code="rendezvous.edit" /> 
+		</jstl:if>
+		</display:column>
+
 	</security:authorize>
 	
 	<acme:column code="rendezvous.name" property="name" />
