@@ -235,6 +235,7 @@
 		<property name="description"
 			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod" />
 		<property name="momentMade" value="10/10/2010" />
+		<property name="rendezvous" ref="rendezvous1" />
 
 	</bean>
 
@@ -243,6 +244,7 @@
 		<property name="description"
 			value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod" />
 		<property name="momentMade" value="10/10/2010" />
+		<property name="rendezvous" ref="rendezvous2" />
 
 	</bean>
 

@@ -6,10 +6,12 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
@@ -116,7 +118,8 @@ public class Rendezvous extends DomainEntity {
 		this.attendant = attendant;
 	}
 
-	@OneToMany
+	@Valid
+	@OneToMany(mappedBy = "rendezvous", cascade = CascadeType.REMOVE)
 	public Collection<Announcement> getAnnouncement() {
 		return this.announcement;
 	}

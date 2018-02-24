@@ -23,6 +23,7 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="momentMade" />
+	<form:hidden path="rendezvous" />
 	
 	<acme:textbox code="announcement.title" path="title"/>
 	<acme:textbox code="announcement.description" path="description"/>

@@ -52,7 +52,7 @@ public class RendezvousServiceTest extends AbstractTest {
 		final boolean finalMode = false;
 		final boolean adultOnly = true;
 
-		final Announcement announcement = this.announcementService.create();
+		final Announcement announcement = this.announcementService.create(rendezvous);
 		final String description2 = "Descripción 1";
 		final String title = "Título 1";
 		announcement.setTitle(title);

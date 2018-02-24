@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 
 import repositories.AnnouncementRepository;
 import domain.Announcement;
+import domain.Rendezvous;
 
 @Service
 @Transactional
@@ -30,10 +31,12 @@ public class AnnouncementService {
 
 	// Simple CRUD methods ----------------------------------------------------
 
-	public Announcement create() {
+	public Announcement create(final Rendezvous rendezvous) {
 		Announcement result;
-
+		
 		result = new Announcement();
+		
+		result.setRendezvous(rendezvous);
 
 		return result;
 	}

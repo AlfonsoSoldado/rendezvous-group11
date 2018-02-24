@@ -36,10 +36,5 @@
 
 <!-- Action links -->
 
-<security:authorize access="hasRole('USER')">
-	</br>
-	<acme:links url="announcement/user/create.do"
-		code="announcement.create" />
-</security:authorize>
 </br>
 <acme:links url="rendezvous/list.do" code="announcement.back" />

@@ -7,11 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AnnouncementService;
+import services.RendezvousService;
 import controllers.AbstractController;
 import domain.Announcement;
+import domain.Rendezvous;
 
 @Controller
 @RequestMapping("/announcement/user")
@@ -21,6 +24,9 @@ public class AnnouncementUserController extends AbstractController {
 
 	@Autowired
 	private AnnouncementService announcementService;
+	
+	@Autowired
+	private RendezvousService rendezvousService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -31,11 +37,19 @@ public class AnnouncementUserController extends AbstractController {
 	// Creation ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam final int rendezvousId) {
 		ModelAndView res;
+		
+//		Collection<Announcement> announcements = new ArrayList<Announcement>();
 		Announcement announcement;
+		Rendezvous rendezvous;
 
-		announcement = this.announcementService.create();
+		rendezvous = rendezvousService.findOne(rendezvousId);
+//		announcements.addAll(rendezvous.getAnnouncement());
+		announcement = this.announcementService.create(rendezvous);
+//		announcements.add(announcement);
+//		rendezvous.setAnnouncement(announcements);
+		
 		res = this.createEditModelAndView(announcement);
 
 		return res;

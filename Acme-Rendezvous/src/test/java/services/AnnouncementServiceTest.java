@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Announcement;
+import domain.Rendezvous;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -23,6 +24,9 @@ public class AnnouncementServiceTest extends AbstractTest {
 
 	@Autowired
 	private AnnouncementService	announcementService;
+	
+	@Autowired
+	private RendezvousService	rendezvousService;
 
 
 	// Tests --------------------
@@ -30,7 +34,9 @@ public class AnnouncementServiceTest extends AbstractTest {
 	@Test
 	public void test() {
 
-		final Announcement announcement = this.announcementService.create();
+		final Rendezvous rendezvous = this.rendezvousService.create();
+		
+		final Announcement announcement = this.announcementService.create(rendezvous);
 
 		final String description = "Descripción 1";
 		final String title = "Título 1";
