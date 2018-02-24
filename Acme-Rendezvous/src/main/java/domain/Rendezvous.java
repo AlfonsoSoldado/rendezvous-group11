@@ -33,6 +33,7 @@ public class Rendezvous extends DomainEntity {
 
 
 	@NotBlank
+	@Column(insertable = false, updatable = false)
 	public String getName() {
 		return this.name;
 	}
