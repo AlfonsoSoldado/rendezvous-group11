@@ -39,7 +39,7 @@
 	<acme:column code="rendezvous.description" property="description" />
 	<acme:column code="rendezvous.moment" property="moment" />
 	<acme:column code="rendezvous.finalMode" property="finalMode" />
-	<display:column><acme:links url="rendezvous/listSimilar.do?rendezvousId=${row.id }" code="rendezvous.similar"/></display:column>
+	<display:column><acme:links url="rendezvous/listSimilar.do?rendezvousId=${row.id }" code="rendezvous.similar" /></display:column>
 	<display:column> <acme:links url="announcement/list.do?rendezvousId=${row.id}" code="rendezvous.announcement" /> </display:column>
 	<display:column> <acme:links url="user/listCreator.do?rendezvousId=${row.id}" code="rendezvous.user" /> </display:column>
 	
@@ -48,7 +48,9 @@
 	</security:authorize>
 	
 	<security:authorize access="hasRole('ADMIN')">
+	<jstl:if test="row.deleted == false">
 	<display:column> <acme:links url="rendezvous/administrator/edit.do?rendezvousId=${row.id}" code="rendezvous.delete" /> </display:column>
+	</jstl:if>
 	</security:authorize>
 </display:table>
 

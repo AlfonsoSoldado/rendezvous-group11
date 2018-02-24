@@ -29,6 +29,7 @@
 		<form:hidden path="attendant" />
 		<form:hidden path="announcement" />
 		<form:hidden path="similar" />
+		<form:hidden path="deleted" />
 
 		<acme:textbox code="rendezvous.name" path="name" />
 		<acme:textbox code="rendezvous.description" path="description" />

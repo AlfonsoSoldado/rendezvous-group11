@@ -28,6 +28,8 @@ public class Rendezvous extends DomainEntity {
 	private String	picture;
 	private boolean	finalMode;
 	private boolean	adultOnly;
+	private boolean	deleted;
+
 
 	@NotBlank
 	public String getName() {
@@ -82,6 +84,13 @@ public class Rendezvous extends DomainEntity {
 		this.adultOnly = adultOnly;
 	}
 
+	public boolean getDeleted() {
+		return this.deleted;
+	}
+	public void setDeleted(final boolean deleted) {
+		this.deleted = deleted;
+	}
+
 
 	//Relationships -------------------------------------------------
 
@@ -89,6 +98,7 @@ public class Rendezvous extends DomainEntity {
 	private Collection<User>			attendant;
 	private Collection<Announcement>	announcement;
 	private Collection<Rendezvous>		similar;
+
 
 	@OneToMany
 	public Collection<Comment> getComment() {

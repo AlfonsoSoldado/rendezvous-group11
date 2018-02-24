@@ -147,6 +147,7 @@
 		</property>
 		<property name="finalMode" value="true" />
 		<property name="adultOnly" value="true" />
+		<property name="deleted" value="false" />
 
 		<property name="comment">
 			<list>
@@ -182,7 +183,7 @@
 		</property>
 		<property name="finalMode" value="false" />
 		<property name="adultOnly" value="false" />
-
+		<property name="deleted" value="false" />
 		<property name="comment">
 			<list>
 				<ref bean="comment3" />

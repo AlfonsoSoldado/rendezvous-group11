@@ -48,6 +48,7 @@ public class RendezvousService {
 		res.setAttendant(new ArrayList<User>());
 		res.setSimilar(new ArrayList<Rendezvous>());
 		res.setAnnouncement(new ArrayList<Announcement>());
+		res.setDeleted(false);
 
 		return res;
 	}
@@ -91,27 +92,9 @@ public class RendezvousService {
 		Assert.isTrue(rendezvous.getId() != 0);
 		Assert.isTrue(this.rendezvousRepository.exists(rendezvous.getId()));
 
-		//		User principal;
-		//		principal = userService.findByPrincipal();
-		//		
-		//		User creator;
-		//		creator = userService.findCreator(rendezvous.getId());
-
-		//Assert.isTrue(principal.equals(creator));
-
-		//		Collection<Rendezvous> rendezvousCreator = new ArrayList<Rendezvous>();
-		//		rendezvousCreator = creator.getRendezvous();
-		//		
-		//		rendezvousCreator.remove(rendezvous);
-		//		
-		//		creator.setRendezvous(rendezvousCreator);
-		//		
-		//		Question question;
-		//		question = questionService.findQuestionByRendezvous(rendezvous.getId());
-		//		
-		//		questionService.delete(question);
-
-		this.rendezvousRepository.delete(rendezvous);
+		rendezvous.setFinalMode(true);
+		rendezvous.setDeleted(true);
+		this.save(rendezvous);
 	}
 
 	public Rendezvous findRendezvousByComment(final int commentId) {

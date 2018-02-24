@@ -120,12 +120,8 @@ public class RendezvousUserController extends AbstractController {
 	public ModelAndView delete(@Valid final Rendezvous rendezvous, final BindingResult binding) {
 		ModelAndView res;
 		try {
-			if (rendezvous.getId() != 0) {
-				final User user = this.userService.findByPrincipal();
-				user.getRendezvous().remove(rendezvous);
-				this.userService.save(user);
+			if (rendezvous.getId() != 0)
 				this.rendezvousService.delete(rendezvous);
-			}
 			res = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
 			System.out.println(oops.getMessage());
