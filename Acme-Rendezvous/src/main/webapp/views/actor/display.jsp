@@ -20,12 +20,14 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<form:form action="user/display.do" modelAttribute="user">
+
 <p>
 	<span style="font-weight: bold;"> <spring:message
 			code="actor.name" var="nameHeader" /> <jstl:out
 			value="${nameHeader }" />:
 	</span>
-	<jstl:out value="${actor.name }" />
+	<jstl:out value="${user.name }" />
 </p>
 
 
@@ -35,7 +37,7 @@
 			code="actor.surname" var="surnameHeader" /> <jstl:out
 			value="${surnameHeader }" />:
 	</span>
-	<jstl:out value="${actor.surname }" />
+	<jstl:out value="${user.surname }" />
 </p>
 
 <p>
@@ -43,7 +45,7 @@
 			code="actor.email" var="emailHeader" /> <jstl:out
 			value="${emailHeader }" />:
 	</span>
-	<jstl:out value="${actor.email }" />
+	<jstl:out value="${user.email }" />
 </p>
 
 <p>
@@ -51,7 +53,7 @@
 			code="actor.phoneNumber" var="phoneNumberHeader" /> <jstl:out
 			value="${phoneNumberHeader }" />:
 	</span>
-	<jstl:out value="${actor.phoneNumber }" />
+	<jstl:out value="${user.phoneNumber }" />
 </p>
 
 
@@ -60,8 +62,6 @@
 			code="actor.postalAddress" var="postalAddressHeader" /> <jstl:out
 			value="${postalAddressHeader }" />:
 	</span>
-	<jstl:out value="${actor.postalAddress }" />
+	<jstl:out value="${user.postalAddress }" />
 </p>
-
-
-
+</form:form>

@@ -59,6 +59,19 @@ public class UserController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/displayByRendezvous", method = RequestMethod.GET)
+	public ModelAndView displayByRendezvous(@RequestParam final int rendezvousId) {
+		ModelAndView result;
+
+		final User user = this.userService.findCreator(rendezvousId);
+
+		result = new ModelAndView("user/display");
+		result.addObject("user", user);
+		result.addObject("requestURI", "user/display.do");
+
+		return result;
+	}
+
 	@RequestMapping(value = "/listCreator", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam final int rendezvousId) {
 		ModelAndView result;
