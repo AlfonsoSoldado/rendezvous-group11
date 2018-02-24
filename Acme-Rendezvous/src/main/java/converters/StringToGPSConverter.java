@@ -23,7 +23,7 @@ public class StringToGPSConverter implements Converter<String, GPS> {
 			try {
 				parts = text.split("\\|");
 				result = new GPS();
-				result.setName(URLDecoder.decode(parts[0], "UTF-8"));
+				result.setNamePlace(URLDecoder.decode(parts[0], "UTF-8"));
 				result.setLatitude(Double.valueOf(URLDecoder.decode(parts[1], "UTF-8")));
 				result.setLongitude(Double.valueOf(URLDecoder.decode(parts[2], "UTF-8")));
 

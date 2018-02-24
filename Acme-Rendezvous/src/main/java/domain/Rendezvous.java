@@ -6,12 +6,10 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Future;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
@@ -31,9 +29,7 @@ public class Rendezvous extends DomainEntity {
 	private boolean	finalMode;
 	private boolean	adultOnly;
 
-
 	@NotBlank
-	@Column(insertable = false, updatable = false)
 	public String getName() {
 		return this.name;
 	}
@@ -49,7 +45,6 @@ public class Rendezvous extends DomainEntity {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Future
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {
 		return this.moment;
@@ -94,7 +89,6 @@ public class Rendezvous extends DomainEntity {
 	private Collection<User>			attendant;
 	private Collection<Announcement>	announcement;
 	private Collection<Rendezvous>		similar;
-
 
 	@OneToMany
 	public Collection<Comment> getComment() {

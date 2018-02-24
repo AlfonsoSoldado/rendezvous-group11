@@ -217,7 +217,7 @@
 	<bean id="gps1" class="domain.GPS">
 		<property name="latitude" value="10.0" />
 		<property name="longitude" value="10.0" />
-		<property name="name" value="gps1" />
+		<property name="namePlace" value="gps1" />
 
 	</bean>
 
@@ -225,7 +225,7 @@
 	<bean id="gps2" class="domain.GPS">
 		<property name="latitude" value="10.0" />
 		<property name="longitude" value="10.0" />
-		<property name="name" value="gps2" />
+		<property name="namePlace" value="gps2" />
 
 	</bean>
 

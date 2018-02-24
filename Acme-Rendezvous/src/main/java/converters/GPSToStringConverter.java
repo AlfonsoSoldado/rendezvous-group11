@@ -22,7 +22,7 @@ public class GPSToStringConverter implements Converter<GPS, String> {
 		else
 			try {
 				builder = new StringBuilder();
-				builder.append(URLEncoder.encode(gps.getName(), "UTF-8"));
+				builder.append(URLEncoder.encode(gps.getNamePlace(), "UTF-8"));
 				builder.append("|");
 				builder.append(URLEncoder.encode(Double.toString(gps.getLatitude()), "UTF-8"));
 				builder.append("|");

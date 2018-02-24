@@ -47,7 +47,7 @@ public class RendezvousServiceTest extends AbstractTest {
 		final GPS gpsCoordinate = new GPS();
 		gpsCoordinate.setLatitude(23.0);
 		gpsCoordinate.setLongitude(22.0);
-		gpsCoordinate.setName("name");
+		gpsCoordinate.setNamePlace("name");
 		final String picture = "http://www.foto.com";
 		final boolean finalMode = false;
 		final boolean adultOnly = true;

@@ -16,7 +16,7 @@ public class GPS {
 
 	private Double	latitude;
 	private Double	longitude;
-	private String	name;
+	private String	namePlace;
 
 
 	@Range(min = -90, max = 90)
@@ -38,12 +38,12 @@ public class GPS {
 	}
 
 	@NotBlank
-	public String getName() {
-		return this.name;
+	public String getNamePlace() {
+		return this.namePlace;
 	}
 
-	public void setName(final String name) {
-		this.name = name;
+	public void setNamePlace(final String namePlace) {
+		this.namePlace = namePlace;
 	}
 
 }

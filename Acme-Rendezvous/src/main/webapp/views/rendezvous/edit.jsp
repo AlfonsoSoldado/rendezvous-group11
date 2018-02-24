@@ -23,12 +23,17 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	
+	<form:hidden path="comment" />
+	<form:hidden path="attendant" />
+	<form:hidden path="announcement" />
+	<form:hidden path="similar" />
+	
 	<acme:textbox code="rendezvous.name" path="name"/>
 	<acme:textbox code="rendezvous.description" path="description"/>
 	<acme:date code="rendezvous.moment" path="moment" placeholder="dd/MM/yyyy HH:mm"/>
 	<acme:textbox code="rendezvous.gpsCoordinate.latitude" path="gpsCoordinate.latitude"/>
 	<acme:textbox code="rendezvous.gpsCoordinate.longitude" path="gpsCoordinate.longitude"/>
-	<acme:textbox code="rendezvous.gpsCoordinate.name" path="gpsCoordinate.name"/>
+	<acme:textbox code="rendezvous.gpsCoordinate.name" path="gpsCoordinate.namePlace"/>
 	<acme:textbox code="rendezvous.picture" path="picture"/>
 	<acme:textbox code="rendezvous.finalMode" path="finalMode"/>
 	<acme:textbox code="rendezvous.adultOnly" path="adultOnly"/>
