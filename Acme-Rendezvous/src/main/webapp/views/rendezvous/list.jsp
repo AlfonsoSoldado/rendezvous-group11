@@ -34,7 +34,13 @@
 	<display:column> <acme:links url="announcement/list.do?rendezvousId=${row.id}" code="rendezvous.announcement" /> </display:column>
 	<display:column> <acme:links url="user/displayByRendezvous.do?rendezvousId=${row.id}" code="rendezvous.user" /> </display:column>
 	<display:column> <acme:links url="question/list.do?rendezvousId=${row.id}" code="rendezvous.question" /> </display:column>
-	
+	<jstl:if test="${row.deleted=='true'}">
+	<spring:message code="rendezvous.deleted" var="deleted" />
+	<display:column property="deleted" title="${deleted}" style="background-color: red" ></display:column>
+	</jstl:if>
+	<jstl:if test="${row.deleted=='false'}">
+		<acme:column code="rendezvous.deleted" property="deleted" />
+	</jstl:if>
 	<security:authorize access="hasRole('USER')">
 	<display:column> <acme:links url="question/user/create.do?rendezvousId=${row.id}" code="rendezvous.question.create" /> </display:column>
 	</security:authorize>
