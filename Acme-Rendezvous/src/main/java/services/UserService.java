@@ -134,4 +134,18 @@ public class UserService {
 		return result;
 	}
 
+	public boolean checkUserLogged() {
+		boolean result = false;
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+		Collection<Authority> authority = userAccount.getAuthorities();
+		Assert.notNull(authority);
+		Authority res = new Authority();
+		res.setAuthority("USER");
+		if(authority.contains(res)){
+			result = true;
+		}
+		return result;
+	}
 }

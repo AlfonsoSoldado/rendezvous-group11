@@ -36,8 +36,8 @@ public class QuestionController extends AbstractController {
 
 	// Listing --------------------------------------------------------------
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam int rendezvousId) {
+	@RequestMapping(value = "/listByUser", method = RequestMethod.GET)
+	public ModelAndView listByUser(@RequestParam int rendezvousId) {
 		ModelAndView result;
 		Collection<Question> question;
 		
@@ -45,17 +45,33 @@ public class QuestionController extends AbstractController {
 		Collection<Integer> rendezvousesId = new ArrayList<Integer>();
 		User user;
 
-		user = userService.findByPrincipal();
-		rendezvouses.addAll(user.getRendezvous());
-		for(Rendezvous r: rendezvouses){
-			rendezvousesId.add(r.getId());
+		if(userService.checkUserLogged()){
+			user = userService.findByPrincipal();
+			rendezvouses.addAll(user.getRendezvous());
+			for(Rendezvous r: rendezvouses){
+				rendezvousesId.add(r.getId());
+			}
 		}
+
+		question = questionService.findQuestionByRendezvous(rendezvousId);
+
+		result = new ModelAndView("question/listByUser");
+		result.addObject("question", question);
+		result.addObject("rendezvousesId", rendezvousesId);
+		result.addObject("requestURI", "question/listByUser.do");
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam int rendezvousId) {
+		ModelAndView result;
+		Collection<Question> question;
 
 		question = questionService.findQuestionByRendezvous(rendezvousId);
 
 		result = new ModelAndView("question/list");
 		result.addObject("question", question);
-		result.addObject("rendezvousesId", rendezvousesId);
 		result.addObject("requestURI", "question/list.do");
 
 		return result;

@@ -21,6 +21,11 @@
 		<put-attribute name="body" value="/views/question/list.jsp" />
 	</definition>
 	
+	<definition name="question/listByUser" extends="master.page">	
+		<put-attribute name="title" value="List of questions" />
+		<put-attribute name="body" value="/views/question/listByUser.jsp" />
+	</definition>
+	
 	<definition name="question/edit" extends="master.page">	
 		<put-attribute name="title" value="Edit questions" />
 		<put-attribute name="body" value="/views/question/edit.jsp" />

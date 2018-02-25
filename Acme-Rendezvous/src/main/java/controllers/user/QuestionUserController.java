@@ -91,6 +91,7 @@ public class QuestionUserController extends AbstractController {
 			this.questionService.delete(question);
 			res = new ModelAndView("redirect:../../");
 		} catch (final Throwable oops) {
+			System.out.println(oops.getMessage());
 			res = this.createEditModelAndView(question, "question.commit.error");
 		}
 		return res;
