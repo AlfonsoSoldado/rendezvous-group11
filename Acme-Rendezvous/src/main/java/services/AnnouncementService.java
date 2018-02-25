@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 import repositories.AnnouncementRepository;
 import domain.Announcement;
 import domain.Rendezvous;
+import domain.User;
 
 @Service
 @Transactional
@@ -22,6 +23,11 @@ public class AnnouncementService {
 
 	@Autowired
 	private AnnouncementRepository announcementRepository;
+	
+	// Services ---------------------------------------------------------------
+	
+	@Autowired
+	private UserService userService;
 
 	// Constructor
 
@@ -66,6 +72,12 @@ public class AnnouncementService {
 			Date momentMade;
 			momentMade = new Date(System.currentTimeMillis() - 1000);
 			result.setMomentMade(momentMade);
+			
+			Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
+			User user;
+			user = userService.findByPrincipal();
+			rendezvouses.addAll(user.getRendezvous());
+			Assert.isTrue(rendezvouses.contains(announcement.getRendezvous()));
 
 			// TODO Añadir restricción: solo el creador del rendezVous puede
 			// asociar un announcement al mismo (en controlador)
