@@ -103,7 +103,7 @@ public class RendezvousService {
 
 		rendezvous.setFinalMode(true);
 		rendezvous.setDeleted(true);
-		this.save(rendezvous);
+		this.rendezvousRepository.save(rendezvous);
 	}
 
 	public Rendezvous findRendezvousByComment(final int commentId) {
@@ -120,51 +120,6 @@ public class RendezvousService {
 		return res;
 	}
 
-	public void DeleteAdmin(Rendezvous rendezvous) {
-		System.out.println(Boolean.valueOf(rendezvous != null).toString() + Boolean.valueOf(rendezvous.getId() != 0));
-		Assert.notNull(rendezvous);
-		Assert.isTrue(rendezvous.getId() != 0);
-		for (Authority au : administratorService.findByPrincipal().getUserAccount().getAuthorities()) {
-			System.out.println(au);
-			System.out.println(au);
-			System.out.println(au.getAuthority().equals("ADMIN"));
-			Assert.isTrue(au.getAuthority().equals("ADMIN"));
-		}
-
-		// quito este rendezvous de la lista de similares de los otros rendezvous
-		List<Rendezvous> rendezvouses = new ArrayList<>();
-		Collection<Rendezvous> comprobacion = this.rendezvousRepository
-				.findRendezvousContainThisAsSimilar(rendezvous.getId());
-		if (comprobacion != null && comprobacion.isEmpty()) {
-			rendezvouses.addAll(this.rendezvousRepository.findRendezvousContainThisAsSimilar(rendezvous.getId()));
-			for (Rendezvous r : rendezvouses) {
-				List<Rendezvous> actualiza = new ArrayList<>(r.getSimilar());
-				actualiza.remove(rendezvous);
-				r.setSimilar(actualiza);
-				this.rendezvousRepository.save(r);
-			}
-		}
-		// borro los annoucements asociados
-		this.announcementService.deleteAll(rendezvous.getAnnouncement());
-		// borro los comment asociados
-		for (Comment comment : rendezvous.getComment()) {
-			if (comment!=null) {
-				this.commentService.delete(comment);
-
-			}
-		}
-
-		User user =this.userService.findCreator(rendezvous.getId());
-		List<Rendezvous> rendezvousUser= new ArrayList<>();
-		rendezvousUser.addAll(user.getRendezvous());
-		System.out.println(rendezvousUser);
-		rendezvousUser.remove(rendezvous);
-		System.out.println(rendezvousUser);
-		user.setRendezvous(rendezvousUser);
-		this.userService.save(user);
-		this.rendezvousRepository.delete(rendezvous.getId());
-
-	}
 
 		
 }
