@@ -78,4 +78,14 @@ public class CommentService {
 
 		this.commentRepository.delete(comment);
 	}
+	
+	public Collection<Comment> findCommentsByRendezvous(int id) {
+		Collection<Comment> res = new ArrayList<Comment>();
+		res.addAll(commentRepository.findCommentsByRendezvous(id));
+		res = commentRepository.findCommentsByRendezvous(id);
+		
+		Assert.notNull(res);
+		return res;
+
+	}
 }

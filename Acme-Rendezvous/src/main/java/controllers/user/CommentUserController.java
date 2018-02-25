@@ -40,15 +40,15 @@ public class CommentUserController extends AbstractController {
 	// Listing --------------------------------------------------------------
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	public ModelAndView list(@RequestParam final int rendezvousId) {
 		ModelAndView result;
 		Collection<Comment> comment;
 
-		comment = commentService.findAll();
+		comment = commentService.findCommentsByRendezvous(rendezvousId);
 
 		result = new ModelAndView("comment/list");
 		result.addObject("comment", comment);
-		result.addObject("requestURI", "comment/list.do");
+		result.addObject("requestURI", "comment/user/list.do");
 
 		return result;
 	}

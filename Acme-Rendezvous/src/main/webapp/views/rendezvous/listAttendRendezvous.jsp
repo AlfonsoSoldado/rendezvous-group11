@@ -35,9 +35,11 @@
 	<display:column><acme:links url="rendezvous/listSimilar.do?rendezvousId=${row.id }" code="rendezvous.similar" /></display:column>
 	<display:column> <acme:links url="announcement/list.do?rendezvousId=${row.id}" code="rendezvous.announcement" /> </display:column>
 	<display:column> <acme:links url="user/displayByRendezvous.do?rendezvousId=${row.id}" code="rendezvous.user" /> </display:column>
+	<display:column> <acme:links url="comment/user/list.do?rendezvousId=${row.id}" code="rendezvous.comment" /> </display:column>
 	
 	<security:authorize access="hasRole('USER')">
 	<display:column> <acme:links url="question/user/create.do?rendezvousId=${row.id}" code="rendezvous.question.create" /> </display:column>
+	<display:column> <acme:links url="comment/user/create.do?rendezvousId=${row.id}" code="rendezvous.comment.create" /> </display:column>
 	</security:authorize>
 	
 </display:table>
