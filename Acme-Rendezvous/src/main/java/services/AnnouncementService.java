@@ -33,9 +33,9 @@ public class AnnouncementService {
 
 	public Announcement create(final Rendezvous rendezvous) {
 		Announcement result;
-		
+
 		result = new Announcement();
-		
+
 		result.setRendezvous(rendezvous);
 
 		return result;
@@ -79,19 +79,25 @@ public class AnnouncementService {
 	public void delete(final Announcement announcement) {
 		Assert.notNull(announcement);
 		Assert.isTrue(announcement.getId() != 0);
-		
+
 		Rendezvous rendezvous;
 		rendezvous = announcement.getRendezvous();
 		rendezvous.getAnnouncement().remove(announcement);
 
 		this.announcementRepository.delete(announcement);
 	}
-	
+
+	public void deleteAll(Collection<Announcement> announcements) {
+		Assert.notNull(announcements);
+
+		this.announcementRepository.delete(announcements);
+	}
+
 	public Collection<Announcement> findAnnouncementsByRendezvous(int id) {
 		Collection<Announcement> res = new ArrayList<Announcement>();
 		res.addAll(announcementRepository.findAnnouncementsByRendezvous(id));
 		res = announcementRepository.findAnnouncementsByRendezvous(id);
-		
+
 		Assert.notNull(res);
 		return res;
 

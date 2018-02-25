@@ -19,8 +19,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="rendezvous/user/edit.do" modelAttribute="rendezvous">
-	<security:authorize access="hasRole('USER')">
+<security:authorize access="hasRole('USER')">
+
+	<form:form action="rendezvous/user/edit.do" modelAttribute="rendezvous">
 
 		<form:hidden path="id" />
 		<form:hidden path="version" />
@@ -42,18 +43,23 @@
 		<acme:textbox code="rendezvous.gpsCoordinate.name"
 			path="gpsCoordinate.namePlace" />
 		<acme:textbox code="rendezvous.picture" path="picture" />
-		
-		<acme:selectBoolean code="rendezvous.finalMode" path="finalMode" items="${finalModes}" />
-		<acme:selectBoolean code="rendezvous.adultOnly" path="adultOnly" items="${finalModes}" />
+
+		<acme:selectBoolean code="rendezvous.finalMode" path="finalMode"
+			items="${finalModes}" />
+		<acme:selectBoolean code="rendezvous.adultOnly" path="adultOnly"
+			items="${finalModes}" />
 
 		<!-- Buttons -->
-
 		<acme:submit name="save" code="rendezvous.save" />
 		<acme:delete confirmationCode="rendezvous.confirm.delete"
 			buttonCode="rendezvous.delete" id="${rendezvous.id }" />
 		<acme:cancel url="rendezvous/list.do" code="rendezvous.cancel" />
 
-	</security:authorize>
+	</form:form>
+</security:authorize>
+
+<form:form action="rendezvous/administrator/edit.do"
+	modelAttribute="rendezvous">
 
 	<security:authorize access="hasRole('ADMIN')">
 		<acme:delete confirmationCode="rendezvous.confirm.delete"

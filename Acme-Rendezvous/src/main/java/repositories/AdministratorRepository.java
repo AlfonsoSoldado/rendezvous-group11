@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import domain.Administrator;
 import domain.Rendezvous;
+import domain.User;
 
 @Repository
 public interface AdministratorRepository extends JpaRepository<Administrator, Integer> {
@@ -81,6 +82,9 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select stddev(m.replies.size) from Comment m")
 	double estandardDesviationRepliesComment();
 	
+	
+	@Query("select e from Administrator e join e.userAccount ac where ac.id = ?1")
+	Administrator findByPrincipal(int id);
 	/*
 	 * preguntar a muller si es más eficiente sacar la media y la desviacion en una sola consulta o en varias
 	 * 

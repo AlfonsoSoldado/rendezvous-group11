@@ -50,7 +50,7 @@ public class RendezvousAdministratorController extends AbstractController {
 			ModelAndView res;
 			try {
 				this.rendezvousService.delete(rendezvous);
-				res = new ModelAndView("redirect:../../");
+				res = new ModelAndView("redirect:rendezvous/list");
 			} catch (final Throwable oops) {
 				System.out.println(oops.getCause());
 				System.out.println(oops.getMessage());
