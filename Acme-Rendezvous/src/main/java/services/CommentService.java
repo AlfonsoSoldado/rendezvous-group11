@@ -75,14 +75,9 @@ public class CommentService {
 		Assert.notNull(comment);
 		Assert.isTrue(comment.getId() != 0);
 		System.out.println(comment);
-		if (!comment.getReplies().isEmpty() || comment.getReplies() == null) {
-			for (Comment comment2 : comment.getReplies()) {
-
-				this.delete(comment2);
-			}
-		}
-
+		
 		this.commentRepository.delete(comment);
+
 	}
 
 	public Collection<Comment> findCommentsByRendezvous(int id) {

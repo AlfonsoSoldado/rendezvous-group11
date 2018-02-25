@@ -148,7 +148,10 @@ public class RendezvousService {
 		this.announcementService.deleteAll(rendezvous.getAnnouncement());
 		// borro los comment asociados
 		for (Comment comment : rendezvous.getComment()) {
-			this.commentService.delete(comment);
+			if (comment!=null) {
+				this.commentService.delete(comment);
+
+			}
 		}
 
 		User user =this.userService.findCreator(rendezvous.getId());
