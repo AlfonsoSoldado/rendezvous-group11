@@ -57,13 +57,45 @@
 
 	</form:form>
 </security:authorize>
-
+<security:authorize access="hasRole('ADMIN')">
 <form:form action="rendezvous/administrator/edit.do"
 	modelAttribute="rendezvous">
 
-	<security:authorize access="hasRole('ADMIN')">
+
+
+
+		<form:hidden path="id" />
+		<form:hidden path="version" />
+
+		<form:hidden path="comment" />
+		<form:hidden path="attendant" />
+		<form:hidden path="announcement" />
+		<form:hidden path="similar" />
+		<form:hidden path="deleted" />
+
+		<acme:textbox code="rendezvous.name" path="name" />
+		<acme:textbox code="rendezvous.description" path="description" />
+		<acme:date code="rendezvous.moment" path="moment"
+			placeholder="dd/MM/yyyy HH:mm" />
+		<acme:textbox code="rendezvous.gpsCoordinate.latitude"
+			path="gpsCoordinate.latitude" />
+		<acme:textbox code="rendezvous.gpsCoordinate.longitude"
+			path="gpsCoordinate.longitude" />
+		<acme:textbox code="rendezvous.gpsCoordinate.name"
+			path="gpsCoordinate.namePlace" />
+		<acme:textbox code="rendezvous.picture" path="picture" />
+
+		<acme:selectBoolean code="rendezvous.finalMode" path="finalMode"
+			items="${finalModes}" />
+		<acme:selectBoolean code="rendezvous.adultOnly" path="adultOnly"
+			items="${finalModes}" />
+
+
+
+	
 		<acme:delete confirmationCode="rendezvous.confirm.delete"
 			buttonCode="rendezvous.delete" id="${rendezvous.id }" />
 		<acme:cancel url="rendezvous/list.do" code="rendezvous.cancel" />
-	</security:authorize>
 </form:form>
+	</security:authorize>
+

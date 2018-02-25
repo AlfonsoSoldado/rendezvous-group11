@@ -20,8 +20,7 @@ public class CommentService {
 
 	// Managed repository -----------------------------------------------------
 	@Autowired
-	private CommentRepository	commentRepository;
-
+	private CommentRepository commentRepository;
 
 	// Constructor
 
@@ -66,7 +65,7 @@ public class CommentService {
 			momentMade = new Date(System.currentTimeMillis() - 1000);
 			comment.setMomentMade(momentMade);
 		}
-		
+
 		result = this.commentRepository.save(comment);
 
 		return result;
@@ -75,15 +74,22 @@ public class CommentService {
 	public void delete(final Comment comment) {
 		Assert.notNull(comment);
 		Assert.isTrue(comment.getId() != 0);
+		System.out.println(comment);
+		if (!comment.getReplies().isEmpty() || comment.getReplies() == null) {
+			for (Comment comment2 : comment.getReplies()) {
+
+				this.delete(comment2);
+			}
+		}
 
 		this.commentRepository.delete(comment);
 	}
-	
+
 	public Collection<Comment> findCommentsByRendezvous(int id) {
 		Collection<Comment> res = new ArrayList<Comment>();
 		res.addAll(commentRepository.findCommentsByRendezvous(id));
 		res = commentRepository.findCommentsByRendezvous(id);
-		
+
 		Assert.notNull(res);
 		return res;
 
