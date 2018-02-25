@@ -78,9 +78,6 @@ public class AnnouncementService {
 			user = userService.findByPrincipal();
 			rendezvouses.addAll(user.getRendezvous());
 			Assert.isTrue(rendezvouses.contains(announcement.getRendezvous()));
-
-			// TODO Añadir restricción: solo el creador del rendezVous puede
-			// asociar un announcement al mismo (en controlador)
 		}
 
 		result = this.announcementRepository.save(result);
