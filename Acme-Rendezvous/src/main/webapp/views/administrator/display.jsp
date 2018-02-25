@@ -90,13 +90,13 @@
 	</jstl:if>
 </h4>
 <h3>
-<jstl:if test="${redezvousSimiliars10!=null}">
-	
+	<jstl:if test="${redezvousSimiliars10!=null}">
+
 		<jstl:forEach var="row" items="${redezvousSimiliars10}">
 
 			<jstl:out value="${row.name }"></jstl:out>
 		</jstl:forEach>
-</jstl:if>
+	</jstl:if>
 </h3>
 <h4>
 	<spring:message
@@ -135,7 +135,9 @@
 
 <h3>
 	<jstl:forEach var="row" items="${RendezvousConMas075Announcement}">
-		<jstl:out value="${row.name }"></jstl:out>
+		<p>
+			<jstl:out value="${row.name }"></jstl:out>
+		</p>
 	</jstl:forEach>
 </h3>
 <h4>
@@ -151,9 +153,17 @@
 <h3>
 	<jstl:out value="${estandardDesviationRepliesComment}" />
 </h3>
+<h4>
+	<spring:message code="administrator.topRedezvous" />
+</h4>
 
-
-
+<h3>
+	<jstl:forEach var="row" items="${topRedezvous}">
+		<p>
+			<jstl:out value="${row.name }"></jstl:out>
+		</p>
+	</jstl:forEach>
+</h3>
 
 <!-- falta lo del top -->
 

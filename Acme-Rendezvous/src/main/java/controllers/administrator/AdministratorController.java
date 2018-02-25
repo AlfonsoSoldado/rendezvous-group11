@@ -53,6 +53,8 @@ public class AdministratorController extends AbstractController {
 		}
 
 		result.addObject("redezvousSimiliars10", rendezvous);
+		result.addObject("topRedezvous", this.administratorService.topRendezvous());
+
 		result.addObject("averageNumberOfQuestionsPerRendezvous",
 				administratorService.averageNumberOfQuestionsPerRendezvous());
 		result.addObject("estandardDesviationOfQuestionsPerRendezvous",
@@ -66,8 +68,7 @@ public class AdministratorController extends AbstractController {
 		result.addObject("averageRepliesComment", administratorService.averageRepliesComment());
 		result.addObject("estandardDesviationRepliesComment", administratorService.estandardDesviationRepliesComment());
 
-
-//*********
+		// *********
 		return result;
 	}
 
