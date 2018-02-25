@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -10,11 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import repositories.RendezvousRepository;
 import domain.Announcement;
 import domain.Comment;
 import domain.Rendezvous;
 import domain.User;
+import repositories.RendezvousRepository;
+import security.Authority;
 
 @Service
 @Transactional
@@ -23,14 +25,18 @@ public class RendezvousService {
 	// Managed repository
 
 	@Autowired
-	private RendezvousRepository	rendezvousRepository;
+	private RendezvousRepository rendezvousRepository;
 
 	// Suporting services
 
 	@Autowired
-	private UserService				userService;
+	private UserService userService;
 
+	@Autowired
+	private AdministratorService administratorService;
 	// Constructor
+	@Autowired
+	private AnnouncementService announcementService;
 
 	public RendezvousService() {
 		super();
@@ -82,7 +88,7 @@ public class RendezvousService {
 		return res;
 
 	}
-	
+
 	public void delete(final Rendezvous rendezvous) {
 		Assert.notNull(rendezvous);
 		Assert.isTrue(rendezvous.getId() != 0);
@@ -92,6 +98,8 @@ public class RendezvousService {
 		rendezvous.setDeleted(true);
 		this.save(rendezvous);
 	}
+	
+	
 
 	public Rendezvous findRendezvousByComment(final int commentId) {
 		Rendezvous res;
@@ -105,5 +113,28 @@ public class RendezvousService {
 		res = this.rendezvousRepository.findByAttendantId(attendantId);
 
 		return res;
+	}
+
+	public void DeleteAdmin(Rendezvous rendezvous) {
+		Assert.notNull(rendezvous);
+		Assert.isTrue(rendezvous.getId() != 0);
+		final Authority a = administratorService.findByPrincipal().getUserAccount().getAuthorities().iterator().next();
+		Assert.isTrue(!a.getAuthority().equals(Authority.ADMIN));
+		
+		//quito este rendezvous de la lista de similares de los otros rendezvous
+		List<Rendezvous> rendezvouses = new ArrayList<>();
+		rendezvouses.addAll(this.rendezvousRepository.findRendezvousContainThisAsSimilar(rendezvous.getId()));
+		for (Rendezvous r : rendezvouses) {
+			List<Rendezvous> actualiza = new ArrayList<>(r.getSimilar());
+			actualiza.remove(rendezvous);
+			r.setSimilar(actualiza);
+			this.rendezvousRepository.save(r);
+		}
+		//borro los annoucements
+		this.announcementService.deleteAll(rendezvous.getAnnouncement());
+		
+		
+		this.rendezvousRepository.delete(rendezvous.getId());
+
 	}
 }

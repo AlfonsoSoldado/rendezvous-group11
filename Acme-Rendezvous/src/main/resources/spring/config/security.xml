@@ -102,7 +102,8 @@
 			access="hasRole('USER')" />
 		<security:intercept-url pattern="/announcement/administrator/edit.do"
 			access="hasRole('ADMIN')" />
-
+		<security:intercept-url pattern="/rendezvous/administrator/edit.do"
+			access="hasRole('ADMIN')" />
 
 
 		<security:intercept-url pattern="/profile/action-1.do"
