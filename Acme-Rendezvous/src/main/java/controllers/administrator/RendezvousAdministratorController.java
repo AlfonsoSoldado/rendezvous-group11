@@ -55,12 +55,10 @@ public class RendezvousAdministratorController extends AbstractController {
 			}
 			ModelAndView res;
 			try {
-				this.rendezvousService.DeleteAdmin(rendezvous);
+				this.rendezvousService.delete(rendezvous);
 				res = new ModelAndView("redirect:../list.do");
 			} catch (final Throwable oops) {
-				System.out.println(oops.getCause());
-				System.out.println(oops.getMessage());
-				System.out.println(oops.getStackTrace());
+			
 				res = this.createEditModelAndView(rendezvous, "rendezvous.commit.error");
 			}
 			return res;
