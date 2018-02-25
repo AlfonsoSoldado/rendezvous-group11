@@ -77,6 +77,8 @@
 			access="hasRole('USER')" />
 		<security:intercept-url pattern="/announcement/user/edit.do"
 			access="hasRole('USER')" />
+		<security:intercept-url pattern="/RSVP/user/create.do"
+			access="hasRole('USER')" />
 
 
 
