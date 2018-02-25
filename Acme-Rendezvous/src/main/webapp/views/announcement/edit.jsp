@@ -18,52 +18,84 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
-<security:authorize access="hasRole('USER')">
-	<form:form action="${requestUri}" modelAttribute="announcement">
 
+<security:authorize access="hasRole('USER')">
+
+	<form:form action="rendezvous/user/edit.do" modelAttribute="rendezvous">
 
 		<form:hidden path="id" />
 		<form:hidden path="version" />
-		<form:hidden path="momentMade" />
-		<form:hidden path="rendezvous" />
 
-		<acme:textbox code="announcement.title" path="title" />
-		<acme:textbox code="announcement.description" path="description" />
+		<form:hidden path="comment" />
+		<form:hidden path="attendant" />
+		<form:hidden path="announcement" />
+		<form:hidden path="similar" />
+		<form:hidden path="deleted" />
+
+		<acme:textbox code="rendezvous.name" path="name" />
+		<acme:textbox code="rendezvous.description" path="description" />
+		<acme:date code="rendezvous.moment" path="moment"
+			placeholder="dd/MM/yyyy HH:mm" />
+		<acme:textbox code="rendezvous.gpsCoordinate.latitude"
+			path="gpsCoordinate.latitude" />
+		<acme:textbox code="rendezvous.gpsCoordinate.longitude"
+			path="gpsCoordinate.longitude" />
+		<acme:textbox code="rendezvous.gpsCoordinate.name"
+			path="gpsCoordinate.namePlace" />
+		<acme:textbox code="rendezvous.picture" path="picture" />
+
+		<acme:selectBoolean code="rendezvous.finalMode" path="finalMode"
+			items="${finalModes}" />
+		<acme:selectBoolean code="rendezvous.adultOnly" path="adultOnly"
+			items="${finalModes}" />
 
 		<!-- Buttons -->
+		<acme:submit name="save" code="rendezvous.save" />
+		<acme:delete confirmationCode="rendezvous.confirm.delete"
+			buttonCode="rendezvous.delete" id="${rendezvous.id }" />
+		<acme:cancel url="rendezvous/list.do" code="rendezvous.cancel" />
 
-		<acme:submit name="save" code="announcement.save" />
-		<acme:delete confirmationCode="announcement.confirm.delete"
-			buttonCode="announcement.delete" id="${announcement.id }" />
-		<acme:cancel url="announcement/list.do" code="announcement.cancel" />
-
-
-		<acme:delete confirmationCode="announcement.confirm.delete"
-			buttonCode="announcement.delete" id="${announcement.id }" />
-		<acme:cancel url="announcement/list.do" code="announcement.cancel" />
 	</form:form>
 </security:authorize>
-
 <security:authorize access="hasRole('ADMIN')">
+<form:form action="rendezvous/administrator/edit.do"
+	modelAttribute="rendezvous">
 
-	<form:form action="${requestUri}" modelAttribute="announcement">
+
 
 
 		<form:hidden path="id" />
 		<form:hidden path="version" />
-		<form:hidden path="momentMade" />
-		<form:hidden path="rendezvous" />
 
-		<acme:textbox code="announcement.title" path="title" />
-		<acme:textbox code="announcement.description" path="description" />
+		<form:hidden path="comment" />
+		<form:hidden path="attendant" />
+		<form:hidden path="announcement" />
+		<form:hidden path="similar" />
+		<form:hidden path="deleted" />
 
-		<!-- Buttons -->
+		<acme:textbox code="rendezvous.name" path="name" />
+		<acme:textbox code="rendezvous.description" path="description" />
+		<acme:date code="rendezvous.moment" path="moment"
+			placeholder="dd/MM/yyyy HH:mm" />
+		<acme:textbox code="rendezvous.gpsCoordinate.latitude"
+			path="gpsCoordinate.latitude" />
+		<acme:textbox code="rendezvous.gpsCoordinate.longitude"
+			path="gpsCoordinate.longitude" />
+		<acme:textbox code="rendezvous.gpsCoordinate.name"
+			path="gpsCoordinate.namePlace" />
+		<acme:textbox code="rendezvous.picture" path="picture" />
+
+		<acme:selectBoolean code="rendezvous.finalMode" path="finalMode"
+			items="${finalModes}" />
+		<acme:selectBoolean code="rendezvous.adultOnly" path="adultOnly"
+			items="${finalModes}" />
+
+
 
 	
+		<acme:delete confirmationCode="rendezvous.confirm.delete"
+			buttonCode="rendezvous.delete" id="${rendezvous.id }" />
+		<acme:cancel url="rendezvous/list.do" code="rendezvous.cancel" />
+</form:form>
+	</security:authorize>
 
-
-		<acme:delete confirmationCode="announcement.confirm.delete"
-			buttonCode="announcement.delete" id="${announcement.id }" />
-		<acme:cancel url="rendezvous/user/listMyRendezvous.do" code="announcement.cancel" />
-	</form:form>
-</security:authorize>
