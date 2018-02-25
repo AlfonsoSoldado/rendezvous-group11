@@ -82,6 +82,7 @@ public class CommentUserController extends AbstractController {
 		rendezvous = rendezvousService.findOne(rendezvousId);
 		
 		comments.addAll(rendezvous.getComment());
+		
 		comments.add(comment);
 		rendezvous.setComment(comments);
 		
@@ -134,7 +135,7 @@ public class CommentUserController extends AbstractController {
 		ModelAndView res;
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(comment,
-					"rendezvous.params.error");
+					"comment.params.error");
 		else
 			try {
 				this.commentService.save(comment);
@@ -142,7 +143,7 @@ public class CommentUserController extends AbstractController {
 			} catch (final Throwable oops) {
 				System.out.println(oops.getMessage());
 				res = this.createEditModelAndView(comment,
-						"rendezvous.commit.error");
+						"comment.commit.error");
 			}
 		return res;
 	}

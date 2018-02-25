@@ -58,16 +58,16 @@ public class CommentService {
 	}
 
 	public Comment save(final Comment comment) {
-		Comment result = comment;
+		Comment result;
 		Assert.notNull(comment);
 
 		if (comment.getId() == 0) {
 			Date momentMade;
 			momentMade = new Date(System.currentTimeMillis() - 1000);
-			result.setMomentMade(momentMade);
+			comment.setMomentMade(momentMade);
 		}
-
-		result = this.commentRepository.save(result);
+		
+		result = this.commentRepository.save(comment);
 
 		return result;
 	}
