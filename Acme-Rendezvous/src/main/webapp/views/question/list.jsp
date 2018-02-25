@@ -20,6 +20,17 @@
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="question" requestURI="${requestUri}" id="row">
 	
+	<security:authorize access="hasRole('USER')">
+		<display:column> 	
+		<jstl:forEach var="rd" items="${rendezvousesId}">
+		<jstl:if test="${rd == row.rendezvous.id}">
+		<acme:links url="question/user/edit.do?questionId=${row.id}" code="question.edit" /> 
+		</jstl:if>
+		</jstl:forEach>
+		</display:column>
+
+	</security:authorize>
+	
 	<acme:column property="text" code="question.text"/>
 	
 	<display:column> <acme:links url="answer/list.do?questionId=${row.id }" code="question.answer"/> </display:column>

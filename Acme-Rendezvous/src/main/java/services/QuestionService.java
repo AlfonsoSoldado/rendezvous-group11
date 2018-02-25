@@ -13,6 +13,8 @@ import org.springframework.util.Assert;
 import repositories.QuestionRepository;
 import domain.Answer;
 import domain.Question;
+import domain.Rendezvous;
+import domain.User;
 
 @Service
 @Transactional
@@ -28,6 +30,8 @@ public class QuestionService {
 	@Autowired
 	private AnswerService		answerService;
 
+	@Autowired
+	private UserService			UserService;
 
 	// Constructor ------------------------------------------------------------
 
@@ -61,6 +65,13 @@ public class QuestionService {
 
 	public Question save(final Question question) {
 		Assert.notNull(question);
+		if(question.getId() != 0){
+			Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
+			User user;
+			user = UserService.findByPrincipal();
+			rendezvouses.addAll(user.getRendezvous());
+			Assert.isTrue(rendezvouses.contains(question.getRendezvous()));
+		}
 		Question res;
 		res = this.questionRepository.save(question);
 		return res;

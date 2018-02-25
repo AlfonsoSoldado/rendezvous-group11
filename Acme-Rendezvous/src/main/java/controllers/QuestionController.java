@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.QuestionService;
+import services.UserService;
 import domain.Question;
+import domain.Rendezvous;
+import domain.User;
 
 @Controller
 @RequestMapping("/question")
@@ -20,6 +24,9 @@ public class QuestionController extends AbstractController {
 
 	@Autowired
 	private QuestionService questionService;
+	
+	@Autowired
+	private UserService userService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -33,11 +40,22 @@ public class QuestionController extends AbstractController {
 	public ModelAndView list(@RequestParam int rendezvousId) {
 		ModelAndView result;
 		Collection<Question> question;
+		
+		Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
+		Collection<Integer> rendezvousesId = new ArrayList<Integer>();
+		User user;
+
+		user = userService.findByPrincipal();
+		rendezvouses.addAll(user.getRendezvous());
+		for(Rendezvous r: rendezvouses){
+			rendezvousesId.add(r.getId());
+		}
 
 		question = questionService.findQuestionByRendezvous(rendezvousId);
 
 		result = new ModelAndView("question/list");
 		result.addObject("question", question);
+		result.addObject("rendezvousesId", rendezvousesId);
 		result.addObject("requestURI", "question/list.do");
 
 		return result;
