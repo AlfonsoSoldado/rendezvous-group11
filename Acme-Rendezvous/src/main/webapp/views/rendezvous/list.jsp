@@ -37,7 +37,6 @@
 	
 	<security:authorize access="hasRole('USER')">
 	<display:column> <acme:links url="question/user/create.do?rendezvousId=${row.id}" code="rendezvous.question.create" /> </display:column>
-	<display:column> <acme:links url="announcement/user/create.do?rendezvousId=${row.id}" code="rendezvous.announcement.create" /> </display:column>
 	</security:authorize>
 	
 	<security:authorize access="hasRole('ADMIN')">

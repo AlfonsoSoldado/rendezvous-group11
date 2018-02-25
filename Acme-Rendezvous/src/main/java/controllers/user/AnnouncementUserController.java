@@ -1,3 +1,4 @@
+
 package controllers.user;
 
 import javax.validation.Valid;
@@ -23,10 +24,11 @@ public class AnnouncementUserController extends AbstractController {
 	// Services -------------------------------------------------------------
 
 	@Autowired
-	private AnnouncementService announcementService;
-	
+	private AnnouncementService	announcementService;
+
 	@Autowired
-	private RendezvousService rendezvousService;
+	private RendezvousService	rendezvousService;
+
 
 	// Constructors ---------------------------------------------------------
 
@@ -39,45 +41,43 @@ public class AnnouncementUserController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int rendezvousId) {
 		ModelAndView res;
-		
-//		Collection<Announcement> announcements = new ArrayList<Announcement>();
+
+		//		Collection<Announcement> announcements = new ArrayList<Announcement>();
 		Announcement announcement;
 		Rendezvous rendezvous;
 
-		rendezvous = rendezvousService.findOne(rendezvousId);
-//		announcements.addAll(rendezvous.getAnnouncement());
+		rendezvous = this.rendezvousService.findOne(rendezvousId);
+		//		announcements.addAll(rendezvous.getAnnouncement());
 		announcement = this.announcementService.create(rendezvous);
-//		announcements.add(announcement);
-//		rendezvous.setAnnouncement(announcements);
-		
+		//		announcements.add(announcement);
+		//		rendezvous.setAnnouncement(announcements);
+
 		res = this.createEditModelAndView(announcement);
 
 		return res;
 	}
-	
+
 	// Saving --------------------------------------------------------------
 
-		@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-		public ModelAndView save(@Valid final Announcement announcement,
-				final BindingResult binding) {
-			ModelAndView res;
-			if (binding.hasErrors())
-				res = this.createEditModelAndView(announcement, "announcement.params.error");
-			else
-				try {
-					this.announcementService.save(announcement);
-					res = new ModelAndView("redirect:../../");
-				} catch (final Throwable oops) {
-					res = this.createEditModelAndView(announcement, "announcement.commit.error");
-				}
-			return res;
-		}
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final Announcement announcement, final BindingResult binding) {
+		ModelAndView res;
+		if (binding.hasErrors())
+			res = this.createEditModelAndView(announcement, "announcement.params.error");
+		else
+			try {
+				this.announcementService.save(announcement);
+				res = new ModelAndView("redirect:../../");
+			} catch (final Throwable oops) {
+				res = this.createEditModelAndView(announcement, "announcement.commit.error");
+			}
+		return res;
+	}
 
 	// Deleting --------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@Valid final Announcement announcement,
-			final BindingResult binding) {
+	public ModelAndView delete(@Valid final Announcement announcement, final BindingResult binding) {
 		ModelAndView res;
 
 		try {
@@ -100,13 +100,12 @@ public class AnnouncementUserController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Announcement announcement,
-			final String message) {
+	protected ModelAndView createEditModelAndView(final Announcement announcement, final String message) {
 		ModelAndView result;
 		result = new ModelAndView("announcement/user/create");
 		result.addObject("announcement", announcement);
 		result.addObject("message", message);
-		result.addObject("requestUri", "announcement/edit.do");
+		result.addObject("requestUri", "announcement/user/edit.do");
 		return result;
 
 	}

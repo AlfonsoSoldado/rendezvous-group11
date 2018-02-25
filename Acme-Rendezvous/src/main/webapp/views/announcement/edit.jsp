@@ -35,12 +35,9 @@
 		<acme:submit name="save" code="announcement.save" />
 		<acme:delete confirmationCode="announcement.confirm.delete"
 			buttonCode="announcement.delete" id="${announcement.id }" />
-		<acme:cancel url="announcement/list.do" code="announcement.cancel" />
+		<acme:cancel url="rendezvous/list.do" code="announcement.cancel" />
 
 
-		<acme:delete confirmationCode="announcement.confirm.delete"
-			buttonCode="announcement.delete" id="${announcement.id }" />
-		<acme:cancel url="announcement/list.do" code="announcement.cancel" />
 	</form:form>
 </security:authorize>
 
@@ -64,6 +61,6 @@
 
 		<acme:delete confirmationCode="announcement.confirm.delete"
 			buttonCode="announcement.delete" id="${announcement.id }" />
-		<acme:cancel url="announcement/list.do" code="announcement.cancel" />
+		<acme:cancel url="rendezvous/list.do" code="announcement.cancel" />
 	</form:form>
 </security:authorize>
