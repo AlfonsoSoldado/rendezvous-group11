@@ -66,7 +66,7 @@ public class AnnouncementUserController extends AbstractController {
 			else
 				try {
 					this.announcementService.save(announcement);
-					res = new ModelAndView("redirect:../rendezvous/list.do");
+					res = new ModelAndView("redirect:../../");
 				} catch (final Throwable oops) {
 					res = this.createEditModelAndView(announcement, "announcement.commit.error");
 				}
@@ -82,7 +82,7 @@ public class AnnouncementUserController extends AbstractController {
 
 		try {
 			this.announcementService.delete(announcement);
-			res = new ModelAndView("redirect:../rendezvous/list.do");
+			res = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
 			res = this.createEditModelAndView(announcement, "announcement.commit.error");
 		}
