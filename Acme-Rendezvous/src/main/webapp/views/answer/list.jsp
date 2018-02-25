@@ -23,5 +23,7 @@
 	<acme:column property="text" code="answer.text"/>
 	
 </display:table>
+</br>
+<acme:links url="rendezvous/list.do" code="answer.back" />
 	
 	
