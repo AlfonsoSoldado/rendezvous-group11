@@ -133,6 +133,13 @@ public class UserService {
 
 		return result;
 	}
+	
+	public User findUserByQuestion(int questionId){
+		User res;
+		res = userRepository.findUserByQuestion(questionId);
+		
+		return res;
+	}
 
 	public boolean checkUserLogged() {
 		boolean result = false;

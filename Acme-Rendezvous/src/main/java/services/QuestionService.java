@@ -31,7 +31,7 @@ public class QuestionService {
 	private AnswerService		answerService;
 
 	@Autowired
-	private UserService			UserService;
+	private UserService			userService;
 
 	// Constructor ------------------------------------------------------------
 
@@ -68,7 +68,7 @@ public class QuestionService {
 		if(question.getId() != 0){
 			Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
 			User user;
-			user = UserService.findByPrincipal();
+			user = userService.findByPrincipal();
 			rendezvouses.addAll(user.getRendezvous());
 			Assert.isTrue(rendezvouses.contains(question.getRendezvous()));
 		}
@@ -85,8 +85,16 @@ public class QuestionService {
 		Collection<Answer> answers;
 		final int questionId = question.getId();
 		answers = this.answerService.findAnswersByQuestion(questionId);
-		for (final Answer res : answers)
+		for (final Answer res : answers){
 			this.answerService.delete(res);
+		}
+		
+		User user;
+		user = userService.findUserByQuestion(question.getId());
+		Collection<Question> questions = new ArrayList<Question>();
+		questions.addAll(user.getQuestion());
+		questions.remove(question);
+		user.setQuestion(questions);
 
 		this.questionRepository.delete(question);
 	}
