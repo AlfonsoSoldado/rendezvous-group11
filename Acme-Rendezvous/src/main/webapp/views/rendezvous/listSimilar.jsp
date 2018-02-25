@@ -27,17 +27,7 @@
 	name="rendezvous" requestURI="${requestUri}" id="row">
 
 	<!-- Attributes -->
-	<security:authorize access="hasRole('USER')">
-		<display:column>
-			<jstl:if test="${row.finalMode == false}">
-				<acme:links url="rendezvous/user/edit.do?rendezvousId=${row.id}"
-					code="rendezvous.edit" />
-			</jstl:if>
-		</display:column>
-
-	</security:authorize>
-
-	<acme:column code="rendezvous.name" property="name" />
+		<acme:column code="rendezvous.name" property="name" />
 	<acme:column code="rendezvous.description" property="description" />
 	<acme:column code="rendezvous.moment" property="moment" />
 	<acme:column code="rendezvous.finalMode" property="finalMode" />
@@ -73,10 +63,5 @@
 </display:table>
 
 <!-- Action links -->
-
-<security:authorize access="hasRole('USER')">
-	</br>
-	<acme:links url="rendezvous/user/create.do" code="rendezvous.create" />
-</security:authorize>
 </br>
 <acme:links url="rendezvous/list.do" code="rendezvous.back" />
