@@ -42,8 +42,7 @@ public class RendezvousService {
 
 	@Autowired
 	private CommentService commentService;
-	@Autowired
-	private UserService service;
+
 
 	public RendezvousService() {
 		super();
@@ -89,7 +88,7 @@ public class RendezvousService {
 
 			Assert.isTrue(principal.equals(creator));
 		}
-
+		
 		Rendezvous res;
 		res = this.rendezvousRepository.save(rendezvous);
 		return res;
