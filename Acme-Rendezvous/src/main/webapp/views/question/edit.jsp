@@ -29,7 +29,7 @@
 		<acme:textbox code="question.text" path="text" />
 
 		<acme:submit name="save" code="question.submit" />
-		<acme:cancel url="question/list.do" code="question.cancel" />
+		<acme:cancel url="rendezvous/list.do" code="question.cancel" />
 		<acme:delete confirmationCode="question.confirmationCode" buttonCode="question.delete" id="${question.id }" />
 	</security:authorize>
 </form:form>
