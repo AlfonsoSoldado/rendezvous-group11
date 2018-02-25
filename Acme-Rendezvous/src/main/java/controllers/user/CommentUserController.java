@@ -75,12 +75,11 @@ public class CommentUserController extends AbstractController {
 	public ModelAndView create(@RequestParam final int rendezvousId) {
 		ModelAndView res;
 		Comment comment;
+		
 		Collection<Comment> comments = new ArrayList<Comment>();
 		Rendezvous rendezvous;
-
-		comment = this.commentService.create();
 		
-		res = this.createEditModelAndView(comment);
+		comment = this.commentService.create();
 		
 		rendezvous = rendezvousService.findOne(rendezvousId);
 		
@@ -88,6 +87,8 @@ public class CommentUserController extends AbstractController {
 		
 		comments.add(comment);
 		rendezvous.setComment(comments);
+		
+		res = this.createEditModelAndView(comment);
 
 		return res;
 	}
@@ -142,7 +143,6 @@ public class CommentUserController extends AbstractController {
 				this.commentService.save(comment);
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
-				System.out.println(oops.getMessage());
 				res = this.createEditModelAndView(comment,
 						"comment.commit.error");
 			}
