@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.ArrayList;
@@ -17,14 +18,14 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
 import domain.Rendezvous;
-import domain.User;
 
 @Service
 @Transactional
 public class AdministratorService {
 
 	@Autowired
-	private AdministratorRepository administratorRepository;
+	private AdministratorRepository	administratorRepository;
+
 
 	public Administrator create() {
 		Administrator result;
@@ -68,38 +69,37 @@ public class AdministratorService {
 	}
 
 	public double averageRedezvousUser() {
-		return administratorRepository.averageRedezvousUser();
+		return this.administratorRepository.averageRedezvousUser();
 	}
 
 	public double estandardDesviationRedezvousUser() {
-		return administratorRepository.EstandardDesviationRedezvousUser();
+		return this.administratorRepository.EstandardDesviationRedezvousUser();
 	}
 
 	public double ratioUserConRendezvous() {
-		return administratorRepository.ratioUserConRendezvous();
+		return this.administratorRepository.ratioUserConRendezvous();
 	}
 
 	public double ratioUserSinRendezvous() {
-		return administratorRepository.ratioUserSinRendezvous();
+		return this.administratorRepository.ratioUserSinRendezvous();
 
 	}
 
 	public double averageUsersRendezvous() {
-		return administratorRepository.averageUsersRendezvous();
+		return this.administratorRepository.averageUsersRendezvous();
 	}
 
 	public double estandardDesviationUsersRendezvous() {
-		return administratorRepository.estandardDesviationUsersRendezvous();
+		return this.administratorRepository.estandardDesviationUsersRendezvous();
 	}
 
 	public double averageRendezvousRSVPTruePerUser() {
-		return administratorRepository.averageRendezvousRSVPTruePerUser();
+		return this.administratorRepository.averageRendezvousRSVPTruePerUser();
 
 	}
 
 	public double estandardDesviationRendezvousRSVPTruePerUser() {
-		return administratorRepository
-				.estandardDesviationRendezvousRSVPTruePerUser();
+		return this.administratorRepository.estandardDesviationRendezvousRSVPTruePerUser();
 	}
 
 	public Collection<Rendezvous> topRendezvous() {
@@ -116,42 +116,34 @@ public class AdministratorService {
 	}
 
 	public double averageannouncementsRendezvous() {
-		return administratorRepository.averageAnnouncementsRendezvous();
+		return this.administratorRepository.averageAnnouncementsRendezvous();
 	}
 
 	public double estandardDesviationAnnouncementsUser() {
-		return this.administratorRepository
-				.estandardDesviationAnnouncementsUser();
+		return this.administratorRepository.estandardDesviationAnnouncementsUser();
 	}
 
 	public Collection<Rendezvous> redezvousSimiliars10() {
-		Collection<Rendezvous> res = new ArrayList<>();
-		if (!this.administratorRepository.redezvousSimiliars10().isEmpty()
-				&& this.administratorRepository.redezvousSimiliars10() != null) {
+		final Collection<Rendezvous> res = new ArrayList<>();
+		if (!this.administratorRepository.redezvousSimiliars10().isEmpty() && this.administratorRepository.redezvousSimiliars10() != null)
 			res.addAll(this.administratorRepository.redezvousSimiliars10());
-
-		}
 		return res;
 	}
 
 	public double averageNumberOfQuestionsPerRendezvous() {
-		return this.administratorRepository
-				.averageNumberOfQuestionsPerRendezvous();
+		return this.administratorRepository.averageNumberOfQuestionsPerRendezvous();
 	}
 
 	public double estandardDesviationOfQuestionsPerRendezvous() {
-		return this.administratorRepository
-				.estandardDesviationOfQuestionsPerRendezvous();
+		return this.administratorRepository.estandardDesviationOfQuestionsPerRendezvous();
 	}
 
 	public double averageOfAnswerPerQuestionsPerRendezvous() {
-		return this.administratorRepository
-				.averageOfAnswerPerQuestionsPerRendezvous();
+		return this.administratorRepository.averageOfAnswerPerQuestionsPerRendezvous();
 	}
 
 	public double estandardDesviationOfAnswerPerQuestionsPerRendezvous() {
-		return this.administratorRepository
-				.estandardDesviationOfAnswerPerQuestionsPerRendezvous();
+		return this.administratorRepository.estandardDesviationOfAnswerPerQuestionsPerRendezvous();
 	}
 
 	public Collection<Rendezvous> RendezvousConMas075Announcement() {
