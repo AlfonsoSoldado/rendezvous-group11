@@ -79,14 +79,15 @@ public class CommentUserController extends AbstractController {
 		Rendezvous rendezvous;
 
 		comment = this.commentService.create();
+		
+		res = this.createEditModelAndView(comment);
+		
 		rendezvous = rendezvousService.findOne(rendezvousId);
 		
 		comments.addAll(rendezvous.getComment());
 		
 		comments.add(comment);
 		rendezvous.setComment(comments);
-		
-		res = this.createEditModelAndView(comment);
 
 		return res;
 	}
