@@ -8,36 +8,62 @@
  * http://www.tdg-seville.info/License.html
  --%>
 
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 
-<%@taglib prefix="jstl"	uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-<%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<security:authorize access="hasRole('USER')">
+	<form:form action="${requestUri}" modelAttribute="announcement">
 
-<form:form action="${requestUri}" modelAttribute="announcement">
-	<security:authorize access="hasRole('USER')">
 
-	<form:hidden path="id" />
-	<form:hidden path="version" />
-	<form:hidden path="momentMade" />
-	<form:hidden path="rendezvous" />
+		<form:hidden path="id" />
+		<form:hidden path="version" />
+		<form:hidden path="momentMade" />
+		<form:hidden path="rendezvous" />
+
+		<acme:textbox code="announcement.title" path="title" />
+		<acme:textbox code="announcement.description" path="description" />
+
+		<!-- Buttons -->
+
+		<acme:submit name="save" code="announcement.save" />
+		<acme:delete confirmationCode="announcement.confirm.delete"
+			buttonCode="announcement.delete" id="${announcement.id }" />
+		<acme:cancel url="announcement/list.do" code="announcement.cancel" />
+
+
+		<acme:delete confirmationCode="announcement.confirm.delete"
+			buttonCode="announcement.delete" id="${announcement.id }" />
+		<acme:cancel url="announcement/list.do" code="announcement.cancel" />
+	</form:form>
+</security:authorize>
+
+<security:authorize access="hasRole('ADMIN')">
+
+	<form:form action="${requestUri}" modelAttribute="announcement">
+
+
+		<form:hidden path="id" />
+		<form:hidden path="version" />
+		<form:hidden path="momentMade" />
+		<form:hidden path="rendezvous" />
+
+		<acme:textbox code="announcement.title" path="title" />
+		<acme:textbox code="announcement.description" path="description" />
+
+		<!-- Buttons -->
+
 	
-	<acme:textbox code="announcement.title" path="title"/>
-	<acme:textbox code="announcement.description" path="description"/>
-	
-	<!-- Buttons -->
-	
-	<acme:submit name="save" code="announcement.save"/>
-	<acme:delete confirmationCode="announcement.confirm.delete" buttonCode="announcement.delete" id="${announcement.id }"/>
-	<acme:cancel url="announcement/list.do" code="announcement.cancel"/>
-	
-	</security:authorize>
-	
-	<security:authorize access="hasRole('ADMIN')">
-	<acme:delete confirmationCode="announcement.confirm.delete" buttonCode="announcement.delete" id="${announcement.id }"/>
-	<acme:cancel url="announcement/list.do" code="announcement.cancel"/>
-	</security:authorize>
-</form:form>
+
+
+		<acme:delete confirmationCode="announcement.confirm.delete"
+			buttonCode="announcement.delete" id="${announcement.id }" />
+		<acme:cancel url="announcement/list.do" code="announcement.cancel" />
+	</form:form>
+</security:authorize>
