@@ -64,6 +64,6 @@
 
 		<acme:delete confirmationCode="announcement.confirm.delete"
 			buttonCode="announcement.delete" id="${announcement.id }" />
-		<acme:cancel url="announcement/list.do" code="announcement.cancel" />
+		<acme:cancel url="rendezvous/user/listMyRendezvous.do" code="announcement.cancel" />
 	</form:form>
 </security:authorize>
