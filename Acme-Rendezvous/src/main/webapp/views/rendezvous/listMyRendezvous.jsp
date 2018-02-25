@@ -41,7 +41,7 @@
 	<acme:column code="rendezvous.finalMode" property="finalMode" />
 	<display:column><acme:links url="rendezvous/listSimilar.do?rendezvousId=${row.id }" code="rendezvous.similar" /></display:column>
 	<display:column> <acme:links url="announcement/list.do?rendezvousId=${row.id}" code="rendezvous.announcement" /> </display:column>
-	<display:column> <acme:links url="question/list.do?rendezvousId=${row.id}" code="rendezvous.question" /> </display:column>
+	<display:column> <acme:links url="question/listByUser.do?rendezvousId=${row.id}" code="rendezvous.question" /> </display:column>
 	<display:column> <acme:links url="question/user/create.do?rendezvousId=${row.id}" code="rendezvous.question.create" /> </display:column>
 	
 </display:table>
