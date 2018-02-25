@@ -86,7 +86,6 @@ public class RendezvousService {
 			User creator;
 			creator = this.userService.findCreator(rendezvous.getId());
 
-			Assert.isTrue(principal.equals(creator));
 		}
 		
 		Rendezvous res;

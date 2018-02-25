@@ -78,7 +78,7 @@ public class RSVPUserController extends AbstractController {
 				rendezvous.setAttendant(att);
 				this.rendezvousService.save(rendezvous);
 
-				res = new ModelAndView("redirect:list.do");
+				res = new ModelAndView("redirect:../../rendezvous/list.do");
 			} catch (final Throwable oops) {
 				res = this.createModelAndView(r, "commit.error");
 			}

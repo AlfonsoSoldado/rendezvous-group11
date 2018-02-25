@@ -8,6 +8,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -110,7 +111,7 @@ public class Rendezvous extends DomainEntity {
 		this.comment = comment;
 	}
 
-	@OneToMany
+	@ManyToMany
 	public Collection<User> getAttendant() {
 		return this.attendant;
 	}
