@@ -15,81 +15,79 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<h4>
+<h3>
 	<spring:message code="administrator.averageRedezvousUser" />
-</h4>
-<h3>
+</h3>
+<p>
 	<jstl:out value="${averageRedezvousUser}" />
-</h3>
-<h4>
+</p>
+<h3>
 	<spring:message code="administrator.estandardDesviationRedezvousUser" />
-</h4>
-<h3>
+</h3>
+<p>
 	<jstl:out value="${estandardDesviationRedezvousUser}" />
-</h3>
-<h4>
+</p>
+<h3>
 	<spring:message code="administrator.ratioUserConRendezvous" />
-</h4>
-<h3>
+</h3>
+<p>
 	<jstl:out value="${ratioUserConRendezvous}" />
-</h3>
-<h4>
+</p>
+<h3>
 	<spring:message code="administrator.ratioUserSinRendezvous" />
-</h4>
-<h3>
+</h3>
+<p>
 	<jstl:out value="${ratioUserSinRendezvous}" />
-</h3>
-<h4>
+</p>
+<h3>
 	<spring:message code="administrator.averageUsersRendezvous" />
-</h4>
-
-
-<h3>
+</h3>
+<p>
 	<jstl:out value="${averageUsersRendezvous}" />
-</h3>
-<h4>
+</p>
+<h3>
 	<spring:message code="administrator.estandardDesviationUsersRendezvous" />
-</h4>
-<h3>
+</h3>
+<p>
 	<jstl:out value="${estandardDesviationUsersRendezvous}" />
-</h3>
-<h4>
-	<spring:message code="administrator.averageRendezvousRSVPTruePerUser" />
-</h4>
+</p>
 <h3>
-	<jstl:out value="${averageRendezvousRSVPTruePerUser}" />
+	<spring:message code="administrator.averageRendezvousRSVPTruePerUser" />
 </h3>
-<h4>
+<p>
+	<jstl:out value="${averageRendezvousRSVPTruePerUser}" />
+</p>
+<h3>
 	<spring:message
 		code="administrator.estandardDesviationRendezvousRSVPTruePerUser" />
-</h4>
-<h3>
+</h3>
+<p>
 	<jstl:out value="${estandardDesviationRendezvousRSVPTruePerUser}" />
-</h3>
-<h4>
-	<spring:message code="administrator.averageannouncementsRendezvous" />
-</h4>
+</p>
 <h3>
-	<jstl:out value="${averageannouncementsRendezvous}" />
+	<spring:message code="administrator.averageannouncementsRendezvous" />
 </h3>
-<h4>
+<p>
+	<jstl:out value="${averageannouncementsRendezvous}" />
+</p>
+<h3>
 	<spring:message
 		code="administrator.estandardDesviationAnnouncementsUser" />
-</h4>
+</h3>
+
+<p>
+	<jstl:out value="${estandardDesviationAnnouncementsUser}" />
+</p>
+<h3>
+	<spring:message code="administrator.redezvousSimiliars10" />
+</h3>
 
 <h3>
-	<jstl:out value="${estandardDesviationAnnouncementsUser}" />
-</h3>
-<h4>
-	<spring:message code="administrator.redezvousSimiliars10" />
-</h4>
-
-<h4>
 	<jstl:if test="${redezvousSimiliars10==null}">
 		<spring:message code="administrator.noHay" />
 	</jstl:if>
-</h4>
-<h3>
+</h3>
+<p>
 	<jstl:if test="${redezvousSimiliars10!=null}">
 
 		<jstl:forEach var="row" items="${redezvousSimiliars10}">
@@ -97,73 +95,73 @@
 			<jstl:out value="${row.name }"></jstl:out>
 		</jstl:forEach>
 	</jstl:if>
-</h3>
-<h4>
+</p>
+<h3>
 	<spring:message
 		code="administrator.averageNumberOfQuestionsPerRendezvous" />
-</h4>
-<h3>
-	<jstl:out value="${averageNumberOfQuestionsPerRendezvous}" />
 </h3>
-<h4>
+<p>
+	<jstl:out value="${averageNumberOfQuestionsPerRendezvous}" />
+</p>
+<h3>
 	<spring:message
 		code="administrator.estandardDesviationOfQuestionsPerRendezvous" />
-</h4>
-<h3>
-	<jstl:out value="${estandardDesviationOfQuestionsPerRendezvous}" />
 </h3>
-<h4>
+<p>
+	<jstl:out value="${estandardDesviationOfQuestionsPerRendezvous}" />
+</p>
+<h3>
 	<spring:message
 		code="administrator.averageOfAnswerPerQuestionsPerRendezvous" />
-</h4>
-<h3>
-	<jstl:out value="${averageOfAnswerPerQuestionsPerRendezvous}" />
 </h3>
-<h4>
+<p>
+	<jstl:out value="${averageOfAnswerPerQuestionsPerRendezvous}" />
+</p>
+<h3>
 	<spring:message
 		code="administrator.estandardDesviationOfAnswerPerQuestionsPerRendezvous" />
-</h4>
-<h3>
+</h3>
+<p>
 	<jstl:out
 		value="${estandardDesviationOfAnswerPerQuestionsPerRendezvous}" />
-</h3>
-<h4>
+</p>
+<h3>
 
 	<spring:message code="administrator.RendezvousConMas075Announcement" />
-</h4>
+</h3>
 
 
-<h3>
+<p>
 	<jstl:forEach var="row" items="${RendezvousConMas075Announcement}">
 		<p>
 			<jstl:out value="${row.name }"></jstl:out>
 		</p>
 	</jstl:forEach>
-</h3>
-<h4>
+</p>
+<h3>
 	<spring:message code="administrator.averageRepliesComment" />
-</h4>
-<h3>
+</h3>
+<p>
 	<jstl:out value="${averageRepliesComment}" />
-</h3>
-<h4>
+</p>
+<h3>
 	<spring:message code="administrator.estandardDesviationRepliesComment" />
-</h4>
-
-<h3>
-	<jstl:out value="${estandardDesviationRepliesComment}" />
 </h3>
-<h4>
-	<spring:message code="administrator.topRedezvous" />
-</h4>
 
+<p>
+	<jstl:out value="${estandardDesviationRepliesComment}" />
+</p>
 <h3>
+	<spring:message code="administrator.topRedezvous" />
+</h3>
+
+<p>
 	<jstl:forEach var="row" items="${topRedezvous}">
 		<p>
 			<jstl:out value="${row.name }"></jstl:out>
 		</p>
 	</jstl:forEach>
-</h3>
+</p>
 
 <!-- falta lo del top -->
 
