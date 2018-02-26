@@ -70,14 +70,6 @@
 			</jstl:if>
 		</display:column>
 		
-
-	<security:authorize access="hasRole('USER')">
-	<display:column> 
-	<jstl:if test="${row.deleted == false}">
-	<acme:links url="question/user/create.do?rendezvousId=${row.id}" code="rendezvous.question.create" /> 
-	</jstl:if>
-	</display:column>
-	</security:authorize>
 	
 	<security:authorize access="hasRole('ADMIN')">
 	<display:column> <acme:links url="rendezvous/administrator/edit.do?rendezvousId=${row.id}" code="rendezvous.delete" /> </display:column>

@@ -41,3 +41,5 @@
 	</display:column>
 
 </display:table>
+
+<acme:links url="rendezvous/list.do" code="actor.back" />
