@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.RendezvousService;
 import services.UserService;
+import domain.Rendezvous;
 import domain.User;
 
 @Controller
@@ -21,7 +23,10 @@ public class UserController extends AbstractController {
 	// Services -------------------------------------------------------------
 
 	@Autowired
-	private UserService	userService;
+	private UserService			userService;
+
+	@Autowired
+	private RendezvousService	rendezvousService;
 
 
 	// Constructors ---------------------------------------------------------
@@ -64,39 +69,48 @@ public class UserController extends AbstractController {
 	public ModelAndView displayByRendezvous(@RequestParam final int rendezvousId) {
 		ModelAndView result;
 
-		final User user = this.userService.findCreator(rendezvousId);
+		final Rendezvous rdv = this.rendezvousService.findOne(rendezvousId);
+		if (rdv.getDeleted() == false) {
+			final User user = this.userService.findCreator(rendezvousId);
 
-		result = new ModelAndView("user/display");
-		result.addObject("user", user);
-		result.addObject("requestURI", "user/display.do");
-
+			result = new ModelAndView("user/display");
+			result.addObject("user", user);
+			result.addObject("requestURI", "user/display.do");
+		} else
+			result = new ModelAndView("redirect:../");
 		return result;
 	}
-
 	@RequestMapping(value = "/listCreator", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam final int rendezvousId) {
 		ModelAndView result;
-		User user;
 
-		user = this.userService.findCreator(rendezvousId);
+		final Rendezvous rdv = this.rendezvousService.findOne(rendezvousId);
+		if (rdv.getDeleted() == false) {
+			User user;
+			user = this.userService.findCreator(rendezvousId);
 
-		result = new ModelAndView("user/listCreator");
-		result.addObject("user", user);
-		result.addObject("requestURI", "user/listCreator.do");
+			result = new ModelAndView("user/listCreator");
+			result.addObject("user", user);
+			result.addObject("requestURI", "user/listCreator.do");
+		} else
+			result = new ModelAndView("redirect:../");
 
 		return result;
 	}
-	
 	@RequestMapping(value = "/listAttendant", method = RequestMethod.GET)
 	public ModelAndView listAttendant(@RequestParam final int rendezvousId) {
 		ModelAndView result;
-		Collection<User> user = new ArrayList<>();
 
-		user = this.userService.findAttendants(rendezvousId);
+		final Rendezvous rdv = this.rendezvousService.findOne(rendezvousId);
+		if (rdv.getDeleted() == false) {
+			Collection<User> user = new ArrayList<>();
+			user = this.userService.findAttendants(rendezvousId);
 
-		result = new ModelAndView("user/listAttendant");
-		result.addObject("user", user);
-		result.addObject("requestURI", "user/listAttendant.do");
+			result = new ModelAndView("user/listAttendant");
+			result.addObject("user", user);
+			result.addObject("requestURI", "user/listAttendant.do");
+		} else
+			result = new ModelAndView("redirect:../");
 
 		return result;
 	}
