@@ -59,6 +59,7 @@ public class Comment extends DomainEntity {
 
 	private Collection<Comment> replies;
 	private Comment comment;
+	private Rendezvous rendezvous;
 
 	@OneToMany
 	public Collection<Comment> getReplies() {
@@ -76,6 +77,14 @@ public class Comment extends DomainEntity {
 
 	public void setComment(Comment comment) {
 		this.comment = comment;
+	}
+	@ManyToOne
+	public Rendezvous getRendezvous() {
+		return rendezvous;
+	}
+
+	public void setRendezvous(Rendezvous rendezvous) {
+		this.rendezvous = rendezvous;
 	}
 
 }

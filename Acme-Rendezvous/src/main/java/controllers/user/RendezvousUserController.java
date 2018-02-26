@@ -92,6 +92,15 @@ public class RendezvousUserController extends AbstractController {
 
 		rendezvous = this.rendezvousService.create();
 		res = this.createEditModelAndView(rendezvous);
+		
+		User user;
+		user = userService.findByPrincipal();
+		
+		Collection<User> attendants = new ArrayList<User>();
+		attendants = rendezvous.getAttendant();
+		attendants.add(user);
+		
+		rendezvous.setAttendant(attendants);
 
 		return res;
 	}
