@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.RSVPService;
@@ -84,7 +85,7 @@ public class RSVPUserController extends AbstractController {
 
 				this.rendezvousService.save(rendezvous);
 
-				res = new ModelAndView("redirect:../../rendezvous/list.do");
+				res = new ModelAndView("redirect:../../rendezvous/user/listAttendRendezvous.do");
 			} catch (final Throwable oops) {
 				res = this.createModelAndView(r, "commit.error");
 			}
@@ -92,6 +93,36 @@ public class RSVPUserController extends AbstractController {
 		return res;
 	}
 	// Deleting --------------------------------------------------------------
+
+	@RequestMapping(value = "/cancel", method = RequestMethod.GET)
+	public ModelAndView cancel(@RequestParam final int rsvpId) {
+		ModelAndView res;
+
+		try {
+			final RSVP saved = this.rsvpService.save(r);
+			final User u = this.userService.findByPrincipal();
+
+			if (saved.getRendezvous().getAdultOnly() == true)
+				Assert.isTrue(this.userService.is18(u));
+
+			final Collection<RSVP> rsvps = u.getRsvp();
+			rsvps.add(saved);
+			u.setRsvp(rsvps);
+			this.userService.save(u);
+			final Rendezvous rendezvous = saved.getRendezvous();
+			final Collection<User> att = rendezvous.getAttendant();
+			att.add(u);
+			rendezvous.setAttendant(att);
+
+			this.rendezvousService.save(rendezvous);
+
+			res = new ModelAndView("redirect:../../rendezvous/user/listAttendRendezvous.do");
+		} catch (final Throwable oops) {
+			res = this.createModelAndView(r, "commit.error");
+		}
+
+		return res;
+	}
 
 	// Ancillary methods --------------------------------------------------
 

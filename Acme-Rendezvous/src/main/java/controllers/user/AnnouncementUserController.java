@@ -1,6 +1,8 @@
 
 package controllers.user;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,23 @@ public class AnnouncementUserController extends AbstractController {
 
 	public AnnouncementUserController() {
 		super();
+	}
+
+	// List --------------------------------------------------------------
+
+	@RequestMapping(value = "/streamAnnouncement", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		final Collection<Announcement> announcements;
+		final User u = this.userService.findByPrincipal();
+
+		announcements = this.announcementService.findAnnouncementsByUser(u.getId());
+
+		result = new ModelAndView("announcement/list");
+		result.addObject("announcement", announcements);
+		result.addObject("requestURI", "announcement/list.do");
+
+		return result;
 	}
 
 	// Creation ---------------------------------------------------------------

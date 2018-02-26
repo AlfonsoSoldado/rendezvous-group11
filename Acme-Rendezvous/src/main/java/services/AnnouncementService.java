@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.ArrayList;
@@ -22,12 +23,13 @@ public class AnnouncementService {
 	// Managed repository -----------------------------------------------------
 
 	@Autowired
-	private AnnouncementRepository announcementRepository;
-	
+	private AnnouncementRepository	announcementRepository;
+
 	// Services ---------------------------------------------------------------
-	
+
 	@Autowired
-	private UserService userService;
+	private UserService				userService;
+
 
 	// Constructor
 
@@ -72,10 +74,10 @@ public class AnnouncementService {
 			Date momentMade;
 			momentMade = new Date(System.currentTimeMillis() - 1000);
 			result.setMomentMade(momentMade);
-			
-			Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
+
+			final Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
 			User user;
-			user = userService.findByPrincipal();
+			user = this.userService.findByPrincipal();
 			rendezvouses.addAll(user.getRendezvous());
 			Assert.isTrue(rendezvouses.contains(announcement.getRendezvous()));
 		}
@@ -96,20 +98,26 @@ public class AnnouncementService {
 		this.announcementRepository.delete(announcement);
 	}
 
-	public void deleteAll(Collection<Announcement> announcements) {
+	public void deleteAll(final Collection<Announcement> announcements) {
 		Assert.notNull(announcements);
 
 		this.announcementRepository.delete(announcements);
 	}
 
-	public Collection<Announcement> findAnnouncementsByRendezvous(int id) {
+	public Collection<Announcement> findAnnouncementsByRendezvous(final int id) {
 		Collection<Announcement> res = new ArrayList<Announcement>();
-		res.addAll(announcementRepository.findAnnouncementsByRendezvous(id));
-		res = announcementRepository.findAnnouncementsByRendezvous(id);
+		res.addAll(this.announcementRepository.findAnnouncementsByRendezvous(id));
+		res = this.announcementRepository.findAnnouncementsByRendezvous(id);
 
 		Assert.notNull(res);
 		return res;
 
+	}
+
+	public Collection<Announcement> findAnnouncementsByUser(final int userId) {
+		final Collection<Announcement> res = this.announcementRepository.findAnnouncementsByUser(userId);
+
+		return res;
 	}
 
 }
