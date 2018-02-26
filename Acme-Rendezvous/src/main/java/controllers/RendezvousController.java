@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,13 +69,22 @@ public class RendezvousController extends AbstractController {
 	@RequestMapping(value = "/listSimilar", method = RequestMethod.GET)
 	public ModelAndView listSimilar(@RequestParam final int rendezvousId) {
 		ModelAndView result;
-		Collection<Rendezvous> rendezvous;
+		Collection<Rendezvous> rendezvous = new ArrayList<Rendezvous>();
 		Rendezvous rv = rendezvousService.findOne(rendezvousId);
+		
+		User creator;
+		creator = userService.findCreator(rendezvousId);
+		
+		rendezvous = rendezvousService.findByCreator(creator.getId());
+		rendezvous.remove(rv);
+		
+		Collection<Rendezvous> similar = new ArrayList<Rendezvous>();
+		rv.setSimilar(rendezvous);
 
-		rendezvous = rv.getSimilar();
+		similar = rv.getSimilar();
 
 		result = new ModelAndView("rendezvous/listSimilar");
-		result.addObject("rendezvous", rendezvous);
+		result.addObject("rendezvous", similar);
 		result.addObject("requestURI", "rendezvous/listSimilar.do");
 
 		return result;

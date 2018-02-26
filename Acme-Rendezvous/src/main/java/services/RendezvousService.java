@@ -1,11 +1,8 @@
 
 package services;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
-
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -13,12 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import repositories.RendezvousRepository;
 import domain.Announcement;
 import domain.Comment;
 import domain.Rendezvous;
 import domain.User;
-import repositories.RendezvousRepository;
-import security.Authority;
 
 @Service
 @Transactional
@@ -33,15 +29,6 @@ public class RendezvousService {
 
 	@Autowired
 	private UserService userService;
-
-	@Autowired
-	private AdministratorService administratorService;
-	// Constructor
-	@Autowired
-	private AnnouncementService announcementService;
-
-	@Autowired
-	private CommentService commentService;
 
 
 	public RendezvousService() {
@@ -86,6 +73,7 @@ public class RendezvousService {
 			User creator;
 			creator = this.userService.findCreator(rendezvous.getId());
 
+			Assert.isTrue(principal.getId() == creator.getId());
 		}
 		
 		Rendezvous res;
@@ -118,6 +106,11 @@ public class RendezvousService {
 		return res;
 	}
 
+	public Collection<Rendezvous> findByCreator(final int creatorId) {
+		Collection<Rendezvous> res;
+		res = this.rendezvousRepository.findByCreator(creatorId);
 
+		return res;
+	}
 		
 }
