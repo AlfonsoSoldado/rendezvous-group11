@@ -215,4 +215,38 @@ public class UserService {
 		this.validator.validate(userFinal, binding);
 		return userFinal;
 	}
+	
+	public User reconstruct(final User user, final BindingResult binding) {
+		User res;
+		User userFinal;
+		if (user.getId() == 0) {
+			
+			UserAccount userAccount;
+			Authority authority;
+			
+			userAccount = user.getUserAccount();
+			user.setUserAccount(userAccount);
+			authority = new Authority();
+			authority.setAuthority(Authority.USER);
+			userAccount.addAuthority(authority);
+			String password = "";
+			password = user.getUserAccount().getPassword();
+			user.getUserAccount().setPassword(password);
+			
+			
+			
+			userFinal = user;
+		} else {
+			res = this.userRepository.findOne(user.getId());
+			user.setId(res.getId());
+			user.setVersion(res.getVersion());
+			user.setUserAccount(res.getUserAccount());
+			user.getUserAccount().setPassword(user.getUserAccount().getPassword());
+			user.getUserAccount().setAuthorities(user.getUserAccount().getAuthorities());
+			
+			userFinal = user;
+		}
+		this.validator.validate(userFinal, binding);
+		return userFinal;
+	}
 }
