@@ -95,35 +95,31 @@ public class RSVPUserController extends AbstractController {
 	// Deleting --------------------------------------------------------------
 
 	@RequestMapping(value = "/cancel", method = RequestMethod.GET)
-	public ModelAndView cancel(@RequestParam final int rsvpId) {
+	public ModelAndView cancel(@RequestParam final int rendezvousId) {
 		ModelAndView res;
-
-		try {
-			final RSVP saved = this.rsvpService.save(r);
-			final User u = this.userService.findByPrincipal();
-
-			if (saved.getRendezvous().getAdultOnly() == true)
-				Assert.isTrue(this.userService.is18(u));
-
-			final Collection<RSVP> rsvps = u.getRsvp();
-			rsvps.add(saved);
-			u.setRsvp(rsvps);
-			this.userService.save(u);
-			final Rendezvous rendezvous = saved.getRendezvous();
-			final Collection<User> att = rendezvous.getAttendant();
-			att.add(u);
-			rendezvous.setAttendant(att);
-
-			this.rendezvousService.save(rendezvous);
-
+		final User us = this.userService.findByPrincipal();
+		final Rendezvous ren = this.rendezvousService.findOne(rendezvousId);
+		final RSVP rsvp = this.rsvpService.findRSVPByUserAndRendezvous(us.getId(), rendezvousId);
+		if (ren == null)
 			res = new ModelAndView("redirect:../../rendezvous/user/listAttendRendezvous.do");
-		} catch (final Throwable oops) {
-			res = this.createModelAndView(r, "commit.error");
-		}
+		else
+			try {
+				us.getRsvp().remove(rsvp);
+				final User saved = this.userService.save(us);
+
+				ren.getAttendant().remove(saved);
+				this.rendezvousService.save(ren);
+
+				this.rsvpService.delete(rsvp);
+
+				res = new ModelAndView("redirect:../../rendezvous/user/listAttendRendezvous.do");
+			} catch (final Throwable oops) {
+				res = new ModelAndView("redirect:../../rendezvous/user/listAttendRendezvous.do");
+				res.addObject("message", "commit.error");
+			}
 
 		return res;
 	}
-
 	// Ancillary methods --------------------------------------------------
 
 	protected ModelAndView createModelAndView(final RSVP rsvp) {

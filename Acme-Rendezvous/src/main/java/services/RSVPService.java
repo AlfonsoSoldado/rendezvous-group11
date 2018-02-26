@@ -73,7 +73,12 @@ public class RSVPService {
 
 		this.rsvpRepository.delete(rsvp);
 
-		//TODO Añadir restricción: solo el creador del RSVP puede eliminarlo
+	}
+
+	public RSVP findRSVPByUserAndRendezvous(final int userId, final int rendezvousId) {
+		final RSVP result = this.rsvpRepository.findRSVPByUserAndRendezvous(userId, rendezvousId);
+
+		return result;
 	}
 
 }

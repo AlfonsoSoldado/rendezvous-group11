@@ -93,6 +93,16 @@
 				code="rendezvous.listAttendant" />
 		</jstl:if>
 	</display:column>
+	
+		<security:authorize access="hasRole('USER')">
+
+		<display:column>
+			<jstl:if test="${row.deleted == false}">
+				<acme:links url="RSVP/user/cancel.do?rendezvousId=${row.id}"
+					code="rendezvous.cancel" />
+			</jstl:if>
+		</display:column>
+	</security:authorize>
 
 </display:table>
 

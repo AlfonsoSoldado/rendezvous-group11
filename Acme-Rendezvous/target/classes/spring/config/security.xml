@@ -63,6 +63,10 @@
 		<security:intercept-url pattern="/user/listAttendant.do"
 			access="permitAll" />
 
+
+		
+		<security:intercept-url pattern="/RSVP/user/cancel.do"
+			access="hasRole('USER')" />
 		<security:intercept-url pattern="/actor/user/edit.do"
 			access="hasRole('USER')" />
 		<security:intercept-url pattern="/rendezvous/user/**"
