@@ -58,7 +58,7 @@ public class RSVPService {
 		RSVP result = rsvp;
 		Assert.notNull(rsvp);
 
-		Assert.isTrue(rsvp.getConfirmed() == true);
+		Assert.isTrue(rsvp.getConfirmed() == true);//TODO
 
 		result = this.rsvpRepository.save(result);
 
