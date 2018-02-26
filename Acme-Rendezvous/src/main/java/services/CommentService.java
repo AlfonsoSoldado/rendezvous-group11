@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 
 import repositories.CommentRepository;
 import domain.Comment;
+import domain.Rendezvous;
 
 @Service
 @Transactional
@@ -22,6 +23,8 @@ public class CommentService {
 	@Autowired
 	private CommentRepository commentRepository;
 
+	@Autowired
+	private RendezvousService rendezvousService;
 	// Constructor
 
 	public CommentService() {
@@ -65,17 +68,29 @@ public class CommentService {
 			momentMade = new Date(System.currentTimeMillis() - 1000);
 			comment.setMomentMade(momentMade);
 		}
-		
-		result = this.commentRepository.save(comment);
-
+		result = this.commentRepository.saveAndFlush(comment);
+		if (comment.getPadre() != null) {
+			this.updatePadre(comment.getPadre(), result);
+		}
+		this.updateRendezvous(comment.getRendezvous(), result);
 		return result;
+	}
+
+	private void updatePadre(Comment padre, Comment hijo) {
+		ArrayList<Comment> replies = new ArrayList<Comment>();
+		if (padre.getReplies() != null) {
+			replies.addAll(padre.getReplies());
+		}
+		replies.add(hijo);
+		padre.setReplies(replies);
+		this.commentRepository.saveAndFlush(padre);
 	}
 
 	public void delete(final Comment comment) {
 		Assert.notNull(comment);
 		Assert.isTrue(comment.getId() != 0);
 		System.out.println(comment);
-		
+
 		this.commentRepository.delete(comment);
 
 	}
@@ -88,5 +103,13 @@ public class CommentService {
 		Assert.notNull(res);
 		return res;
 
+	}
+
+	public void updateRendezvous(Rendezvous rendezvous, Comment comment) {
+		Rendezvous save = this.rendezvousService.findOne(rendezvous.getId());
+		ArrayList<Comment> comments = new ArrayList<>(save.getComment());
+		comments.add(comment);
+		save.setComment(comments);
+		this.rendezvousService.save(save);
 	}
 }

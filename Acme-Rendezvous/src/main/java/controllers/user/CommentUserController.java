@@ -52,12 +52,12 @@ public class CommentUserController extends AbstractController {
 
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/listReplies", method = RequestMethod.GET)
 	public ModelAndView listReplies(@RequestParam final int commentId) {
 		ModelAndView result;
 		Collection<Comment> comment;
-		
+
 		Comment c = commentService.findOne(commentId);
 
 		comment = c.getReplies();
@@ -74,45 +74,27 @@ public class CommentUserController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int rendezvousId) {
 		ModelAndView res;
-		Comment comment;
-		
-		Collection<Comment> comments = new ArrayList<Comment>();
-		Rendezvous rendezvous;
-		
-		comment = this.commentService.create();
-		
-		rendezvous = rendezvousService.findOne(rendezvousId);
-		
-		comments.addAll(rendezvous.getComment());
-		
-		comments.add(comment);
-		rendezvous.setComment(comments);
-		
+		Comment comment = commentService.create();
+		comment.setRendezvous(rendezvousService.findOne(rendezvousId));
 		res = this.createEditModelAndView(comment);
 
 		return res;
 	}
-	
+
 	@RequestMapping(value = "/createReply", method = RequestMethod.GET)
 	public ModelAndView createReply(@RequestParam final int commentId) {
 		ModelAndView res;
-		
+
 		Comment result;
-		
+
 		Comment comment;
-		Collection<Comment> replies = new ArrayList<Comment>();
 
 		comment = commentService.findOne(commentId);
-		
-		result = commentService.create();
-		
-		result.setComment(comment);
-		replies.addAll(comment.getReplies());
-		replies.add(result);
-		comment.setReplies(replies);
-		
-		res = this.createEditModelAndView(result);
 
+		result = commentService.create();
+		result.setPadre(comment);
+		result.setRendezvous(comment.getRendezvous());
+		res = this.createEditModelAndView(result);
 		return res;
 	}
 
@@ -132,19 +114,30 @@ public class CommentUserController extends AbstractController {
 	// Saving --------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Comment comment,
-			final BindingResult binding) {
+	public ModelAndView save(@Valid final Comment comment, final BindingResult binding) {
 		ModelAndView res;
 		if (binding.hasErrors())
-			res = this.createEditModelAndView(comment,
-					"comment.params.error");
+			res = this.createEditModelAndView(comment, "comment.params.error");
 		else
 			try {
-				this.commentService.save(comment);
+				Comment save = this.commentService.create();
+				save.setText(comment.getText());
+				save.setPicture(comment.getPicture());
+				Comment padre=null;
+				if (comment.getPadre() != null) {
+					int id=comment.getPadre().getId();
+				padre = this.commentService.findOne(id);
+				save.setPadre(padre);
+				}
+				
+
+				Rendezvous rendezvous = this.rendezvousService.findOne(comment.getRendezvous().getId());
+				save.setRendezvous(rendezvous);
+				this.commentService.save(save);
+				
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(comment,
-						"comment.commit.error");
+				res = this.createEditModelAndView(comment, "comment.commit.error");
 			}
 		return res;
 	}
@@ -152,8 +145,7 @@ public class CommentUserController extends AbstractController {
 	// Deleting --------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@Valid final Comment comment,
-			final BindingResult binding) {
+	public ModelAndView delete(@Valid final Comment comment, final BindingResult binding) {
 		ModelAndView res;
 		try {
 			this.commentService.delete(comment);
@@ -174,8 +166,7 @@ public class CommentUserController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Comment comment,
-			final String message) {
+	protected ModelAndView createEditModelAndView(final Comment comment, final String message) {
 		ModelAndView result;
 
 		result = new ModelAndView("comment/edit");

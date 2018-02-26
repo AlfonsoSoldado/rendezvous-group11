@@ -67,9 +67,15 @@ public class RendezvousService {
 		Assert.notNull(rendezvous);
 
 		Rendezvous res;
+		try {
+			res = this.rendezvousRepository.saveAndFlush(rendezvous);
+			return res;
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		res = this.rendezvousRepository.save(rendezvous);
 		return res;
-
 	}
 
 	public void delete(final Rendezvous rendezvous) {

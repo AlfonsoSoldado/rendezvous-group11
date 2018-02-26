@@ -21,11 +21,10 @@
 <form:form action="comment/user/edit.do" modelAttribute="comment">
 	<security:authorize access="hasRole('USER')">
 	
-		<form:hidden path="id" />
-		<form:hidden path="version" />
 		<form:hidden path="momentMade" />
 		<form:hidden path="replies" />
-
+		<form:hidden path="rendezvous.id"/>
+		<form:hidden path="padre"/>
 		<acme:textbox code="comment.text" path="text" />
 		<acme:textbox code="comment.picture" path="picture" />
 
