@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -42,14 +43,14 @@ public class UserService {
 		User result;
 
 		result = new User();
-		UserAccount userAccount = new UserAccount();
-		Authority authority = new Authority();
-		
+		final UserAccount userAccount = new UserAccount();
+		final Authority authority = new Authority();
+
 		result.setComment(new ArrayList<Comment>());
 		result.setRendezvous(new ArrayList<Rendezvous>());
 		result.setRsvp(new ArrayList<RSVP>());
 		result.setQuestion(new ArrayList<Question>());
-		
+
 		authority.setAuthority(Authority.USER);
 		userAccount.addAuthority(authority);
 		result.setUserAccount(userAccount);
@@ -77,14 +78,14 @@ public class UserService {
 	public User save(final User user) {
 		User result = user;
 		Assert.notNull(user);
-		
+
 		if (user.getId() == 0) {
 			String pass = user.getUserAccount().getPassword();
-			
+
 			final Md5PasswordEncoder code = new Md5PasswordEncoder();
-			
+
 			pass = code.encodePassword(pass, null);
-			
+
 			user.getUserAccount().setPassword(pass);
 		}
 
@@ -133,11 +134,11 @@ public class UserService {
 
 		return result;
 	}
-	
-	public User findUserByQuestion(int questionId){
+
+	public User findUserByQuestion(final int questionId) {
 		User res;
-		res = userRepository.findUserByQuestion(questionId);
-		
+		res = this.userRepository.findUserByQuestion(questionId);
+
 		return res;
 	}
 
@@ -146,13 +147,36 @@ public class UserService {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Assert.notNull(userAccount);
-		Collection<Authority> authority = userAccount.getAuthorities();
+		final Collection<Authority> authority = userAccount.getAuthorities();
 		Assert.notNull(authority);
-		Authority res = new Authority();
+		final Authority res = new Authority();
 		res.setAuthority("USER");
-		if(authority.contains(res)){
+		if (authority.contains(res))
 			result = true;
-		}
+		return result;
+	}
+
+	@SuppressWarnings("deprecation")
+	public boolean is18(final User user) {
+
+		boolean result = false;
+
+		final Date fecha = new Date();
+
+		final Integer year = user.getDateBorn().getYear() + 1900;
+		final Integer month = user.getDateBorn().getMonth() + 1;
+		final Integer day = user.getDateBorn().getDate();
+
+		final Integer y = fecha.getYear() + 1900;
+		final Integer m = fecha.getMonth() + 1;
+		final Integer d = fecha.getDate();
+
+		if (y - year > 18)
+			result = true;
+		else if ((y - year == 18) && (m - month > 0))
+			result = true;
+		else if ((y - year == 18) && (m - month == 0) && (d - day >= 0))
+			result = true;
 		return result;
 	}
 }
