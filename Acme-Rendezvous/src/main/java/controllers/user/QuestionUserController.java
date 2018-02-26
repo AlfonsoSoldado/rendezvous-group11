@@ -78,8 +78,9 @@ public class QuestionUserController extends AbstractController {
 	// Saving --------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Question question, final BindingResult binding) {
+	public ModelAndView save(@Valid Question question, final BindingResult binding) {
 		ModelAndView res;
+		question = this.questionService.reconstruct(question, binding);
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(question, "question.params.error");
 		else

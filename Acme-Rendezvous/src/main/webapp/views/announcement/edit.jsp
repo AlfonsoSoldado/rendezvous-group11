@@ -21,7 +21,6 @@
 <security:authorize access="hasRole('USER')">
 	<form:form action="${requestUri}" modelAttribute="announcement">
 
-
 		<form:hidden path="id" />
 		<form:hidden path="version" />
 		<form:hidden path="momentMade" />
@@ -37,14 +36,12 @@
 			buttonCode="announcement.delete" id="${announcement.id }" />
 		<acme:cancel url="rendezvous/list.do" code="announcement.cancel" />
 
-
 	</form:form>
 </security:authorize>
 
 <security:authorize access="hasRole('ADMIN')">
 
 	<form:form action="${requestUri}" modelAttribute="announcement">
-
 
 		<form:hidden path="id" />
 		<form:hidden path="version" />
@@ -55,9 +52,6 @@
 		<acme:textbox code="announcement.description" path="description" />
 
 		<!-- Buttons -->
-
-	
-
 
 		<acme:delete confirmationCode="announcement.confirm.delete"
 			buttonCode="announcement.delete" id="${announcement.id }" />

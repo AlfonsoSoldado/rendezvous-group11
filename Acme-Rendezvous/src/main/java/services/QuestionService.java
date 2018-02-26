@@ -9,6 +9,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.QuestionRepository;
 import domain.Answer;
@@ -32,6 +34,9 @@ public class QuestionService {
 
 	@Autowired
 	private UserService			userService;
+	
+	@Autowired
+	private Validator				validator;
 
 	// Constructor ------------------------------------------------------------
 
@@ -107,7 +112,23 @@ public class QuestionService {
 		Collection<Question> result;
 		result = this.questionRepository.findQuestionByRendezvous(rendezvousId);
 		Assert.notNull(result);
-
 		return result;
+	}
+	
+	public Question reconstruct(final Question question, final BindingResult binding) {
+		Question res;
+		Question questionFinal;
+		if (question.getId() == 0) {
+			Collection<Answer> answer;
+			answer = new ArrayList<Answer>();
+			question.setAnswer(answer);
+			res = question;
+		} else {
+			questionFinal = this.questionRepository.findOne(question.getId());
+			question.setAnswer(questionFinal.getAnswer());
+			res = question;
+		}
+		this.validator.validate(res, binding);
+		return res;
 	}
 }

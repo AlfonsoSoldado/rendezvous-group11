@@ -24,7 +24,6 @@
 		<form:hidden path="id" />
 		<form:hidden path="version" />
 		<form:hidden path="rendezvous" />
-		<form:hidden path="answer" />
 
 		<acme:textbox code="question.text" path="text" />
 
