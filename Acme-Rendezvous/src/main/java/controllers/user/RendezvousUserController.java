@@ -92,14 +92,14 @@ public class RendezvousUserController extends AbstractController {
 
 		rendezvous = this.rendezvousService.create();
 		res = this.createEditModelAndView(rendezvous);
-		
+
 		User user;
-		user = userService.findByPrincipal();
-		
+		user = this.userService.findByPrincipal();
+
 		Collection<User> attendants = new ArrayList<User>();
 		attendants = rendezvous.getAttendant();
 		attendants.add(user);
-		
+
 		rendezvous.setAttendant(attendants);
 
 		return res;
@@ -113,15 +113,19 @@ public class RendezvousUserController extends AbstractController {
 		Rendezvous rendezvous;
 
 		rendezvous = this.rendezvousService.findOne(rendezvousId);
-		result = this.createEditModelAndView(rendezvous);
+		if (rendezvous.getDeleted() == false && rendezvous.getFinalMode() == false) {
 
-		final User own = this.userService.findCreator(rendezvousId);
-		final User principal = this.userService.findByPrincipal();
-
-		if (own.equals(principal))
 			result = this.createEditModelAndView(rendezvous);
-		else
-			result = this.list("rendezvous.commit.error");
+
+			final User own = this.userService.findCreator(rendezvousId);
+			final User principal = this.userService.findByPrincipal();
+
+			if (own.equals(principal))
+				result = this.createEditModelAndView(rendezvous);
+			else
+				result = this.list("rendezvous.commit.error");
+		} else
+			result = new ModelAndView("redirect:list.do");
 
 		return result;
 	}
@@ -136,7 +140,7 @@ public class RendezvousUserController extends AbstractController {
 			res = this.createEditModelAndView(rendezvous, "rendezvous.params.error");
 		else
 			try {
-				Rendezvous saved = this.rendezvousService.save(rendezvous);
+				final Rendezvous saved = this.rendezvousService.save(rendezvous);
 				if (rendezvous.getId() == 0) {
 					final User user = this.userService.findByPrincipal();
 					user.getRendezvous().add(saved);
