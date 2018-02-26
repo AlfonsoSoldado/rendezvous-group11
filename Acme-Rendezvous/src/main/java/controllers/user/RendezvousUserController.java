@@ -146,6 +146,7 @@ public class RendezvousUserController extends AbstractController {
 					user.getRendezvous().add(saved);
 					this.userService.save(user);
 					saved.getAttendant().add(user);
+					this.rendezvousService.save(saved);
 				}
 				res = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
