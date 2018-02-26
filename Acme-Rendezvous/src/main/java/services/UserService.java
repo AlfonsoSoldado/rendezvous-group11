@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.UserRepository;
 import security.Authority;
@@ -21,15 +23,19 @@ import domain.Question;
 import domain.RSVP;
 import domain.Rendezvous;
 import domain.User;
+import forms.UserForm;
 
 @Service
 @Transactional
 public class UserService {
 
 	// Managed repository -----------------------------------------------------
+	
 	@Autowired
 	private UserRepository	userRepository;
-
+	
+	@Autowired
+	private Validator validator;
 
 	// Constructor
 
@@ -178,5 +184,35 @@ public class UserService {
 		else if ((y - year == 18) && (m - month == 0) && (d - day >= 0))
 			result = true;
 		return result;
+	}
+	
+	public UserForm reconstruct(final UserForm userForm, final BindingResult binding) {
+		User res;
+		UserForm userFinal = null;
+		res = userForm.getUser();
+		
+		if (res.getId() == 0) {
+			
+			UserAccount userAccount;
+			Authority authority;
+			userAccount = userForm.getUser().getUserAccount();
+			authority = new Authority();
+			userForm.getUser().setUserAccount(userAccount);
+			authority.setAuthority(Authority.USER);
+			userAccount.addAuthority(authority);
+
+			userFinal = userForm;
+			
+		} else {
+
+			res = this.userRepository.findOne(userForm.getUser().getId());
+			userForm.getUser().setId(res.getId());
+			userForm.getUser().setVersion(res.getVersion());
+			userForm.getUser().setUserAccount(res.getUserAccount());
+			
+			userFinal = userForm;
+		}
+		this.validator.validate(userFinal, binding);
+		return userFinal;
 	}
 }

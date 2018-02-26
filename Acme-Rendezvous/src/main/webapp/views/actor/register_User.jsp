@@ -18,27 +18,33 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="user/register_User.do" modelAttribute="user">
+<form:form action="user/register_User.do" modelAttribute="userForm">
 
-	<form:hidden path="id"/>
-	<form:hidden path="version"/>
-	<form:hidden path="userAccount"/>
-	<form:hidden path="userAccount.authorities"/>
-	<form:hidden path="comment"/>
-	<form:hidden path="rendezvous"/>
-	<form:hidden path="rsvp"/>
-	<form:hidden path="question"/>
+	<form:hidden path="user.id"/>
+	<form:hidden path="user.version"/>
+	<form:hidden path="user.comment"/>
+	<form:hidden path="user.rendezvous"/>
+	<form:hidden path="user.rsvp"/>
+	<form:hidden path="user.question"/>
 
-	<acme:textbox code="actor.username" path="userAccount.username" />
-	<acme:password code="actor.password" path="userAccount.password"/>
-	
-	<acme:textbox code="actor.name" path="name" />
-	<acme:textbox code="actor.surname" path="surname" />
-	<acme:textbox code="actor.email" path="email" />
-	<acme:textbox code="actor.phoneNumber" path="phoneNumber" />
-	<acme:textbox code="actor.postalAddress" path="postalAddress" />
+	<acme:textbox code="actor.username" path="user.userAccount.username" />
+	<jstl:choose>
+		<jstl:when test="${userForm.user.id==0}">
+			<acme:password code="actor.password" path="user.userAccount.password" />
+			<br />
+			<acme:password code="actor.password" path="confirmPassword" />
+			<br />
+		</jstl:when>
+		<jstl:otherwise></jstl:otherwise>
+	</jstl:choose>
 
-	<acme:date code="actor.dateBorn" path="dateBorn"  placeholder="dd/MM/yyyy"/>
+	<acme:textbox code="actor.name" path="user.name" />
+	<acme:textbox code="actor.surname" path="user.surname" />
+	<acme:textbox code="actor.email" path="user.email" />
+	<acme:textbox code="actor.phoneNumber" path="user.phoneNumber" />
+	<acme:textbox code="actor.postalAddress" path="user.postalAddress" />
+
+	<acme:date code="actor.dateBorn" path="user.dateBorn"  placeholder="dd/MM/yyyy"/>
 
 	<acme:submit name="save" code="actor.submit" />
 	<acme:cancel url="/" code="answer.cancel" />
