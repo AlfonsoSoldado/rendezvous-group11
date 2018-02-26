@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -69,7 +70,8 @@ public class RSVPUserController extends AbstractController {
 				final RSVP saved = this.rsvpService.save(r);
 				final User u = this.userService.findByPrincipal();
 
-				//Assert.isTrue(this.userService.is18(u));
+				if (saved.getRendezvous().getAdultOnly() == true)
+					Assert.isTrue(this.userService.is18(u));
 
 				final Collection<RSVP> rsvps = u.getRsvp();
 				rsvps.add(saved);
