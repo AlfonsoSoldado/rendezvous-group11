@@ -45,13 +45,6 @@
 			code="rendezvous.user" />
 	</display:column>
 
-	<security:authorize access="hasRole('USER')">
-		<display:column>
-			<acme:links url="question/user/create.do?rendezvousId=${row.id}"
-				code="rendezvous.question.create" />
-		</display:column>
-	</security:authorize>
-
 	<security:authorize access="hasRole('ADMIN')">
 		<jstl:if test="row.deleted == false">
 			<display:column>

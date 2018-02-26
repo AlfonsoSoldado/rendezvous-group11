@@ -43,9 +43,6 @@
 	<display:column> <acme:links url="announcement/list.do?rendezvousId=${row.id}" code="rendezvous.announcement" /> </display:column>
 	<display:column> <acme:links url="user/displayByRendezvous.do?rendezvousId=${row.id}" code="rendezvous.user" /> </display:column>
 	
-	<security:authorize access="hasRole('USER')">
-	<display:column> <acme:links url="question/user/create.do?rendezvousId=${row.id}" code="rendezvous.question.create" /> </display:column>
-	</security:authorize>
 	
 	<security:authorize access="hasRole('ADMIN')">
 	<jstl:if test="row.deleted == false">
