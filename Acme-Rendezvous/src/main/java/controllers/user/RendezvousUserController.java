@@ -129,13 +129,14 @@ public class RendezvousUserController extends AbstractController {
 	// Saving --------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Rendezvous rendezvous, final BindingResult binding) {
+	public ModelAndView save(@Valid Rendezvous rendezvous, final BindingResult binding) {
 		ModelAndView res;
+		rendezvous = this.rendezvousService.reconstruct(rendezvous, binding);
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(rendezvous, "rendezvous.params.error");
 		else
 			try {
-				final Rendezvous saved = this.rendezvousService.save(rendezvous);
+				Rendezvous saved = this.rendezvousService.save(rendezvous);
 				if (rendezvous.getId() == 0) {
 					final User user = this.userService.findByPrincipal();
 					user.getRendezvous().add(saved);

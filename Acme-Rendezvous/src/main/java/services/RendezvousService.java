@@ -9,6 +9,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.RendezvousRepository;
 import domain.Announcement;
@@ -24,6 +26,9 @@ public class RendezvousService {
 
 	@Autowired
 	private RendezvousRepository rendezvousRepository;
+	
+	@Autowired
+	private Validator validator;
 
 
 	public RendezvousService() {
@@ -97,5 +102,37 @@ public class RendezvousService {
 
 		return res;
 	}
+	
+	public Rendezvous reconstruct(final Rendezvous rendezvous, final BindingResult binding) {
+		Rendezvous res;
+		Rendezvous rendezvousFinal;
+		if (rendezvous.getId() == 0) {
+			Collection<Comment> comment;
+			Collection<User> attendant;
+			Collection<Rendezvous> similar;
+			Collection<Announcement> announcement;
+
+			announcement = new ArrayList<Announcement>();
+			similar = new ArrayList<Rendezvous>();
+			attendant= new ArrayList<User>();
+			comment= new ArrayList<Comment>();
+
+			rendezvous.setAttendant(attendant);
+			rendezvous.setAnnouncement(announcement);
+			rendezvous.setSimilar(similar);
+			rendezvous.setDeleted(false);
+			rendezvous.setComment(comment);
+			res = rendezvous;
+		} else {
+			rendezvousFinal = this.rendezvousRepository.findOne(rendezvous.getId());
+			rendezvous.setAttendant(rendezvousFinal.getAttendant());
+			rendezvous.setAnnouncement(rendezvousFinal.getAnnouncement());
+			rendezvous.setComment(rendezvousFinal.getComment());
+			res = rendezvous;
+		}
+		this.validator.validate(res, binding);
+		return res;
+	}
+
 		
 }

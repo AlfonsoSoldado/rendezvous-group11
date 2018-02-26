@@ -26,13 +26,6 @@
 		<form:hidden path="id" />
 		<form:hidden path="version" />
 
-		<form:hidden path="comment" />
-		<form:hidden path="announcement" />
-		<form:hidden path="similar" />
-		<form:hidden path="deleted" />
-		<form:hidden path="attendant" />
-		
-
 		<acme:textbox code="rendezvous.name" path="name" />
 		<acme:textbox code="rendezvous.description" path="description" />
 		<acme:date code="rendezvous.moment" path="moment"
@@ -62,17 +55,8 @@
 <form:form action="rendezvous/administrator/edit.do"
 	modelAttribute="rendezvous">
 
-
-
-
 		<form:hidden path="id" />
 		<form:hidden path="version" />
-
-		<form:hidden path="comment" />
-		<form:hidden path="attendant" />
-		<form:hidden path="announcement" />
-		<form:hidden path="similar" />
-		<form:hidden path="deleted" />
 
 		<acme:textbox code="rendezvous.name" path="name" />
 		<acme:textbox code="rendezvous.description" path="description" />
@@ -90,13 +74,9 @@
 			items="${finalModes}" />
 		<acme:selectBoolean code="rendezvous.adultOnly" path="adultOnly"
 			items="${finalModes}" />
-
-
-
 	
 		<acme:delete confirmationCode="rendezvous.confirm.delete"
 			buttonCode="rendezvous.delete" id="${rendezvous.id }" />
 		<acme:cancel url="rendezvous/list.do" code="rendezvous.cancel" />
 </form:form>
 	</security:authorize>
-
