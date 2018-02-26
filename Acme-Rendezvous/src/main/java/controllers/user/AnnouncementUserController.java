@@ -13,9 +13,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AnnouncementService;
 import services.RendezvousService;
+import services.UserService;
 import controllers.AbstractController;
 import domain.Announcement;
 import domain.Rendezvous;
+import domain.User;
 
 @Controller
 @RequestMapping("/announcement/user")
@@ -28,6 +30,9 @@ public class AnnouncementUserController extends AbstractController {
 
 	@Autowired
 	private RendezvousService	rendezvousService;
+
+	@Autowired
+	private UserService			userService;
 
 
 	// Constructors ---------------------------------------------------------
@@ -42,21 +47,19 @@ public class AnnouncementUserController extends AbstractController {
 	public ModelAndView create(@RequestParam final int rendezvousId) {
 		ModelAndView res;
 
-		//		Collection<Announcement> announcements = new ArrayList<Announcement>();
+		final User main = this.userService.findByPrincipal();
 		Announcement announcement;
 		Rendezvous rendezvous;
 
 		rendezvous = this.rendezvousService.findOne(rendezvousId);
-		//		announcements.addAll(rendezvous.getAnnouncement());
-		announcement = this.announcementService.create(rendezvous);
-		//		announcements.add(announcement);
-		//		rendezvous.setAnnouncement(announcements);
-
-		res = this.createEditModelAndView(announcement);
+		if (main.getRendezvous().contains(rendezvous)) {
+			announcement = this.announcementService.create(rendezvous);
+			res = this.createEditModelAndView(announcement);
+		} else
+			res = new ModelAndView("redirect:../../");
 
 		return res;
 	}
-
 	// Saving --------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
