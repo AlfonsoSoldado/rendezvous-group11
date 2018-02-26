@@ -106,7 +106,6 @@ public class RendezvousUserController extends AbstractController {
 	}
 
 	// Editing ---------------------------------------------------------------
-
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int rendezvousId) {
 		ModelAndView result;
