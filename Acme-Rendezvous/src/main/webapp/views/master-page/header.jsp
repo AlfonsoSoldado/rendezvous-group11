@@ -58,10 +58,11 @@
 				</ul></li>
 			<li><a class="fNiv" href="rendezvous/list.do"><spring:message
 						code="master.page.rendezvous" /></a></li>
+			<li><a class="fNiv" href="announcement/user/streamAnnouncement.do"><spring:message
+						code="master.page.myAnnouncements" /></a></li>
 			<li><a class="fNiv" href="rendezvous/user/listMyRendezvous.do"><spring:message
 						code="master.page.myRendezvous" /></a></li>
-			<li><a class="fNiv"
-				href="rendezvous/user/listAttendRendezvous.do"><spring:message
+			<li><a class="fNiv" href="rendezvous/user/listAttendRendezvous.do"><spring:message
 						code="master.page.attendedRendezvous" /></a></li>
 			<li><a class="fNiv" href="user/list.do"><spring:message
 						code="master.page.user.list" /></a></li>
