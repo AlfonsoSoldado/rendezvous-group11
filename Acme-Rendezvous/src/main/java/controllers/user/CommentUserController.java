@@ -1,6 +1,5 @@
 package controllers.user;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -114,7 +113,8 @@ public class CommentUserController extends AbstractController {
 	// Saving --------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Comment comment, final BindingResult binding) {
+	public ModelAndView save(@Valid final Comment comment,
+			final BindingResult binding) {
 		ModelAndView res;
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(comment, "comment.params.error");
@@ -123,21 +123,22 @@ public class CommentUserController extends AbstractController {
 				Comment save = this.commentService.create();
 				save.setText(comment.getText());
 				save.setPicture(comment.getPicture());
-				Comment padre=null;
+				Comment padre = null;
 				if (comment.getPadre() != null) {
-					int id=comment.getPadre().getId();
-				padre = this.commentService.findOne(id);
-				save.setPadre(padre);
+					int id = comment.getPadre().getId();
+					padre = this.commentService.findOne(id);
+					save.setPadre(padre);
 				}
-				
 
-				Rendezvous rendezvous = this.rendezvousService.findOne(comment.getRendezvous().getId());
+				Rendezvous rendezvous = this.rendezvousService.findOne(comment
+						.getRendezvous().getId());
 				save.setRendezvous(rendezvous);
 				this.commentService.save(save);
-				
+
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(comment, "comment.commit.error");
+				res = this.createEditModelAndView(comment,
+						"comment.commit.error");
 			}
 		return res;
 	}
@@ -145,7 +146,8 @@ public class CommentUserController extends AbstractController {
 	// Deleting --------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@Valid final Comment comment, final BindingResult binding) {
+	public ModelAndView delete(@Valid final Comment comment,
+			final BindingResult binding) {
 		ModelAndView res;
 		try {
 			this.commentService.delete(comment);
@@ -166,7 +168,8 @@ public class CommentUserController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Comment comment, final String message) {
+	protected ModelAndView createEditModelAndView(final Comment comment,
+			final String message) {
 		ModelAndView result;
 
 		result = new ModelAndView("comment/edit");

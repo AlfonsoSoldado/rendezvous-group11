@@ -1,7 +1,5 @@
 package controllers.administrator;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;

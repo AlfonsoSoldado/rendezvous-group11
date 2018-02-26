@@ -1,4 +1,3 @@
-
 package controllers.user;
 
 import javax.validation.Valid;
@@ -9,8 +8,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.mysql.jdbc.jdbc2.optional.SuspendableXAConnection;
 
 import services.UserService;
 import controllers.AbstractController;
@@ -23,8 +20,7 @@ public class ActorUserController extends AbstractController {
 	// Services -------------------------------------------------------------
 
 	@Autowired
-	private UserService	userService;
-
+	private UserService userService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -75,7 +71,8 @@ public class ActorUserController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final User user, final String message) {
+	protected ModelAndView createEditModelAndView(final User user,
+			final String message) {
 		ModelAndView result;
 		result = new ModelAndView("actor/user/edit");
 		result.addObject("actor", user);
