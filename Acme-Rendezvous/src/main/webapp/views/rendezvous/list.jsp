@@ -64,6 +64,11 @@
 				<acme:links url="question/list.do?rendezvousId=${row.id}" code="rendezvous.question" />
 			</jstl:if>
 		</display:column>
+		<display:column>
+			<jstl:if test="${row.deleted == false}">
+				<acme:links url="user/listAttendant.do?rendezvousId=${row.id}" code="rendezvous.listAttendant" />
+			</jstl:if>
+		</display:column>
 		
 
 	<security:authorize access="hasRole('USER')">
