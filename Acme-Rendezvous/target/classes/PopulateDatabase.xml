@@ -260,6 +260,7 @@
 				<ref bean="comment2" />
 			</list>
 		</property>
+		<property name="rendezvous" ref="rendezvous1"></property>
 	</bean>
 
 
@@ -274,6 +275,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="rendezvous" ref="rendezvous1"></property>
 
 	</bean>
 
@@ -289,6 +291,7 @@
 				<ref bean="comment4" />
 			</list>
 		</property>
+		<property name="rendezvous" ref="rendezvous2"></property>
 
 	</bean>
 
@@ -304,6 +307,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="rendezvous" ref="rendezvous2"></property>
 
 	</bean>
 
