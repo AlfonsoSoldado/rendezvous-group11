@@ -23,15 +23,14 @@ public class AnnouncementService {
 	// Managed repository -----------------------------------------------------
 
 	@Autowired
-	private AnnouncementRepository	announcementRepository;
+	private AnnouncementRepository announcementRepository;
 
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private UserService				userService;
-
-
-	// Constructor
+	private UserService userService;
+	
+	// Constructor ------------------------------------------------------------
 
 	public AnnouncementService() {
 		super();
@@ -67,6 +66,7 @@ public class AnnouncementService {
 	}
 
 	public Announcement save(final Announcement announcement) {
+		userService.checkAuthority();
 		Announcement result = announcement;
 		Assert.notNull(announcement);
 
@@ -103,6 +103,8 @@ public class AnnouncementService {
 
 		this.announcementRepository.delete(announcements);
 	}
+	
+	// Other business method --------------------------------------------------
 
 	public Collection<Announcement> findAnnouncementsByRendezvous(final int id) {
 		Collection<Announcement> res = new ArrayList<Announcement>();
@@ -111,7 +113,6 @@ public class AnnouncementService {
 
 		Assert.notNull(res);
 		return res;
-
 	}
 
 	public Collection<Announcement> findAnnouncementsByUser(final int userId) {

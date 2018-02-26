@@ -186,29 +186,56 @@ public class UserService {
 		return result;
 	}
 	
+	public void checkAuthority() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+		Collection<Authority> authority = userAccount.getAuthorities();
+		Assert.notNull(authority);
+		Authority res = new Authority();
+		res.setAuthority("USER");
+		Assert.isTrue(authority.contains(res));
+	}
+	
 	public UserForm reconstruct(final UserForm userForm, final BindingResult binding) {
 		User res;
 		UserForm userFinal = null;
 		res = userForm.getUser();
 		
 		if (res.getId() == 0) {
-			
+			Collection<Comment> comment;
+			Collection<Question> question;
+			Collection<Rendezvous> rendezvous;
+			Collection<RSVP> rsvp;
 			UserAccount userAccount;
 			Authority authority;
 			userAccount = userForm.getUser().getUserAccount();
+			
 			authority = new Authority();
+			comment = new ArrayList<Comment>();
+			question = new ArrayList<Question>();
+			rendezvous = new ArrayList<Rendezvous>();
+			rsvp = new ArrayList<RSVP>();
+			
 			userForm.getUser().setUserAccount(userAccount);
 			authority.setAuthority(Authority.USER);
 			userAccount.addAuthority(authority);
-
-			userFinal = userForm;
+			userForm.getUser().setComment(comment);
+			userForm.getUser().setQuestion(question);
+			userForm.getUser().setRendezvous(rendezvous);
+			userForm.getUser().setRsvp(rsvp);
 			
+			userFinal = userForm;
 		} else {
-
 			res = this.userRepository.findOne(userForm.getUser().getId());
+			
 			userForm.getUser().setId(res.getId());
 			userForm.getUser().setVersion(res.getVersion());
 			userForm.getUser().setUserAccount(res.getUserAccount());
+			userForm.getUser().setComment(res.getComment());
+			userForm.getUser().setQuestion(res.getQuestion());
+			userForm.getUser().setRendezvous(res.getRendezvous());
+			userForm.getUser().setRsvp(res.getRsvp());
 			
 			userFinal = userForm;
 		}
@@ -232,8 +259,6 @@ public class UserService {
 			String password = "";
 			password = user.getUserAccount().getPassword();
 			user.getUserAccount().setPassword(password);
-			
-			
 			
 			userFinal = user;
 		} else {

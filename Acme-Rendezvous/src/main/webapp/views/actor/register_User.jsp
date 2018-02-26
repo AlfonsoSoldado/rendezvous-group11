@@ -22,10 +22,6 @@
 
 	<form:hidden path="user.id"/>
 	<form:hidden path="user.version"/>
-	<form:hidden path="user.comment"/>
-	<form:hidden path="user.rendezvous"/>
-	<form:hidden path="user.rsvp"/>
-	<form:hidden path="user.question"/>
 
 	<acme:textbox code="actor.username" path="user.userAccount.username" />
 	<jstl:choose>
