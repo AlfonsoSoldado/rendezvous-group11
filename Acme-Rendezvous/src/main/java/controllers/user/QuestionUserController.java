@@ -49,7 +49,7 @@ public class QuestionUserController extends AbstractController {
 		Rendezvous rendezvous;
 		final User user = this.userService.findByPrincipal();
 		rendezvous = this.rendezvousService.findOne(rendezvousId);
-		if (rendezvous.getDeleted() == false && rendezvous.getFinalMode() == false && user.getRendezvous().contains(rendezvous)) {
+		if (rendezvous.getDeleted() == false && user.getRendezvous().contains(rendezvous)) {
 			Question question;
 			question = this.questionService.create();
 			question.setRendezvous(rendezvous);
@@ -68,10 +68,10 @@ public class QuestionUserController extends AbstractController {
 		question = this.questionService.findOne(questionId);
 		final Rendezvous rendezvous = this.rendezvousService.findRendezvousByQuestionId(questionId);
 		final User user = this.userService.findByPrincipal();
-		if (rendezvous.getDeleted() == false && rendezvous.getFinalMode() == false && user.getRendezvous().contains(rendezvous))
+		if (rendezvous.getDeleted() == false && user.getQuestion().contains(question))
 			result = this.createEditModelAndView(question);
 		else
-			res = new ModelAndView("redirect:../../");
+			result = new ModelAndView("redirect:../../");
 
 		return result;
 	}
