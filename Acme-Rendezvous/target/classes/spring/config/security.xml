@@ -61,7 +61,7 @@
 		<security:intercept-url pattern="/answer/list.do"
 			access="permitAll" />
 		<security:intercept-url pattern="/user/listAttendant.do"
-			access="hasRole('permitAll')" />
+			access="permitAll" />
 
 		<security:intercept-url pattern="/actor/user/edit.do"
 			access="hasRole('USER')" />
