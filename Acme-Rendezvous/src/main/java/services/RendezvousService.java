@@ -25,10 +25,10 @@ public class RendezvousService {
 	// Managed repository
 
 	@Autowired
-	private RendezvousRepository rendezvousRepository;
-	
+	private RendezvousRepository	rendezvousRepository;
+
 	@Autowired
-	private Validator validator;
+	private Validator				validator;
 
 
 	public RendezvousService() {
@@ -65,7 +65,7 @@ public class RendezvousService {
 
 	public Rendezvous save(final Rendezvous rendezvous) {
 		Assert.notNull(rendezvous);
-		
+
 		Rendezvous res;
 		res = this.rendezvousRepository.save(rendezvous);
 		return res;
@@ -102,7 +102,14 @@ public class RendezvousService {
 
 		return res;
 	}
-	
+
+	public Rendezvous findRendezvousByQuestionId(final int questionId) {
+		Rendezvous res;
+		res = this.rendezvousRepository.findRendezvousByQuestionId(questionId);
+
+		return res;
+	}
+
 	public Rendezvous reconstruct(final Rendezvous rendezvous, final BindingResult binding) {
 		Rendezvous res;
 		Rendezvous rendezvousFinal;
@@ -114,8 +121,8 @@ public class RendezvousService {
 
 			announcement = new ArrayList<Announcement>();
 			similar = new ArrayList<Rendezvous>();
-			attendant= new ArrayList<User>();
-			comment= new ArrayList<Comment>();
+			attendant = new ArrayList<User>();
+			comment = new ArrayList<Comment>();
 
 			rendezvous.setAttendant(attendant);
 			rendezvous.setAnnouncement(announcement);
@@ -134,5 +141,4 @@ public class RendezvousService {
 		return res;
 	}
 
-		
 }
