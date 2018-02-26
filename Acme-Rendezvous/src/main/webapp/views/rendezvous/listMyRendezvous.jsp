@@ -83,6 +83,11 @@
 			code="rendezvous.question.create" />
 		</jstl:if>
 	</display:column>
+	<display:column>
+			<jstl:if test="${row.deleted == false}">
+				<acme:links url="user/listAttendant.do?rendezvousId=${row.id}" code="rendezvous.listAttendant" />
+			</jstl:if>
+		</display:column>
 
 </display:table>
 
