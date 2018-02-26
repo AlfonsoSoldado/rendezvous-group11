@@ -60,5 +60,4 @@
 	<acme:links url="rendezvous/user/create.do" code="rendezvous.create" />
 </security:authorize>
 
-</br>
 <acme:links url="user/list.do" code="rendezvous.back" />

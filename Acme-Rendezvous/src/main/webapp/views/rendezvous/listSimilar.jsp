@@ -27,7 +27,8 @@
 	name="rendezvous" requestURI="${requestUri}" id="row">
 
 	<!-- Attributes -->
-		<acme:column code="rendezvous.name" property="name" />
+	
+	<acme:column code="rendezvous.name" property="name" />
 	<acme:column code="rendezvous.description" property="description" />
 	<acme:column code="rendezvous.moment" property="moment" />
 	<acme:column code="rendezvous.finalMode" property="finalMode" />
@@ -63,5 +64,5 @@
 </display:table>
 
 <!-- Action links -->
-</br>
+
 <acme:links url="rendezvous/list.do" code="rendezvous.back" />

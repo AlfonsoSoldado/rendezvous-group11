@@ -21,23 +21,19 @@
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="question" requestURI="${requestUri}" id="row">
+	
+	<!-- Attributes -->
 
 	<acme:column property="text" code="question.text" />
 
-	<display:column>
-		<acme:links url="answer/list.do?questionId=${row.id }"
-			code="question.answer" />
-	</display:column>
+	<display:column> <acme:links url="answer/list.do?questionId=${row.id }" code="question.answer" /> </display:column>
 
 	<security:authorize access="hasRole('USER')">
-		<display:column>
-			<acme:links url="answer/user/create.do?questionId=${row.id}"
-				code="question.answer.create" />
-		</display:column>
+		<display:column> <acme:links url="answer/user/create.do?questionId=${row.id}" code="question.answer.create" /> </display:column>
 	</security:authorize>
 
 </display:table>
 
-</br>
-<acme:links url="rendezvous/list.do" code="question.back" />
+<!-- Action links -->
 
+<acme:links url="rendezvous/list.do" code="question.back" />

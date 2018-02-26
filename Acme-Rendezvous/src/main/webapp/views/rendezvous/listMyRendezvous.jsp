@@ -50,6 +50,5 @@
 <!-- Action links -->
 
 <security:authorize access="hasRole('USER')">
-	</br>
 	<acme:links url="rendezvous/user/create.do" code="rendezvous.create" />
 </security:authorize>

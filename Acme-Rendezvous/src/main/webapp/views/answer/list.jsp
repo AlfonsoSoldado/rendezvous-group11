@@ -20,10 +20,14 @@
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="answer" requestURI="${requestUri}" id="row">
 	
+	<!-- Attributes -->
+	
 	<acme:column property="text" code="answer.text"/>
 	
 </display:table>
-</br>
+
+<!-- Action links -->
+
 <acme:links url="rendezvous/list.do" code="answer.back" />
 	
 	
