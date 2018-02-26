@@ -30,6 +30,8 @@
 		<form:hidden path="announcement" />
 		<form:hidden path="similar" />
 		<form:hidden path="deleted" />
+		<form:hidden path="attendant" />
+		
 
 		<acme:textbox code="rendezvous.name" path="name" />
 		<acme:textbox code="rendezvous.description" path="description" />
@@ -47,8 +49,6 @@
 			items="${finalModes}" />
 		<acme:selectBoolean code="rendezvous.adultOnly" path="adultOnly"
 			items="${finalModes}" />
-			
-		<acme:select items="${attendant }" itemLabel="userAccount.username" code="rendezvous.attendant" path="attendant"/>
 
 		<!-- Buttons -->
 		<acme:submit name="save" code="rendezvous.save" />

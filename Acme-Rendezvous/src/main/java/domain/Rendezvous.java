@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
@@ -42,13 +43,15 @@ public class Rendezvous extends DomainEntity {
 		this.name = name;
 	}
 
+	@NotBlank
 	public String getDescription() {
 		return this.description;
 	}
 	public void setDescription(final String description) {
 		this.description = description;
 	}
-
+	
+	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {

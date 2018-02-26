@@ -25,11 +25,6 @@ public class RendezvousService {
 	@Autowired
 	private RendezvousRepository rendezvousRepository;
 
-	// Suporting services
-
-	@Autowired
-	private UserService userService;
-
 
 	public RendezvousService() {
 		super();
@@ -65,16 +60,6 @@ public class RendezvousService {
 
 	public Rendezvous save(final Rendezvous rendezvous) {
 		Assert.notNull(rendezvous);
-
-		if (rendezvous.getId() != 0) {
-			User principal;
-			principal = this.userService.findByPrincipal();
-
-			User creator;
-			creator = this.userService.findCreator(rendezvous.getId());
-
-			Assert.isTrue(principal.getId() == creator.getId());
-		}
 		
 		Rendezvous res;
 		res = this.rendezvousRepository.save(rendezvous);

@@ -65,6 +65,8 @@
 						code="master.page.attendedRendezvous" /></a></li>
 			<li><a class="fNiv" href="user/list.do"><spring:message
 						code="master.page.user.list" /></a></li>
+			<li><a class="fNiv" href="RSVP/user/create.do"><spring:message
+						code="master.page.rsvp" /></a></li>
 		</security:authorize>
 
 		<security:authorize access="isAnonymous()">

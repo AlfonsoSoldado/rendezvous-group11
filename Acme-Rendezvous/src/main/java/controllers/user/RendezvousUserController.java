@@ -174,16 +174,11 @@ public class RendezvousUserController extends AbstractController {
 
 		finalModes.add(false);
 		finalModes.add(true);
-		
-		Collection<User> attendant = new ArrayList<User>();
-		
-		attendant.addAll(userService.findAll());
 
 		result = new ModelAndView("rendezvous/edit");
 		result.addObject("finalModes", finalModes);
 		result.addObject("rendezvous", rendezvous);
 		result.addObject("message", message);
-		result.addObject("attendant", attendant);
 		result.addObject("requestUri", "rendezvous/edit.do");
 
 		return result;
