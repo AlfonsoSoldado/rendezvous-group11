@@ -64,5 +64,5 @@
 </display:table>
 
 <!-- Action links -->
-
+<br>
 <acme:links url="rendezvous/list.do" code="rendezvous.back" />
