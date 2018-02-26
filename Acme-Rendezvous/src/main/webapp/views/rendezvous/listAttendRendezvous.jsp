@@ -26,20 +26,58 @@
 	name="rendezvous" requestURI="${requestUri}" id="row">
 	
 	<!-- Attributes -->
-
 	
-	<acme:column code="rendezvous.name" property="name" />
-	<acme:column code="rendezvous.description" property="description" />
-	<acme:column code="rendezvous.moment" property="moment" />
-	<acme:column code="rendezvous.finalMode" property="finalMode" />
-	<display:column><acme:links url="rendezvous/listSimilar.do?rendezvousId=${row.id }" code="rendezvous.similar" /></display:column>
-	<display:column> <acme:links url="announcement/list.do?rendezvousId=${row.id}" code="rendezvous.announcement" /> </display:column>
-	<display:column> <acme:links url="user/displayByRendezvous.do?rendezvousId=${row.id}" code="rendezvous.user" /> </display:column>
-	<display:column> <acme:links url="comment/user/list.do?rendezvousId=${row.id}" code="rendezvous.comment" /> </display:column>
+	<spring:message code="rendezvous.name" var="name"/>
+	<display:column property="name" title="${name }" class="${row.deleted }"/>
+	
+	<spring:message code="rendezvous.description" var="description"/>
+	<display:column property="description" title="${description }" class="${row.deleted }"/>
+	
+	<spring:message code="rendezvous.moment" var="moment"/>
+	<display:column property="moment" title="${moment }" class="${row.deleted }"/>
+	
+	<spring:message code="rendezvous.finalMode" var="finalMode"/>
+	<display:column property="finalMode" title="${finalMode }" class="${row.deleted }"/>
+		
+	<spring:message code="rendezvous.deleted" var="deleted"/>
+	<display:column property="deleted" title="${deleted}" sortable="false" class="${row.deleted }"/>
+
+	<display:column>
+		<jstl:if test="${row.deleted == false}">
+			<acme:links url="rendezvous/listSimilar.do?rendezvousId=${row.id }" code="rendezvous.similar" />
+		</jstl:if>
+	</display:column>
+	
+	<display:column>
+		<jstl:if test="${row.deleted == false}">
+			<acme:links url="announcement/list.do?rendezvousId=${row.id}" code="rendezvous.announcement" />
+		</jstl:if>
+	</display:column>
+	
+	<display:column>
+		<jstl:if test="${row.deleted == false}">
+			<acme:links url="user/displayByRendezvous.do?rendezvousId=${row.id}" code="rendezvous.user" />
+		</jstl:if>
+	</display:column>
+	
+	<display:column>
+		<jstl:if test="${row.deleted == false}">
+			<acme:links url="comment/user/list.do?rendezvousId=${row.id}" code="rendezvous.comment" />
+		</jstl:if>
+	</display:column>
 	
 	<security:authorize access="hasRole('USER')">
-	<display:column> <acme:links url="question/user/create.do?rendezvousId=${row.id}" code="rendezvous.question.create" /> </display:column>
-	<display:column> <acme:links url="comment/user/create.do?rendezvousId=${row.id}" code="rendezvous.comment.create" /> </display:column>
+	<display:column>
+		<jstl:if test="${row.deleted == false}">
+			<acme:links url="question/user/create.do?rendezvousId=${row.id}" code="rendezvous.question.create" />
+		</jstl:if>
+	</display:column>
+	
+	<display:column>
+		<jstl:if test="${row.deleted == false}">
+			<acme:links url="comment/user/create.do?rendezvousId=${row.id}" code="rendezvous.comment.create" />
+		</jstl:if>
+	</display:column>
 	</security:authorize>
 	
 </display:table>
