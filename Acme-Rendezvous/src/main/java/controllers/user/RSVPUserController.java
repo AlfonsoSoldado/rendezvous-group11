@@ -70,7 +70,7 @@ public class RSVPUserController extends AbstractController {
 				final RSVP saved = this.rsvpService.save(r);
 				final User u = this.userService.findByPrincipal();
 
-				Assert.isTrue(this.userService.is18(u));
+				//Assert.isTrue(this.userService.is18(u));
 
 				final Collection<RSVP> rsvps = u.getRsvp();
 				rsvps.add(saved);
