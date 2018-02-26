@@ -66,9 +66,10 @@ public class AnswerUserController extends AbstractController {
 	// Saving --------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Answer answer,
+	public ModelAndView save(@Valid Answer answer,
 			final BindingResult binding) {
 		ModelAndView res;
+//		answer = this.answerService.reconstruct(answer, binding);
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(answer, "rendezvous.params.error");
 		else
@@ -76,6 +77,7 @@ public class AnswerUserController extends AbstractController {
 				this.answerService.save(answer);
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
+				System.out.println(oops.getMessage());
 				res = this.createEditModelAndView(answer, "rendezvous.commit.error");
 			}
 		return res;
