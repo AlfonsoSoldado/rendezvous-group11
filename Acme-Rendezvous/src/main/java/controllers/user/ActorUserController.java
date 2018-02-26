@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mysql.jdbc.jdbc2.optional.SuspendableXAConnection;
+
 import services.UserService;
 import controllers.AbstractController;
 import domain.User;
@@ -44,8 +46,10 @@ public class ActorUserController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final User user, final BindingResult binding) {
+	public ModelAndView save(@Valid User user, final BindingResult binding) {
 		ModelAndView res;
+		user = this.userService.reconstruct(user, binding);
+		System.out.println(binding.getFieldError());
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(user, "actor.params.error");
 		else
