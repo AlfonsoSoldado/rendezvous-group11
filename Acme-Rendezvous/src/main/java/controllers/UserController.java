@@ -1,6 +1,7 @@
 
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,6 +83,20 @@ public class UserController extends AbstractController {
 		result = new ModelAndView("user/listCreator");
 		result.addObject("user", user);
 		result.addObject("requestURI", "user/listCreator.do");
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/listAttendant", method = RequestMethod.GET)
+	public ModelAndView listAttendant(@RequestParam final int rendezvousId) {
+		ModelAndView result;
+		Collection<User> user = new ArrayList<>();
+
+		user = this.userService.findAttendants(rendezvousId);
+
+		result = new ModelAndView("user/listAttendant");
+		result.addObject("user", user);
+		result.addObject("requestURI", "user/listAttendant.do");
 
 		return result;
 	}
