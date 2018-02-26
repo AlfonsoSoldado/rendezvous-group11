@@ -22,29 +22,35 @@ import domain.User;
 @Transactional
 public class RendezvousService {
 
-	// Managed repository
+	// Managed repository ----------------------------------------------------
 
 	@Autowired
 	private RendezvousRepository	rendezvousRepository;
+	
+	// Services ---------------------------------------------------------------
+
+	@Autowired
+	private UserService userService;
 
 	@Autowired
 	private Validator				validator;
-
+	
+	// Constructor ------------------------------------------------------------
 
 	public RendezvousService() {
 		super();
 	}
 
-	// Simple CRUD methods
+	// Simple CRUD methods ----------------------------------------------------
 
 	public Rendezvous create() {
+		userService.checkAuthority();
 		final Rendezvous res = new Rendezvous();
 		res.setComment(new ArrayList<Comment>());
 		res.setAttendant(new ArrayList<User>());
 		res.setSimilar(new ArrayList<Rendezvous>());
 		res.setAnnouncement(new ArrayList<Announcement>());
 		res.setDeleted(false);
-
 		return res;
 	}
 
@@ -64,8 +70,8 @@ public class RendezvousService {
 	}
 
 	public Rendezvous save(final Rendezvous rendezvous) {
+		userService.checkAuthority();
 		Assert.notNull(rendezvous);
-
 		Rendezvous res;
 		try {
 			res = this.rendezvousRepository.saveAndFlush(rendezvous);
@@ -82,37 +88,34 @@ public class RendezvousService {
 		Assert.notNull(rendezvous);
 		Assert.isTrue(rendezvous.getId() != 0);
 		Assert.isTrue(this.rendezvousRepository.exists(rendezvous.getId()));
-
 		rendezvous.setFinalMode(true);
 		rendezvous.setDeleted(true);
 		this.rendezvousRepository.save(rendezvous);
 	}
+	
+	// Other business method --------------------------------------------------
 
 	public Rendezvous findRendezvousByComment(final int commentId) {
 		Rendezvous res;
 		res = this.rendezvousRepository.findRendezvousByComment(commentId);
-
 		return res;
 	}
 
 	public Collection<Rendezvous> findByAttendantId(final int attendantId) {
 		Collection<Rendezvous> res;
 		res = this.rendezvousRepository.findByAttendantId(attendantId);
-
 		return res;
 	}
 
 	public Collection<Rendezvous> findByCreator(final int creatorId) {
 		Collection<Rendezvous> res;
 		res = this.rendezvousRepository.findByCreator(creatorId);
-
 		return res;
 	}
 
 	public Rendezvous findRendezvousByQuestionId(final int questionId) {
 		Rendezvous res;
 		res = this.rendezvousRepository.findRendezvousByQuestionId(questionId);
-
 		return res;
 	}
 
@@ -124,12 +127,10 @@ public class RendezvousService {
 			Collection<User> attendant;
 			Collection<Rendezvous> similar;
 			Collection<Announcement> announcement;
-
 			announcement = new ArrayList<Announcement>();
 			similar = new ArrayList<Rendezvous>();
 			attendant = new ArrayList<User>();
 			comment = new ArrayList<Comment>();
-
 			rendezvous.setAttendant(attendant);
 			rendezvous.setAnnouncement(announcement);
 			rendezvous.setSimilar(similar);
@@ -146,5 +147,4 @@ public class RendezvousService {
 		this.validator.validate(res, binding);
 		return res;
 	}
-
 }

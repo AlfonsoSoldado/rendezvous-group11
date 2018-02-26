@@ -1,4 +1,3 @@
-
 package services;
 
 import java.util.ArrayList;
@@ -23,50 +22,52 @@ import domain.Rendezvous;
 @Transactional
 public class AdministratorService {
 
-	@Autowired
-	private AdministratorRepository	administratorRepository;
+	// Managed repository -----------------------------------------------------
 
+	@Autowired
+	private AdministratorRepository administratorRepository;
+
+	// Constructor ------------------------------------------------------------
+
+	public AdministratorService() {
+		super();
+	}
+
+	// Simple CRUD methods ----------------------------------------------------
 
 	public Administrator create() {
 		Administrator result;
-
 		result = new Administrator();
-
 		return result;
 	}
 
 	public Collection<Administrator> findAll() {
 		Collection<Administrator> result;
-
 		result = this.administratorRepository.findAll();
 		Assert.notNull(result);
-
 		return result;
 	}
 
 	public Administrator findOne(final int administratorId) {
 		Administrator result;
-
 		result = this.administratorRepository.findOne(administratorId);
-
 		return result;
 	}
 
 	public Administrator save(final Administrator administrator) {
 		Administrator result = administrator;
 		Assert.notNull(administrator);
-
 		result = this.administratorRepository.save(result);
-
 		return result;
 	}
 
 	public void delete(final Administrator administrator) {
 		Assert.notNull(administrator);
 		Assert.isTrue(administrator.getId() != 0);
-
 		this.administratorRepository.delete(administrator);
 	}
+
+	// Other business method --------------------------------------------------
 
 	public double averageRedezvousUser() {
 		return this.administratorRepository.averageRedezvousUser();
@@ -90,7 +91,8 @@ public class AdministratorService {
 	}
 
 	public double estandardDesviationUsersRendezvous() {
-		return this.administratorRepository.estandardDesviationUsersRendezvous();
+		return this.administratorRepository
+				.estandardDesviationUsersRendezvous();
 	}
 
 	public double averageRendezvousRSVPTruePerUser() {
@@ -99,20 +101,18 @@ public class AdministratorService {
 	}
 
 	public double estandardDesviationRendezvousRSVPTruePerUser() {
-		return this.administratorRepository.estandardDesviationRendezvousRSVPTruePerUser();
+		return this.administratorRepository
+				.estandardDesviationRendezvousRSVPTruePerUser();
 	}
 
 	public Collection<Rendezvous> topRendezvous() {
 		Collection<Rendezvous> res;
 		final Page<Rendezvous> pages;
 		final Pageable pageable;
-
 		pageable = new PageRequest(0, 10);
 		pages = this.administratorRepository.topRendezvous(pageable);
 		res = pages.getContent();
-
 		return res;
-
 	}
 
 	public double averageannouncementsRendezvous() {
@@ -120,30 +120,36 @@ public class AdministratorService {
 	}
 
 	public double estandardDesviationAnnouncementsUser() {
-		return this.administratorRepository.estandardDesviationAnnouncementsUser();
+		return this.administratorRepository
+				.estandardDesviationAnnouncementsUser();
 	}
 
 	public Collection<Rendezvous> redezvousSimiliars10() {
 		final Collection<Rendezvous> res = new ArrayList<>();
-		if (!this.administratorRepository.redezvousSimiliars10().isEmpty() && this.administratorRepository.redezvousSimiliars10() != null)
+		if (!this.administratorRepository.redezvousSimiliars10().isEmpty()
+				&& this.administratorRepository.redezvousSimiliars10() != null)
 			res.addAll(this.administratorRepository.redezvousSimiliars10());
 		return res;
 	}
 
 	public double averageNumberOfQuestionsPerRendezvous() {
-		return this.administratorRepository.averageNumberOfQuestionsPerRendezvous();
+		return this.administratorRepository
+				.averageNumberOfQuestionsPerRendezvous();
 	}
 
 	public double estandardDesviationOfQuestionsPerRendezvous() {
-		return this.administratorRepository.estandardDesviationOfQuestionsPerRendezvous();
+		return this.administratorRepository
+				.estandardDesviationOfQuestionsPerRendezvous();
 	}
 
 	public double averageOfAnswerPerQuestionsPerRendezvous() {
-		return this.administratorRepository.averageOfAnswerPerQuestionsPerRendezvous();
+		return this.administratorRepository
+				.averageOfAnswerPerQuestionsPerRendezvous();
 	}
 
 	public double estandardDesviationOfAnswerPerQuestionsPerRendezvous() {
-		return this.administratorRepository.estandardDesviationOfAnswerPerQuestionsPerRendezvous();
+		return this.administratorRepository
+				.estandardDesviationOfAnswerPerQuestionsPerRendezvous();
 	}
 
 	public Collection<Rendezvous> RendezvousConMas075Announcement() {

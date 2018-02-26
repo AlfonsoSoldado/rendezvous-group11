@@ -42,6 +42,7 @@ public class QuestionService {
 	// Simple CRUD methods ----------------------------------------------------
 
 	public Question create() {
+		userService.checkAuthority();
 		final Question res = new Question();
 		res.setAnswer(new ArrayList<Answer>());
 		res.setText("Question text");
@@ -64,6 +65,7 @@ public class QuestionService {
 	}
 
 	public Question save(final Question question) {
+		userService.checkAuthority();
 		Assert.notNull(question);
 		if(question.getId() != 0){
 			Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
@@ -98,7 +100,8 @@ public class QuestionService {
 
 		this.questionRepository.delete(question);
 	}
-
+	
+	// Other business method --------------------------------------------------
 	
 	public Collection<Question> findQuestionByRendezvous(final int rendezvousId) {
 		Collection<Question> result;

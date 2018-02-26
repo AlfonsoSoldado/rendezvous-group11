@@ -18,46 +18,41 @@ import domain.Actor;
 @Transactional
 public class ActorService {
 
-	// repository
+	// Managed repository -----------------------------------------------------
+	
 	@Autowired
 	private ActorRepository	actorRepository;
 
-
-	// constructor
+	// Constructor ------------------------------------------------------------
+	
 	public ActorService() {
 		super();
 	}
 
-	// CRUD methods
+	// Simple CRUD methods ----------------------------------------------------
 
 	public Collection<Actor> findAll() {
 		Collection<Actor> result;
-
 		result = this.actorRepository.findAll();
 		Assert.notNull(result);
-
 		return result;
 	}
 
 	public Actor findOne(final int actorId) {
-
 		Actor result;
 		result = this.actorRepository.findOne(actorId);
 		return result;
 	}
 	public Actor save(final Actor actor) {
-
 		Assert.notNull(actor);
 		return this.actorRepository.save(actor);
-
 	}
 
-	// Other business methods
+	// Other business method --------------------------------------------------
 
 	public Actor findByPrincipal() {
 		Actor result;
 		UserAccount userAccount;
-
 		userAccount = LoginService.getPrincipal();
 		final int id = userAccount.getId();
 		result = this.actorRepository.findActorByUserAccount(id);
@@ -65,7 +60,6 @@ public class ActorService {
 	}
 
 	public Actor findByUsername(final String username) {
-
 		Assert.notNull(username);
 		final Actor result = this.actorRepository.findByUsername(username);
 		return result;

@@ -20,6 +20,11 @@ public class AnswerService {
 	@Autowired
 	private AnswerRepository answerRepository;
 
+	// Services ---------------------------------------------------------------
+
+	@Autowired
+	private UserService userService;
+
 	// Constructor ------------------------------------------------------------
 
 	public AnswerService() {
@@ -29,6 +34,7 @@ public class AnswerService {
 	// Simple CRUD methods ----------------------------------------------------
 
 	public Answer create() {
+		userService.checkAuthority();
 		Answer result;
 		result = new Answer();
 		return result;
@@ -48,6 +54,7 @@ public class AnswerService {
 	}
 
 	public Answer save(final Answer answer) {
+		userService.checkAuthority();
 		Answer result = answer;
 		Assert.notNull(answer);
 		result = this.answerRepository.save(result);

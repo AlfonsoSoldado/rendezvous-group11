@@ -1,4 +1,3 @@
-
 package services;
 
 import java.util.Collection;
@@ -17,11 +16,16 @@ import domain.RSVP;
 public class RSVPService {
 
 	// Managed repository -----------------------------------------------------
+
 	@Autowired
-	private RSVPRepository	rsvpRepository;
+	private RSVPRepository rsvpRepository;
 
+	// Services ---------------------------------------------------------------
 
-	// Constructor
+	@Autowired
+	private UserService userService;
+
+	// Constructor ------------------------------------------------------------
 
 	public RSVPService() {
 		super();
@@ -30,55 +34,46 @@ public class RSVPService {
 	// Simple CRUD methods ----------------------------------------------------
 
 	public RSVP create() {
+		userService.checkAuthority();
 		RSVP result;
-
 		result = new RSVP();
-
 		return result;
 	}
 
 	public Collection<RSVP> findAll() {
 		Collection<RSVP> result;
-
 		result = this.rsvpRepository.findAll();
 		Assert.notNull(result);
-
 		return result;
 	}
 
 	public RSVP findOne(final int rsvpId) {
 		RSVP result;
-
 		result = this.rsvpRepository.findOne(rsvpId);
-
 		return result;
 	}
 
 	public RSVP save(final RSVP rsvp) {
+		userService.checkAuthority();
 		RSVP result = rsvp;
 		Assert.notNull(rsvp);
-
-		Assert.isTrue(rsvp.getConfirmed() == true);//TODO
-
+		Assert.isTrue(rsvp.getConfirmed() == true);
 		result = this.rsvpRepository.save(result);
-
-		//TODO Añadir restricción: number of answers must be the same as the number of questions of the rendezvous
-
 		return result;
 	}
 
 	public void delete(final RSVP rsvp) {
 		Assert.notNull(rsvp);
 		Assert.isTrue(rsvp.getId() != 0);
-
 		this.rsvpRepository.delete(rsvp);
-
 	}
+	
+	// Other business method --------------------------------------------------
 
-	public RSVP findRSVPByUserAndRendezvous(final int userId, final int rendezvousId) {
-		final RSVP result = this.rsvpRepository.findRSVPByUserAndRendezvous(userId, rendezvousId);
-
+	public RSVP findRSVPByUserAndRendezvous(final int userId,
+			final int rendezvousId) {
+		final RSVP result = this.rsvpRepository.findRSVPByUserAndRendezvous(
+				userId, rendezvousId);
 		return result;
 	}
-
 }

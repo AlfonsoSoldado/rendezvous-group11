@@ -37,7 +37,7 @@ public class UserService {
 	@Autowired
 	private Validator validator;
 
-	// Constructor
+	// Constructor ------------------------------------------------------------
 
 	public UserService() {
 		super();
@@ -47,65 +47,52 @@ public class UserService {
 
 	public User create() {
 		User result;
-
 		result = new User();
 		final UserAccount userAccount = new UserAccount();
 		final Authority authority = new Authority();
-
 		result.setComment(new ArrayList<Comment>());
 		result.setRendezvous(new ArrayList<Rendezvous>());
 		result.setRsvp(new ArrayList<RSVP>());
 		result.setQuestion(new ArrayList<Question>());
-
 		authority.setAuthority(Authority.USER);
 		userAccount.addAuthority(authority);
 		result.setUserAccount(userAccount);
-
 		return result;
 	}
 
 	public Collection<User> findAll() {
 		Collection<User> result;
-
 		result = this.userRepository.findAll();
 		Assert.notNull(result);
-
 		return result;
 	}
 
 	public User findOne(final int userId) {
 		User result;
-
 		result = this.userRepository.findOne(userId);
-
 		return result;
 	}
 
 	public User save(final User user) {
 		User result = user;
 		Assert.notNull(user);
-
 		if (user.getId() == 0) {
 			String pass = user.getUserAccount().getPassword();
-
 			final Md5PasswordEncoder code = new Md5PasswordEncoder();
-
 			pass = code.encodePassword(pass, null);
-
 			user.getUserAccount().setPassword(pass);
 		}
-
 		result = this.userRepository.save(result);
-
 		return result;
 	}
 
 	public void delete(final User user) {
 		Assert.notNull(user);
 		Assert.isTrue(user.getId() != 0);
-
 		this.userRepository.delete(user);
 	}
+	
+	// Other business method --------------------------------------------------
 
 	public User findByPrincipal() {
 		User e;
@@ -120,7 +107,6 @@ public class UserService {
 		User result;
 		result = this.userRepository.findCreator(rendezvousId);
 		Assert.notNull(result);
-
 		return result;
 	}
 
@@ -128,23 +114,19 @@ public class UserService {
 		Collection<User> result;
 		result = this.userRepository.findAttendants(rendezvousId);
 		Assert.notNull(result);
-
 		return result;
 	}
 
-	//TODO Test por hacer 
 	public Collection<User> findRUserSVPbyRendezvous(final int rendezvousId) {
 		Collection<User> result;
 		result = this.userRepository.findUserRSVPbyRendezvous(rendezvousId);
 		Assert.notNull(result);
-
 		return result;
 	}
 
 	public User findUserByQuestion(final int questionId) {
 		User res;
 		res = this.userRepository.findUserByQuestion(questionId);
-
 		return res;
 	}
 
@@ -164,19 +146,14 @@ public class UserService {
 
 	@SuppressWarnings("deprecation")
 	public boolean is18(final User user) {
-
 		boolean result = false;
-
 		final Date fecha = new Date();
-
 		final Integer year = user.getDateBorn().getYear() + 1900;
 		final Integer month = user.getDateBorn().getMonth() + 1;
 		final Integer day = user.getDateBorn().getDate();
-
 		final Integer y = fecha.getYear() + 1900;
 		final Integer m = fecha.getMonth() + 1;
 		final Integer d = fecha.getDate();
-
 		if (y - year > 18)
 			result = true;
 		else if ((y - year == 18) && (m - month > 0))
@@ -201,7 +178,6 @@ public class UserService {
 		User res;
 		UserForm userFinal = null;
 		res = userForm.getUser();
-		
 		if (res.getId() == 0) {
 			Collection<Comment> comment;
 			Collection<Question> question;
@@ -210,13 +186,11 @@ public class UserService {
 			UserAccount userAccount;
 			Authority authority;
 			userAccount = userForm.getUser().getUserAccount();
-			
 			authority = new Authority();
 			comment = new ArrayList<Comment>();
 			question = new ArrayList<Question>();
 			rendezvous = new ArrayList<Rendezvous>();
 			rsvp = new ArrayList<RSVP>();
-			
 			userForm.getUser().setUserAccount(userAccount);
 			authority.setAuthority(Authority.USER);
 			userAccount.addAuthority(authority);
@@ -224,11 +198,9 @@ public class UserService {
 			userForm.getUser().setQuestion(question);
 			userForm.getUser().setRendezvous(rendezvous);
 			userForm.getUser().setRsvp(rsvp);
-			
 			userFinal = userForm;
 		} else {
 			res = this.userRepository.findOne(userForm.getUser().getId());
-			
 			userForm.getUser().setId(res.getId());
 			userForm.getUser().setVersion(res.getVersion());
 			userForm.getUser().setUserAccount(res.getUserAccount());
@@ -236,7 +208,6 @@ public class UserService {
 			userForm.getUser().setQuestion(res.getQuestion());
 			userForm.getUser().setRendezvous(res.getRendezvous());
 			userForm.getUser().setRsvp(res.getRsvp());
-			
 			userFinal = userForm;
 		}
 		this.validator.validate(userFinal, binding);
@@ -247,10 +218,8 @@ public class UserService {
 		User res;
 		User userFinal;
 		if (user.getId() == 0) {
-			
 			UserAccount userAccount;
 			Authority authority;
-			
 			userAccount = user.getUserAccount();
 			user.setUserAccount(userAccount);
 			authority = new Authority();
@@ -259,7 +228,6 @@ public class UserService {
 			String password = "";
 			password = user.getUserAccount().getPassword();
 			user.getUserAccount().setPassword(password);
-			
 			userFinal = user;
 		} else {
 			res = this.userRepository.findOne(user.getId());
@@ -268,7 +236,6 @@ public class UserService {
 			user.setUserAccount(res.getUserAccount());
 			user.getUserAccount().setPassword(user.getUserAccount().getPassword());
 			user.getUserAccount().setAuthorities(user.getUserAccount().getAuthorities());
-			
 			userFinal = user;
 		}
 		this.validator.validate(userFinal, binding);

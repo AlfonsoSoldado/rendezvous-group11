@@ -20,12 +20,19 @@ import domain.Rendezvous;
 public class CommentService {
 
 	// Managed repository -----------------------------------------------------
+	
 	@Autowired
 	private CommentRepository commentRepository;
+	
+	// Services ---------------------------------------------------------------
 
 	@Autowired
 	private RendezvousService rendezvousService;
-	// Constructor
+	
+	@Autowired
+	private UserService userService;
+
+	// Constructor ------------------------------------------------------------
 
 	public CommentService() {
 		super();
@@ -34,35 +41,30 @@ public class CommentService {
 	// Simple CRUD methods ----------------------------------------------------
 
 	public Comment create() {
+		userService.checkAuthority();
 		Comment result;
-
 		result = new Comment();
 		result.setReplies(new ArrayList<Comment>());
-
 		return result;
 	}
 
 	public Collection<Comment> findAll() {
 		Collection<Comment> result;
-
 		result = this.commentRepository.findAll();
 		Assert.notNull(result);
-
 		return result;
 	}
 
 	public Comment findOne(final int commentId) {
 		Comment result;
-
 		result = this.commentRepository.findOne(commentId);
-
 		return result;
 	}
 
 	public Comment save(final Comment comment) {
+		userService.checkAuthority();
 		Comment result;
 		Assert.notNull(comment);
-
 		if (comment.getId() == 0) {
 			Date momentMade;
 			momentMade = new Date(System.currentTimeMillis() - 1000);
@@ -75,6 +77,8 @@ public class CommentService {
 		this.updateRendezvous(comment.getRendezvous(), result);
 		return result;
 	}
+	
+	// Other business method --------------------------------------------------
 
 	private void updatePadre(Comment padre, Comment hijo) {
 		ArrayList<Comment> replies = new ArrayList<Comment>();
@@ -90,16 +94,13 @@ public class CommentService {
 		Assert.notNull(comment);
 		Assert.isTrue(comment.getId() != 0);
 		System.out.println(comment);
-
 		this.commentRepository.delete(comment);
-
 	}
 
 	public Collection<Comment> findCommentsByRendezvous(int id) {
 		Collection<Comment> res = new ArrayList<Comment>();
 		res.addAll(commentRepository.findCommentsByRendezvous(id));
 		res = commentRepository.findCommentsByRendezvous(id);
-
 		Assert.notNull(res);
 		return res;
 
