@@ -52,7 +52,7 @@ public class AnnouncementUserController extends AbstractController {
 		Rendezvous rendezvous;
 
 		rendezvous = this.rendezvousService.findOne(rendezvousId);
-		if (main.getRendezvous().contains(rendezvous)) {
+		if (main.getRendezvous().contains(rendezvous) && rendezvous.getDeleted() == false) {
 			announcement = this.announcementService.create(rendezvous);
 			res = this.createEditModelAndView(announcement);
 		} else

@@ -17,11 +17,13 @@ public interface RendezvousRepository extends JpaRepository<Rendezvous, Integer>
 
 	@Query("select m from Rendezvous m join m.attendant e where e.id=?1")
 	Collection<Rendezvous> findByAttendantId(int userid);
-	
+
 	@Query("select m from Rendezvous m join m.similar e where e.id=?1")
 	Collection<Rendezvous> findRendezvousContainThisAsSimilar(int rendezvousId);
 
 	@Query("select r from User u join u.rendezvous r where u.id=?1")
 	Collection<Rendezvous> findByCreator(int userid);
-	
+
+	@Query("select r from Question q join q.rendezvous r where q.id=?1")
+	Rendezvous findRendezvousByQuestionId(int questionId);
 }
