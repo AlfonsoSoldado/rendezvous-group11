@@ -16,39 +16,57 @@
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-<%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <!-- Listing grid -->
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="rendezvous" requestURI="${requestUri}" id="row">
-	
+
 	<!-- Attributes -->
 	<security:authorize access="hasRole('USER')">
-		<display:column> 	
-		<jstl:if test="${row.finalMode == false}">
-		<acme:links url="rendezvous/user/edit.do?rendezvousId=${row.id}" code="rendezvous.edit" /> 
-		</jstl:if>
+		<display:column>
+			<jstl:if test="${row.finalMode == false}">
+				<acme:links url="rendezvous/user/edit.do?rendezvousId=${row.id}"
+					code="rendezvous.edit" />
+			</jstl:if>
 		</display:column>
 
 	</security:authorize>
-	
+
 	<acme:column code="rendezvous.name" property="name" />
 	<acme:column code="rendezvous.description" property="description" />
 	<acme:column code="rendezvous.moment" property="moment" />
 	<acme:column code="rendezvous.finalMode" property="finalMode" />
-	<display:column><acme:links url="rendezvous/listSimilar.do?rendezvousId=${row.id }" code="rendezvous.similar" /></display:column>
-	<display:column> <acme:links url="announcement/list.do?rendezvousId=${row.id}" code="rendezvous.announcement" /> </display:column>
-	<display:column> <acme:links url="announcement/user/create.do?rendezvousId=${row.id}" code="rendezvous.announcement.create" /> </display:column>
-	<display:column> <acme:links url="question/listByUser.do?rendezvousId=${row.id}" code="rendezvous.question" /> </display:column>
-	<display:column> <acme:links url="question/user/create.do?rendezvousId=${row.id}" code="rendezvous.question.create" /> </display:column>
-	
+	<display:column>
+		<acme:links url="rendezvous/listSimilar.do?rendezvousId=${row.id }"
+			code="rendezvous.similar" />
+	</display:column>
+	<display:column>
+		<acme:links url="announcement/list.do?rendezvousId=${row.id}"
+			code="rendezvous.announcement" />
+	</display:column>
+	<display:column>
+		<acme:links url="announcement/user/create.do?rendezvousId=${row.id}"
+			code="rendezvous.announcement.create" />
+	</display:column>
+	<display:column>
+		<acme:links url="question/listByUser.do?rendezvousId=${row.id}"
+			code="rendezvous.question" />
+	</display:column>
+	<display:column>
+		<acme:links url="question/user/create.do?rendezvousId=${row.id}"
+			code="rendezvous.question.create" />
+	</display:column>
+
 </display:table>
 
 <!-- Action links -->
 
 <security:authorize access="hasRole('USER')">
+	<br>
 	<acme:links url="rendezvous/user/create.do" code="rendezvous.create" />
 </security:authorize>
