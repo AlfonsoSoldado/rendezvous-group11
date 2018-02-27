@@ -93,11 +93,7 @@ public class CommentUserController extends AbstractController {
 	@RequestMapping(value = "/createReply", method = RequestMethod.GET)
 	public ModelAndView createReply(@RequestParam final int commentId) {
 		ModelAndView res;
-<<<<<<< HEAD
-		if (this.rendezvousService.findOne(commentId) == null)
-=======
-		if (this.commentService.findOne(commentId) == null) {
->>>>>>> 489cb3908a70a3fc8cdd8feb426ca91d81f3a118
+		if (this.commentService.findOne(commentId) == null)
 			res = new ModelAndView("redirect:../../");
 		else {
 			Comment result;
@@ -113,7 +109,6 @@ public class CommentUserController extends AbstractController {
 		}
 		return res;
 	}
-
 	// Editing ---------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
