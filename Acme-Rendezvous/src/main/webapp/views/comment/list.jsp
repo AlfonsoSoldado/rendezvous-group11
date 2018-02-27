@@ -24,7 +24,9 @@
 	<display:column> <acme:links url="user/displayByComment.do?commentId=${row.id}" code="comment.user" /> </display:column>
 	<acme:column property="text" code="comment.text"/>
 	<acme:column property="momentMade" code="comment.momentMade"/>
-	<acme:column property="picture" code="comment.picture"/>
+	
+	<spring:message code="comment.picture" var="picture"/>
+	<display:column><img class="imagenesComment" src="${row.picture}"></display:column>
 	
 	<display:column> <acme:links url="comment/user/createReply.do?commentId=${row.id}" code="comment.createReply" /> </display:column>
 	<display:column> <acme:links url="comment/user/listReplies.do?commentId=${row.id}" code="comment.reply" /> </display:column>

@@ -23,7 +23,7 @@
 	
 		<form:hidden path="momentMade" />
 		<form:hidden path="replies" />
-		<form:hidden path="rendezvous.id"/>
+		<form:hidden path="rendezvous"/>
 		<form:hidden path="parent"/>
 		<acme:textbox code="comment.text" path="text" />
 		<acme:textbox code="comment.picture" path="picture" />
@@ -38,7 +38,7 @@
 	
 		<form:hidden path="momentMade" />
 		<form:hidden path="replies" />
-		<form:hidden path="rendezvous.id"/>
+		<form:hidden path="rendezvous"/>
 		<form:hidden path="parent"/>
 		<form:hidden path="id"/>
 		<acme:textbox code="comment.text" path="text" />
