@@ -74,17 +74,8 @@ public class RendezvousService {
 		Rendezvous res;
 		Collection<Rendezvous> similar;
 		similar = rendezvous.getSimilar();
-		try {
-			res = this.rendezvousRepository.saveAndFlush(rendezvous);
-			return res;
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		
+		System.out.println(similar);
 		res = this.rendezvousRepository.save(rendezvous);
-		for (final Rendezvous r : similar)
-			r.getSimilar().add(rendezvous);
 		return res;
 	}
 
