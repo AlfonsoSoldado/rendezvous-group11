@@ -34,7 +34,6 @@ public class ActorService {
 	public Collection<Actor> findAll() {
 		Collection<Actor> result;
 		result = this.actorRepository.findAll();
-		Assert.notNull(result);
 		return result;
 	}
 

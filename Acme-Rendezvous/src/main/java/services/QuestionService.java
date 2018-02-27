@@ -65,7 +65,6 @@ public class QuestionService {
 		Assert.isTrue(questionId != 0);
 		Question res;
 		res = this.questionRepository.findOne(questionId);
-		Assert.notNull(res);
 		return res;
 	}
 

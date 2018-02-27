@@ -65,7 +65,6 @@ public class RendezvousService {
 		Assert.isTrue(rendezvousId != 0);
 		Rendezvous res;
 		res = this.rendezvousRepository.findOne(rendezvousId);
-		Assert.notNull(res);
 		return res;
 	}
 
