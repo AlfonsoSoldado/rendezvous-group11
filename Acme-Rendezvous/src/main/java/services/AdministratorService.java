@@ -92,8 +92,7 @@ public class AdministratorService {
 	}
 
 	public double estandardDesviationUsersRendezvous() {
-		return this.administratorRepository
-				.estandardDesviationUsersRendezvous();
+		return this.administratorRepository.estandardDesviationUsersRendezvous();
 	}
 
 	public double averageRendezvousRSVPTruePerUser() {
@@ -102,8 +101,7 @@ public class AdministratorService {
 	}
 
 	public double estandardDesviationRendezvousRSVPTruePerUser() {
-		return this.administratorRepository
-				.estandardDesviationRendezvousRSVPTruePerUser();
+		return this.administratorRepository.estandardDesviationRendezvousRSVPTruePerUser();
 	}
 
 	public Collection<Rendezvous> topRendezvous() {
@@ -121,8 +119,7 @@ public class AdministratorService {
 	}
 
 	public double estandardDesviationAnnouncementsUser() {
-		return this.administratorRepository
-				.estandardDesviationAnnouncementsUser();
+		return this.administratorRepository.estandardDesviationAnnouncementsUser();
 	}
 
 	public Collection<Rendezvous> redezvousSimiliars10() {
@@ -134,23 +131,19 @@ public class AdministratorService {
 	}
 
 	public double averageNumberOfQuestionsPerRendezvous() {
-		return this.administratorRepository
-				.averageNumberOfQuestionsPerRendezvous();
+		return this.administratorRepository.averageNumberOfQuestionsPerRendezvous();
 	}
 
 	public double estandardDesviationOfQuestionsPerRendezvous() {
-		return this.administratorRepository
-				.estandardDesviationOfQuestionsPerRendezvous();
+		return this.administratorRepository.estandardDesviationOfQuestionsPerRendezvous();
 	}
 
 	public double averageOfAnswerPerQuestionsPerRendezvous() {
-		return this.administratorRepository
-				.averageOfAnswerPerQuestionsPerRendezvous();
+		return this.administratorRepository.averageOfAnswerPerQuestionsPerRendezvous();
 	}
 
 	public double estandardDesviationOfAnswerPerQuestionsPerRendezvous() {
-		return this.administratorRepository
-				.estandardDesviationOfAnswerPerQuestionsPerRendezvous();
+		return this.administratorRepository.estandardDesviationOfAnswerPerQuestionsPerRendezvous();
 	}
 
 	public Collection<Rendezvous> RendezvousConMas075Announcement() {
@@ -173,8 +166,7 @@ public class AdministratorService {
 		e = this.administratorRepository.findByPrincipal(userAccount.getId());
 		return e;
 	}
-	
-<<<<<<< HEAD
+
 	public void checkAuthority() {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
@@ -184,7 +176,8 @@ public class AdministratorService {
 		Authority res = new Authority();
 		res.setAuthority("ADMIN");
 		Assert.isTrue(authority.contains(res));
-=======
+	}
+
 	public boolean checkAdminLogged() {
 		boolean result = false;
 		UserAccount userAccount;
@@ -197,6 +190,5 @@ public class AdministratorService {
 		if (authority.contains(res))
 			result = true;
 		return result;
->>>>>>> 746d2927da7c367ddaf970fa9bdf575f505ca110
 	}
 }
