@@ -33,17 +33,11 @@ public class RendezvousService {
 	private UserService				userService;
 
 	@Autowired
-<<<<<<< HEAD
 	private Validator				validator;
-
-
-=======
-	private Validator	validator;
 	
 	@Autowired
 	private ActorService actorService;
-	
->>>>>>> 7baadce23843c360cfbbda28ad36601cfc47e91e
+
 	// Constructor ------------------------------------------------------------
 
 	public RendezvousService() {
