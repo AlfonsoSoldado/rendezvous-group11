@@ -52,9 +52,6 @@ public class AnnouncementAdministratorController extends AbstractController {
 				this.announcementService.delete(announcement);
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
-				System.out.println(oops.getCause());
-				System.out.println(oops.getMessage());
-				System.out.println(oops.getStackTrace());
 				res = this.createEditModelAndView(announcement, "announcement.commit.error");
 			}
 			return res;

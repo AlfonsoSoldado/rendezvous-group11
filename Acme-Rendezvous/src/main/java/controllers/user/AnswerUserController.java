@@ -77,7 +77,6 @@ public class AnswerUserController extends AbstractController {
 				this.answerService.save(answer);
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
-				System.out.println(oops.getMessage());
 				res = this.createEditModelAndView(answer, "rendezvous.commit.error");
 			}
 		return res;

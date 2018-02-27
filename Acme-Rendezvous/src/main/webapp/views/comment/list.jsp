@@ -30,5 +30,18 @@
 	
 </display:table>
 </security:authorize>
+
+<security:authorize access="hasRole('ADMIN')">
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="comment" requestURI="${requestUri}" id="row">
+	
+	<acme:column property="text" code="comment.text"/>
+	<acme:column property="momentMade" code="comment.momentMade"/>
+	<acme:column property="picture" code="comment.picture"/>
+	
+	<display:column> <acme:links url="comment/administrator/edit.do?commentId=${row.id}" code="comment.delete" /> </display:column>
+	
+</display:table>
+</security:authorize>
 	
 	

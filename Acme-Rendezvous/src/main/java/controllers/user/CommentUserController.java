@@ -41,6 +41,10 @@ public class CommentUserController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam final int rendezvousId) {
 		ModelAndView result;
+		if (this.rendezvousService.findOne(rendezvousId)==null) {
+			result = new ModelAndView("redirect:../../");
+
+		}else {
 		Collection<Comment> comment;
 
 		comment = commentService.findCommentsByRendezvous(rendezvousId);
@@ -48,7 +52,7 @@ public class CommentUserController extends AbstractController {
 		result = new ModelAndView("comment/list");
 		result.addObject("comment", comment);
 		result.addObject("requestURI", "comment/user/list.do");
-
+		}
 		return result;
 	}
 
@@ -89,17 +93,21 @@ public class CommentUserController extends AbstractController {
 	@RequestMapping(value = "/createReply", method = RequestMethod.GET)
 	public ModelAndView createReply(@RequestParam final int commentId) {
 		ModelAndView res;
+		if (this.rendezvousService.findOne(commentId) == null) {
+			res = new ModelAndView("redirect:../../");
 
-		Comment result;
+		} else {
+			Comment result;
 
-		Comment comment;
+			Comment comment;
 
-		comment = commentService.findOne(commentId);
+			comment = commentService.findOne(commentId);
 
-		result = commentService.create();
-		result.setParent(comment);
-		result.setRendezvous(comment.getRendezvous());
-		res = this.createEditModelAndView(result);
+			result = commentService.create();
+			result.setParent(comment);
+			result.setRendezvous(comment.getRendezvous());
+			res = this.createEditModelAndView(result);
+		}
 		return res;
 	}
 
@@ -148,17 +156,7 @@ public class CommentUserController extends AbstractController {
 
 	// Deleting --------------------------------------------------------------
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@Valid final Comment comment, final BindingResult binding) {
-		ModelAndView res;
-		try {
-			this.commentService.delete(comment);
-			res = new ModelAndView("redirect:../../");
-		} catch (final Throwable oops) {
-			res = this.createEditModelAndView(comment, "comment.commit.error");
-		}
-		return res;
-	}
+
 
 	// Ancillary methods --------------------------------------------------
 

@@ -31,6 +31,9 @@ public class CommentService {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private AdministratorService administratorService;
 
 	// Constructor ------------------------------------------------------------
 
@@ -81,10 +84,22 @@ public class CommentService {
 	public void delete(final Comment comment) {
 		Assert.notNull(comment);
 		Assert.isTrue(comment.getId() != 0);
-		System.out.println(comment);
 		this.commentRepository.delete(comment);
 	}
 	
+	
+	
+	public Comment deleteAdmin(final Comment comment) {
+		this.administratorService.checkAuthority();
+		Comment res;
+		Comment result;
+		Assert.notNull(comment);
+		result= this.commentRepository.findOne(comment.getId());
+		result.setText("this comment has been deleted, este comentario ha sido borrado");
+		res = this.commentRepository.saveAndFlush(result);
+		
+		return res;
+	}
 	// Other business method --------------------------------------------------
 
 	private void updatePadre(Comment padre, Comment hijo) {
@@ -100,7 +115,6 @@ public class CommentService {
 	public Collection<Comment> findCommentsByRendezvous(int id) {
 		Collection<Comment> res = new ArrayList<Comment>();
 		res.addAll(commentRepository.findCommentsByRendezvous(id));
-		res = commentRepository.findCommentsByRendezvous(id);
 		Assert.notNull(res);
 		return res;
 

@@ -49,7 +49,6 @@ public class RendezvousAdministratorController extends AbstractController {
 				final BindingResult binding) {
 			if (binding.hasErrors()) {
 			
-				System.out.println(binding.getAllErrors());
 			}
 			ModelAndView res;
 			try {

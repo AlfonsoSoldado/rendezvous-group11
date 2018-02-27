@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.AdministratorRepository;
+import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
@@ -171,5 +172,16 @@ public class AdministratorService {
 		Assert.notNull(userAccount);
 		e = this.administratorRepository.findByPrincipal(userAccount.getId());
 		return e;
+	}
+	
+	public void checkAuthority() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+		Collection<Authority> authority = userAccount.getAuthorities();
+		Assert.notNull(authority);
+		Authority res = new Authority();
+		res.setAuthority("ADMIN");
+		Assert.isTrue(authority.contains(res));
 	}
 }
