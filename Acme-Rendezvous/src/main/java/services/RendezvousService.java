@@ -33,9 +33,17 @@ public class RendezvousService {
 	private UserService				userService;
 
 	@Autowired
+<<<<<<< HEAD
 	private Validator				validator;
 
 
+=======
+	private Validator	validator;
+	
+	@Autowired
+	private ActorService actorService;
+	
+>>>>>>> 7baadce23843c360cfbbda28ad36601cfc47e91e
 	// Constructor ------------------------------------------------------------
 
 	public RendezvousService() {
@@ -80,6 +88,7 @@ public class RendezvousService {
 		Assert.notNull(rendezvous);
 		Assert.isTrue(rendezvous.getId() != 0);
 		Assert.isTrue(this.rendezvousRepository.exists(rendezvous.getId()));
+		Assert.isTrue(actorService.isAuthenticated());
 		rendezvous.setFinalMode(true);
 		rendezvous.setDeleted(true);
 		this.rendezvousRepository.save(rendezvous);

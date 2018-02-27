@@ -30,6 +30,9 @@ public class AnnouncementService {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private AdministratorService administratorService;
+
 	// Constructor ------------------------------------------------------------
 
 	public AnnouncementService() {
@@ -78,6 +81,7 @@ public class AnnouncementService {
 	}
 
 	public void delete(final Announcement announcement) {
+		administratorService.checkAuthority();
 		Assert.notNull(announcement);
 		Assert.isTrue(announcement.getId() != 0);
 		Rendezvous rendezvous;
@@ -90,7 +94,7 @@ public class AnnouncementService {
 		Assert.notNull(announcements);
 		this.announcementRepository.delete(announcements);
 	}
-	
+
 	// Other business method --------------------------------------------------
 
 	public Collection<Announcement> findAnnouncementsByRendezvous(final int id) {

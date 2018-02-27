@@ -98,19 +98,7 @@ public class AnnouncementUserController extends AbstractController {
 
 	// Deleting --------------------------------------------------------------
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@Valid final Announcement announcement, final BindingResult binding) {
-		ModelAndView res;
 
-		try {
-			this.announcementService.delete(announcement);
-			res = new ModelAndView("redirect:list.do");
-		} catch (final Throwable oops) {
-			res = this.createEditModelAndView(announcement, "announcement.commit.error");
-		}
-
-		return res;
-	}
 
 	// Ancillary methods --------------------------------------------------
 
