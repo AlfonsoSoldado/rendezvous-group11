@@ -149,9 +149,6 @@ public class RendezvousUserController extends AbstractController {
 				}
 				res = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
-				System.out.println(oops.getCause());
-				System.out.println(oops.getMessage());
-				System.out.println(oops.getStackTrace());
 				res = this.createEditModelAndView(rendezvous, "rendezvous.commit.error");
 			}
 		return res;
@@ -167,7 +164,6 @@ public class RendezvousUserController extends AbstractController {
 				this.rendezvousService.delete(rendezvous);
 			res = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
-			System.out.println(oops.getMessage());
 			res = this.createEditModelAndView(rendezvous, "rendezvous.commit.error");
 		}
 		return res;

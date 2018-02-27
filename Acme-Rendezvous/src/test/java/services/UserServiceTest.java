@@ -68,8 +68,6 @@ public class UserServiceTest extends AbstractTest {
 
 		Assert.isTrue(this.userService.findByPrincipal().getUserAccount().getUsername().equals("user1"));
 		Assert.isTrue(this.userService.findCreator(27).getId() == 25);
-		//TODO
-		//Assert.isTrue(this.userService.findAttendants(28).contains(this.userService.findOne(26)));
 
 	}
 }

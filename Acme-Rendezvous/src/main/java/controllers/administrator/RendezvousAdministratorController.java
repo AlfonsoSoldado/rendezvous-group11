@@ -47,10 +47,7 @@ public class RendezvousAdministratorController extends AbstractController {
 		@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 		public ModelAndView delete(@Valid final Rendezvous rendezvous,
 				final BindingResult binding) {
-			if (binding.hasErrors()) {
-			
-				System.out.println(binding.getAllErrors());
-			}
+
 			ModelAndView res;
 			try {
 				this.rendezvousService.delete(rendezvous);

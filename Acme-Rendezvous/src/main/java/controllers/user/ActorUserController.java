@@ -45,7 +45,6 @@ public class ActorUserController extends AbstractController {
 	public ModelAndView save(@Valid User user, final BindingResult binding) {
 		ModelAndView res;
 		user = this.userService.reconstruct(user, binding);
-		System.out.println(binding.getFieldError());
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(user, "actor.params.error");
 		else
@@ -53,9 +52,6 @@ public class ActorUserController extends AbstractController {
 				this.userService.save(user);
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
-				System.out.println(oops.getMessage());
-				System.out.println(oops.getCause());
-				System.out.println(oops.getStackTrace());
 				res = this.createEditModelAndView(user, "actor.commit.error");
 			}
 		return res;
