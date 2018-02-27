@@ -129,6 +129,12 @@ public class UserService {
 		res = this.userRepository.findUserByQuestion(questionId);
 		return res;
 	}
+	
+	public User findUserByComment(final int commentId) {
+		User res;
+		res = this.userRepository.findUserByComment(commentId);
+		return res;
+	}
 
 	public boolean checkUserLogged() {
 		boolean result = false;

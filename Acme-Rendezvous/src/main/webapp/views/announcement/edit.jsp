@@ -48,8 +48,8 @@
 		<form:hidden path="momentMade" />
 		<form:hidden path="rendezvous" />
 
-		<acme:textbox code="announcement.title" path="title" />
-		<acme:textbox code="announcement.description" path="description" />
+		<acme:textbox code="announcement.title" path="title" readonly="true"/>
+		<acme:textbox code="announcement.description" path="description" readonly="true"/>
 
 		<!-- Buttons -->
 
