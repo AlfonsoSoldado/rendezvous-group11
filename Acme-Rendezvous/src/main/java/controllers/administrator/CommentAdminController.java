@@ -1,3 +1,4 @@
+
 package controllers.administrator;
 
 import java.util.Collection;
@@ -12,35 +13,40 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import controllers.AbstractController;
-import domain.Comment;
 import services.CommentService;
 import services.RendezvousService;
+import controllers.AbstractController;
+import domain.Comment;
+import domain.Rendezvous;
 
 @Controller
 @RequestMapping("/comment/administrator")
 public class CommentAdminController extends AbstractController {
-	
+
 	@Autowired
-	private CommentService commentService;
-	
+	private CommentService		commentService;
+
 	@Autowired
-	private RendezvousService rendezvousService;
-	
+	private RendezvousService	rendezvousService;
+
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam final int rendezvousId) {
 		ModelAndView result;
-		if (this.rendezvousService.findOne(rendezvousId)==null) {
+		final Rendezvous rdv = this.rendezvousService.findOne(rendezvousId);
+		if (rdv.getDeleted() == false) {
+			if (this.rendezvousService.findOne(rendezvousId) == null)
+				result = new ModelAndView("redirect:../../");
+			else {
+				Collection<Comment> comment;
+
+				comment = this.commentService.findCommentsByRendezvous(rendezvousId);
+				result = new ModelAndView("comment/list");
+				result.addObject("comment", comment);
+				result.addObject("requestURI", "comment/administrator/list.do");
+			}
+		} else
 			result = new ModelAndView("redirect:../../");
-
-		}else {
-		Collection<Comment> comment;
-
-		comment = commentService.findCommentsByRendezvous(rendezvousId);
-		result = new ModelAndView("comment/list");
-		result.addObject("comment", comment);
-		result.addObject("requestURI", "comment/administrator/list.do");
-		}
 		return result;
 	}
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)

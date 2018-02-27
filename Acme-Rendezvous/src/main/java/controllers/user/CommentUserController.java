@@ -1,3 +1,4 @@
+
 package controllers.user;
 
 import java.util.Collection;
@@ -25,10 +26,11 @@ public class CommentUserController extends AbstractController {
 	// Services -------------------------------------------------------------
 
 	@Autowired
-	private CommentService commentService;
+	private CommentService		commentService;
 
 	@Autowired
-	private RendezvousService rendezvousService;
+	private RendezvousService	rendezvousService;
+
 
 	// Constructors ---------------------------------------------------------
 
@@ -41,17 +43,16 @@ public class CommentUserController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam final int rendezvousId) {
 		ModelAndView result;
-		if (this.rendezvousService.findOne(rendezvousId)==null) {
+		if (this.rendezvousService.findOne(rendezvousId) == null)
 			result = new ModelAndView("redirect:../../");
+		else {
+			Collection<Comment> comment;
 
-		}else {
-		Collection<Comment> comment;
+			comment = this.commentService.findCommentsByRendezvous(rendezvousId);
 
-		comment = commentService.findCommentsByRendezvous(rendezvousId);
-
-		result = new ModelAndView("comment/list");
-		result.addObject("comment", comment);
-		result.addObject("requestURI", "comment/user/list.do");
+			result = new ModelAndView("comment/list");
+			result.addObject("comment", comment);
+			result.addObject("requestURI", "comment/user/list.do");
 		}
 		return result;
 	}
@@ -61,7 +62,7 @@ public class CommentUserController extends AbstractController {
 		ModelAndView result;
 		Collection<Comment> comment;
 
-		Comment c = commentService.findOne(commentId);
+		final Comment c = this.commentService.findOne(commentId);
 
 		comment = c.getReplies();
 
@@ -78,12 +79,11 @@ public class CommentUserController extends AbstractController {
 	public ModelAndView create(@RequestParam final int rendezvousId) {
 		ModelAndView res;
 
-		if (this.rendezvousService.findOne(rendezvousId) == null) {
+		if (this.rendezvousService.findOne(rendezvousId) == null)
 			res = new ModelAndView("redirect:../../");
-
-		} else {
-			Comment comment = commentService.create();
-			comment.setRendezvous(rendezvousService.findOne(rendezvousId));
+		else {
+			final Comment comment = this.commentService.create();
+			comment.setRendezvous(this.rendezvousService.findOne(rendezvousId));
 			res = this.createEditModelAndView(comment);
 		}
 		return res;
@@ -93,24 +93,22 @@ public class CommentUserController extends AbstractController {
 	@RequestMapping(value = "/createReply", method = RequestMethod.GET)
 	public ModelAndView createReply(@RequestParam final int commentId) {
 		ModelAndView res;
-		if (this.commentService.findOne(commentId) == null) {
+		if (this.commentService.findOne(commentId) == null)
 			res = new ModelAndView("redirect:../../");
-
-		} else {
+		else {
 			Comment result;
 
 			Comment comment;
 
-			comment = commentService.findOne(commentId);
+			comment = this.commentService.findOne(commentId);
 
-			result = commentService.create();
+			result = this.commentService.create();
 			result.setParent(comment);
 			result.setRendezvous(comment.getRendezvous());
 			res = this.createEditModelAndView(result);
 		}
 		return res;
 	}
-
 	// Editing ---------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -134,17 +132,17 @@ public class CommentUserController extends AbstractController {
 			res = this.createEditModelAndView(comment, "comment.params.error");
 		else
 			try {
-				Comment save = this.commentService.create();
+				final Comment save = this.commentService.create();
 				save.setText(comment.getText());
 				save.setPicture(comment.getPicture());
 				Comment padre = null;
 				if (comment.getParent() != null) {
-					int id = comment.getParent().getId();
+					final int id = comment.getParent().getId();
 					padre = this.commentService.findOne(id);
 					save.setParent(padre);
 				}
 
-				Rendezvous rendezvous = this.rendezvousService.findOne(comment.getRendezvous().getId());
+				final Rendezvous rendezvous = this.rendezvousService.findOne(comment.getRendezvous().getId());
 				save.setRendezvous(rendezvous);
 				this.commentService.save(save);
 
@@ -156,8 +154,6 @@ public class CommentUserController extends AbstractController {
 	}
 
 	// Deleting --------------------------------------------------------------
-
-
 
 	// Ancillary methods --------------------------------------------------
 
