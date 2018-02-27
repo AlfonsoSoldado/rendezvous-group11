@@ -41,7 +41,17 @@
 	<acme:textbox code="actor.postalAddress" path="user.postalAddress" />
 
 	<acme:date code="actor.dateBorn" path="user.dateBorn"  placeholder="dd/MM/yyyy"/>
-
+	
+	<jstl:if test="${userForm.user.id == 0}">
+   		<form:label path="terms">
+		<spring:message code="actor.legal.agree"/><a href="misc/legal.do"><spring:message code="actor.legal.info"/></a>
+		</form:label>
+		<form:checkbox id="terms" path="terms" />
+		<form:errors cssClass="error" path="terms"/>
+   </jstl:if>
+	
+	<br />
+	
 	<acme:submit name="save" code="actor.submit" />
 	<acme:cancel url="/" code="answer.cancel" />
 	
