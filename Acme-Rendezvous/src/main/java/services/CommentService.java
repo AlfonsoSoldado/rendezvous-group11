@@ -96,6 +96,7 @@ public class CommentService {
 		Assert.notNull(comment);
 		result= this.commentRepository.findOne(comment.getId());
 		result.setText("this comment has been deleted, este comentario ha sido borrado");
+		result.setPicture(null);
 		res = this.commentRepository.saveAndFlush(result);
 		
 		return res;
