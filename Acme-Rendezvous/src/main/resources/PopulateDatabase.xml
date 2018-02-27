@@ -25,10 +25,10 @@
 	</bean>
 
 	<bean id="admin1" class="domain.Administrator">
-		<property name="name" value="ffffff" />
-		<property name="surname" value="López Vázquez" />
-		<property name="email" value="javilv@gmail.com" />
-		<property name="phoneNumber" value="6664323536" />
+		<property name="name" value="Admin" />
+		<property name="surname" value="Admin" />
+		<property name="email" value="admin@admin.com" />
+		<property name="phoneNumber" value="666666666" />
 		<property name="postalAddress" value="41015" />
 		<property name="userAccount" ref="userAccount1" />
 	</bean>
