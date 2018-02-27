@@ -185,6 +185,8 @@ public class RendezvousUserController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Rendezvous rendezvous, final String message) {
 		ModelAndView result;
 		final Collection<Boolean> finalModes = new ArrayList<>();
+		Collection<Rendezvous> similar = new ArrayList<>();
+		similar = rendezvousService.findAll();
 
 		finalModes.add(false);
 		finalModes.add(true);
@@ -192,6 +194,7 @@ public class RendezvousUserController extends AbstractController {
 		result = new ModelAndView("rendezvous/edit");
 		result.addObject("finalModes", finalModes);
 		result.addObject("rendezvous", rendezvous);
+		result.addObject("similar", similar);
 		result.addObject("message", message);
 		result.addObject("requestUri", "rendezvous/edit.do");
 
