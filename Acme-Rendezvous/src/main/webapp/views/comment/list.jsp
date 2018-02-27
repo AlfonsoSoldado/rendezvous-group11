@@ -48,5 +48,7 @@
 	
 </display:table>
 </security:authorize>
+
+<acme:links url="rendezvous/list.do" code="comment.back" />
 	
 	
