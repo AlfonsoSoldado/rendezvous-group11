@@ -27,7 +27,7 @@ public class AnswerUserController extends AbstractController {
 	
 	@Autowired
 	private QuestionService questionService;
-
+	
 	// Constructors ---------------------------------------------------------
 
 	public AnswerUserController() {
@@ -45,6 +45,7 @@ public class AnswerUserController extends AbstractController {
 		answer = this.answerService.create();
 		question = questionService.findOne(questionId);
 		answer.setQuestion(question);
+		
 		res = this.createEditModelAndView(answer);
 
 		return res;
@@ -69,7 +70,6 @@ public class AnswerUserController extends AbstractController {
 	public ModelAndView save(@Valid Answer answer,
 			final BindingResult binding) {
 		ModelAndView res;
-//		answer = this.answerService.reconstruct(answer, binding);
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(answer, "rendezvous.params.error");
 		else

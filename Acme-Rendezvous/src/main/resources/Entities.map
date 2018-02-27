@@ -1,5 +1,13 @@
 #./src/main/resources/Entities.map
+<<<<<<< HEAD
 #Tue Feb 27 14:26:03 CET 2018
+=======
+<<<<<<< HEAD
+#Tue Feb 27 14:19:22 CET 2018
+=======
+#Tue Feb 27 14:12:17 CET 2018
+>>>>>>> 049413e3aacdb53b80e5d341e2afd96ea9e23ef3
+>>>>>>> ea71b147d3295e8244c9fdd71f3bb33b09040888
 Announcement2=32
 Announcement1=31
 admin1=22
