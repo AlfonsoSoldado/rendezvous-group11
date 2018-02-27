@@ -71,9 +71,6 @@ public class RendezvousService {
 		userService.checkAuthority();
 		Assert.notNull(rendezvous);
 		Rendezvous res;
-		Collection<Rendezvous> similar;
-		similar = rendezvous.getSimilar();
-		System.out.println(similar);
 		res = this.rendezvousRepository.save(rendezvous);
 		return res;
 	}

@@ -31,7 +31,5 @@ public class ActorServiceTest extends AbstractTest {
 		Assert.isTrue(this.actorService.findAll().contains(actor));
 		Assert.notNull(this.actorService.findOne(actor.getId()));
 		Assert.isTrue(this.actorService.isAuthenticated() == true);
-		//TODO
-		//Assert.notNull(this.actorService.findByUsername("admin"));
 	}
 }
