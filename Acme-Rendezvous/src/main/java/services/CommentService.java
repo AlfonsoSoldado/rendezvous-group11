@@ -78,6 +78,13 @@ public class CommentService {
 		return result;
 	}
 	
+	public void delete(final Comment comment) {
+		Assert.notNull(comment);
+		Assert.isTrue(comment.getId() != 0);
+		System.out.println(comment);
+		this.commentRepository.delete(comment);
+	}
+	
 	// Other business method --------------------------------------------------
 
 	private void updatePadre(Comment padre, Comment hijo) {
@@ -88,13 +95,6 @@ public class CommentService {
 		replies.add(hijo);
 		padre.setReplies(replies);
 		this.commentRepository.saveAndFlush(padre);
-	}
-
-	public void delete(final Comment comment) {
-		Assert.notNull(comment);
-		Assert.isTrue(comment.getId() != 0);
-		System.out.println(comment);
-		this.commentRepository.delete(comment);
 	}
 
 	public Collection<Comment> findCommentsByRendezvous(int id) {
