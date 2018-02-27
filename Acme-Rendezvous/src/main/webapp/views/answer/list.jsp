@@ -18,7 +18,7 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="answer" requestURI="${requestUri}" id="row">
+	name="answer" requestURI="${requestURI}" id="row">
 	
 	<!-- Attributes -->
 	

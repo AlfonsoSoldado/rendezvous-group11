@@ -19,7 +19,7 @@
 
 <security:authorize access="hasRole('USER')">
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="comment" requestURI="${requestUri}" id="row">
+	name="comment" requestURI="${requestURI}" id="row">
 	
 	<display:column> <acme:links url="user/displayByComment.do?commentId=${row.id}" code="comment.user" /> </display:column>
 	<acme:column property="text" code="comment.text"/>

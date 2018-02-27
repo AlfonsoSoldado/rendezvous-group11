@@ -23,7 +23,7 @@
 <!-- Listing grid -->
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="user" requestURI="${requestUri}" id="row">
+	name="user" requestURI="${requestURI}" id="row">
 	
 	<!-- Attributes -->
 	
