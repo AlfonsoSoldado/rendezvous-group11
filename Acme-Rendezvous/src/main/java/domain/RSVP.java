@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -29,6 +30,7 @@ public class RSVP extends DomainEntity {
 
 	private Rendezvous rendezvous;
 	
+	@Valid
 	@ManyToOne(optional = false)
 	public Rendezvous getRendezvous() {
 		return rendezvous;

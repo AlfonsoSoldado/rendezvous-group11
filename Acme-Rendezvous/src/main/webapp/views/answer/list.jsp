@@ -18,10 +18,11 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="answer" requestURI="${requestUri}" id="row">
+	name="answer" requestURI="${requestURI}" id="row">
 	
 	<!-- Attributes -->
 	
+	<display:column> <acme:links url="user/displayByAnswer.do?answerId=${row.id}" code="comment.user" /> </display:column>
 	<acme:column property="text" code="answer.text"/>
 	
 </display:table>

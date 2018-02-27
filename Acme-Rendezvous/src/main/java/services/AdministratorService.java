@@ -174,6 +174,7 @@ public class AdministratorService {
 		return e;
 	}
 	
+<<<<<<< HEAD
 	public void checkAuthority() {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
@@ -183,5 +184,19 @@ public class AdministratorService {
 		Authority res = new Authority();
 		res.setAuthority("ADMIN");
 		Assert.isTrue(authority.contains(res));
+=======
+	public boolean checkAdminLogged() {
+		boolean result = false;
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+		final Collection<Authority> authority = userAccount.getAuthorities();
+		Assert.notNull(authority);
+		final Authority res = new Authority();
+		res.setAuthority("ADMIN");
+		if (authority.contains(res))
+			result = true;
+		return result;
+>>>>>>> 746d2927da7c367ddaf970fa9bdf575f505ca110
 	}
 }

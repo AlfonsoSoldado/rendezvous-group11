@@ -94,6 +94,12 @@
 
 			</list>
 		</property>
+		<property name="answer">
+			<list>
+				<ref bean="answer1" />
+
+			</list>
+		</property>
 	</bean>
 
 	<bean id="user2" class="domain.User">
@@ -127,6 +133,12 @@
 		<property name="question">
 			<list>
 				<ref bean="question2" />
+
+			</list>
+		</property>
+		<property name="answer">
+			<list>
+				<ref bean="answer2" />
 
 			</list>
 		</property>

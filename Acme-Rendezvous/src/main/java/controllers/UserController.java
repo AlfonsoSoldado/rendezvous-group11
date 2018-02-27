@@ -80,6 +80,33 @@ public class UserController extends AbstractController {
 			result = new ModelAndView("redirect:../");
 		return result;
 	}
+	
+	@RequestMapping(value = "/displayByComment", method = RequestMethod.GET)
+	public ModelAndView displayByComment(@RequestParam final int commentId) {
+		ModelAndView result;
+		
+		User user;
+		user = userService.findUserByComment(commentId);
+		
+		result = new ModelAndView("user/displayByComment");
+		result.addObject("user", user);
+		result.addObject("requestURI", "user/displayByComment.do");
+		return result;
+	}
+	
+	@RequestMapping(value = "/displayByAnswer", method = RequestMethod.GET)
+	public ModelAndView displayByAnswer(@RequestParam final int answerId) {
+		ModelAndView result;
+		
+		User user;
+		user = userService.findUserByAnswer(answerId);
+		
+		result = new ModelAndView("user/displayByAnswer");
+		result.addObject("user", user);
+		result.addObject("requestURI", "user/displayByAnswer.do");
+		return result;
+	}
+	
 	@RequestMapping(value = "/listCreator", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam final int rendezvousId) {
 		ModelAndView result;

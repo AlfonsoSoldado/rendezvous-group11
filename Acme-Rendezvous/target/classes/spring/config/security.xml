@@ -64,6 +64,9 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/misc/legal.do"
 			access="permitAll" />
+		<security:intercept-url pattern="/user/displayByAnswer.do"
+			access="permitAll" />
+			
 
 
 
@@ -84,6 +87,8 @@
 		<security:intercept-url pattern="/answer/user/**"
 			access="hasRole('USER')" />
 		<security:intercept-url pattern="/comment/user/**"
+			access="hasRole('USER')" />
+		<security:intercept-url pattern="/user/displayByComment.do"
 			access="hasRole('USER')" />
 
 		<security:intercept-url pattern="/administrator/display.do"
