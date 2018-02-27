@@ -105,7 +105,7 @@ public class Rendezvous extends DomainEntity {
 	private Collection<Announcement>	announcement;
 	private Collection<Rendezvous>		similar;
 
-
+	@Valid
 	@OneToMany
 	public Collection<Comment> getComment() {
 		return this.comment;
@@ -114,6 +114,7 @@ public class Rendezvous extends DomainEntity {
 		this.comment = comment;
 	}
 
+	@Valid
 	@ManyToMany
 	public Collection<User> getAttendant() {
 		return this.attendant;
