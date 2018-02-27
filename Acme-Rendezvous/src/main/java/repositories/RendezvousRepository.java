@@ -26,7 +26,11 @@ public interface RendezvousRepository extends JpaRepository<Rendezvous, Integer>
 
 	@Query("select r from Question q join q.rendezvous r where q.id=?1")
 	Rendezvous findRendezvousByQuestionId(int questionId);
-	
+
 	@Query("select r from Rendezvous r where r.adultOnly=true")
 	Collection<Rendezvous> findRendezvousAdultOnly();
+
+	@Query("select r from Rendezvous r where r.deleted = false and r not in (select m from Rendezvous m join m.attendant e where e.id=?1)")
+	Collection<Rendezvous> findNotYetAttendantByUserId(int userId);
+
 }

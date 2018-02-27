@@ -34,9 +34,10 @@ public class QuestionService {
 
 	@Autowired
 	private UserService			userService;
-	
+
 	@Autowired
-	private Validator				validator;
+	private Validator			validator;
+
 
 	// Constructor ------------------------------------------------------------
 
@@ -47,7 +48,7 @@ public class QuestionService {
 	// Simple CRUD methods ----------------------------------------------------
 
 	public Question create() {
-		userService.checkAuthority();
+		this.userService.checkAuthority();
 		final Question res = new Question();
 		res.setAnswer(new ArrayList<Answer>());
 		res.setText("Question text");
@@ -69,12 +70,12 @@ public class QuestionService {
 	}
 
 	public Question save(final Question question) {
-		userService.checkAuthority();
+		this.userService.checkAuthority();
 		Assert.notNull(question);
-		if(question.getId() != 0){
-			Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
+		if (question.getId() != 0) {
+			final Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
 			User user;
-			user = userService.findByPrincipal();
+			user = this.userService.findByPrincipal();
 			rendezvouses.addAll(user.getRendezvous());
 			Assert.isTrue(rendezvouses.contains(question.getRendezvous()));
 		}
@@ -91,29 +92,36 @@ public class QuestionService {
 		Collection<Answer> answers;
 		final int questionId = question.getId();
 		answers = this.answerService.findAnswersByQuestion(questionId);
-		for (final Answer res : answers){
+		for (final Answer res : answers)
 			this.answerService.delete(res);
-		}
-		
+
 		User user;
-		user = userService.findUserByQuestion(question.getId());
-		Collection<Question> questions = new ArrayList<Question>();
+		user = this.userService.findUserByQuestion(question.getId());
+		final Collection<Question> questions = new ArrayList<Question>();
 		questions.addAll(user.getQuestion());
 		questions.remove(question);
 		user.setQuestion(questions);
 
 		this.questionRepository.delete(question);
 	}
-	
+
 	// Other business method --------------------------------------------------
-	
+
 	public Collection<Question> findQuestionByRendezvous(final int rendezvousId) {
 		Collection<Question> result;
 		result = this.questionRepository.findQuestionByRendezvous(rendezvousId);
-		Assert.notNull(result);
+
 		return result;
 	}
-	
+
+	public Collection<Question> findQuestionAnswered(final int userId, final int rendezvousId) {
+
+		Collection<Question> result;
+		result = this.questionRepository.findQuestionAnswered(userId, rendezvousId);
+
+		return result;
+	}
+
 	public Question reconstruct(final Question question, final BindingResult binding) {
 		Question res;
 		Question questionFinal;

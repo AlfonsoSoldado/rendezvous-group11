@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.Collection;
@@ -18,12 +19,16 @@ public class RSVPService {
 	// Managed repository -----------------------------------------------------
 
 	@Autowired
-	private RSVPRepository rsvpRepository;
+	private RSVPRepository	rsvpRepository;
 
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private UserService userService;
+	private UserService		userService;
+
+	@Autowired
+	private QuestionService	questionService;
+
 
 	// Constructor ------------------------------------------------------------
 
@@ -34,7 +39,7 @@ public class RSVPService {
 	// Simple CRUD methods ----------------------------------------------------
 
 	public RSVP create() {
-		userService.checkAuthority();
+		this.userService.checkAuthority();
 		RSVP result;
 		result = new RSVP();
 		return result;
@@ -54,7 +59,7 @@ public class RSVPService {
 	}
 
 	public RSVP save(final RSVP rsvp) {
-		userService.checkAuthority();
+		this.userService.checkAuthority();
 		RSVP result = rsvp;
 		Assert.notNull(rsvp);
 		Assert.isTrue(rsvp.getConfirmed() == true);
@@ -67,13 +72,25 @@ public class RSVPService {
 		Assert.isTrue(rsvp.getId() != 0);
 		this.rsvpRepository.delete(rsvp);
 	}
-	
+
 	// Other business method --------------------------------------------------
 
-	public RSVP findRSVPByUserAndRendezvous(final int userId,
-			final int rendezvousId) {
-		final RSVP result = this.rsvpRepository.findRSVPByUserAndRendezvous(
-				userId, rendezvousId);
+	public RSVP findRSVPByUserAndRendezvous(final int userId, final int rendezvousId) {
+		final RSVP result = this.rsvpRepository.findRSVPByUserAndRendezvous(userId, rendezvousId);
 		return result;
+	}
+
+	public boolean questionsAnswered(final int rendezvousId, final int userId) {
+
+		Boolean res = false;
+
+		final Integer q = this.questionService.findQuestionByRendezvous(rendezvousId).size();
+		final Integer qa = this.questionService.findQuestionAnswered(userId, rendezvousId).size();
+
+		if (q == qa)
+			res = true;
+
+		return res;
+
 	}
 }

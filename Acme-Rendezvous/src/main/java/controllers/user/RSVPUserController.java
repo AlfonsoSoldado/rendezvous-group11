@@ -50,6 +50,7 @@ public class RSVPUserController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
+
 		RSVP rsvp;
 
 		rsvp = this.rsvpService.create();
@@ -71,21 +72,25 @@ public class RSVPUserController extends AbstractController {
 				final RSVP saved = this.rsvpService.save(r);
 				final User u = this.userService.findByPrincipal();
 
-				if (saved.getRendezvous().getAdultOnly() == true)
-					Assert.isTrue(this.userService.is18(u));
+				if (!(this.rsvpService.questionsAnswered(saved.getRendezvous().getId(), u.getId())))
+					res = this.createModelAndView(r, "commit.error.question");
+				else {
+					if (saved.getRendezvous().getAdultOnly() == true)
+						Assert.isTrue(this.userService.is18(u));
 
-				final Collection<RSVP> rsvps = u.getRsvp();
-				rsvps.add(saved);
-				u.setRsvp(rsvps);
-				this.userService.save(u);
-				final Rendezvous rendezvous = saved.getRendezvous();
-				final Collection<User> att = rendezvous.getAttendant();
-				att.add(u);
-				rendezvous.setAttendant(att);
+					final Collection<RSVP> rsvps = u.getRsvp();
+					rsvps.add(saved);
+					u.setRsvp(rsvps);
+					this.userService.save(u);
+					final Rendezvous rendezvous = saved.getRendezvous();
+					final Collection<User> att = rendezvous.getAttendant();
+					att.add(u);
+					rendezvous.setAttendant(att);
 
-				this.rendezvousService.save(rendezvous);
+					this.rendezvousService.save(rendezvous);
 
-				res = new ModelAndView("redirect:../../rendezvous/user/listAttendRendezvous.do");
+					res = new ModelAndView("redirect:../../rendezvous/user/listAttendRendezvous.do");
+				}
 			} catch (final Throwable oops) {
 				res = this.createModelAndView(r, "commit.error");
 			}
@@ -141,10 +146,7 @@ public class RSVPUserController extends AbstractController {
 		confirmed.add(t);
 
 		final User user = this.userService.findByPrincipal();
-		final Collection<Rendezvous> rendezvouses = this.rendezvousService.findAll();
-		final Collection<Rendezvous> rendezvousesSol = this.rendezvousService.findByAttendantId(user.getId());
-
-		rendezvouses.removeAll(rendezvousesSol);
+		final Collection<Rendezvous> rendezvouses = this.rendezvousService.findNotYetAttendantByUserId(user.getId());
 
 		result = new ModelAndView("RSVP/user/create");
 		result.addObject("RSVP", rsvp);

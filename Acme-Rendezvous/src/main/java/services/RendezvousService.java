@@ -26,15 +26,16 @@ public class RendezvousService {
 
 	@Autowired
 	private RendezvousRepository	rendezvousRepository;
-	
+
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private UserService userService;
+	private UserService				userService;
 
 	@Autowired
 	private Validator				validator;
-	
+
+
 	// Constructor ------------------------------------------------------------
 
 	public RendezvousService() {
@@ -44,7 +45,7 @@ public class RendezvousService {
 	// Simple CRUD methods ----------------------------------------------------
 
 	public Rendezvous create() {
-		userService.checkAuthority();
+		this.userService.checkAuthority();
 		final Rendezvous res = new Rendezvous();
 		res.setComment(new ArrayList<Comment>());
 		res.setAttendant(new ArrayList<User>());
@@ -68,7 +69,7 @@ public class RendezvousService {
 	}
 
 	public Rendezvous save(final Rendezvous rendezvous) {
-		userService.checkAuthority();
+		this.userService.checkAuthority();
 		Assert.notNull(rendezvous);
 		Rendezvous res;
 		res = this.rendezvousRepository.save(rendezvous);
@@ -83,7 +84,7 @@ public class RendezvousService {
 		rendezvous.setDeleted(true);
 		this.rendezvousRepository.save(rendezvous);
 	}
-	
+
 	// Other business method --------------------------------------------------
 
 	public Rendezvous findRendezvousByComment(final int commentId) {
@@ -109,10 +110,17 @@ public class RendezvousService {
 		res = this.rendezvousRepository.findRendezvousByQuestionId(questionId);
 		return res;
 	}
-	
+
 	public Collection<Rendezvous> findRendezvousAdultOnly() {
 		Collection<Rendezvous> res;
 		res = this.rendezvousRepository.findRendezvousAdultOnly();
+		return res;
+	}
+
+	public Collection<Rendezvous> findNotYetAttendantByUserId(final int userId) {
+
+		Collection<Rendezvous> res;
+		res = this.rendezvousRepository.findNotYetAttendantByUserId(userId);
 		return res;
 	}
 
