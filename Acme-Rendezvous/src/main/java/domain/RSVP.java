@@ -4,10 +4,13 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(indexes = { @Index(columnList = "rendezvous_id") })
 public class RSVP extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
