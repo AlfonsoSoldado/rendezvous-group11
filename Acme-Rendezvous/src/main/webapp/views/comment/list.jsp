@@ -40,7 +40,9 @@
 	
 	<acme:column property="text" code="comment.text"/>
 	<acme:column property="momentMade" code="comment.momentMade"/>
-	<acme:column property="picture" code="comment.picture"/>
+	
+	<spring:message code="comment.picture" var="picture"/>
+	<display:column><img class="imagenesComment" src="${row.picture}"></display:column>
 	
 	<display:column> <acme:links url="comment/administrator/edit.do?commentId=${row.id}" code="comment.delete" /> </display:column>
 	

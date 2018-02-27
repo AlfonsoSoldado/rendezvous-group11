@@ -14,6 +14,7 @@ import org.springframework.util.Assert;
 import repositories.CommentRepository;
 import domain.Comment;
 import domain.Rendezvous;
+import domain.User;
 
 @Service
 @Transactional
@@ -78,6 +79,8 @@ public class CommentService {
 			this.updatePadre(comment.getParent(), result);
 		}
 		this.updateRendezvous(comment.getRendezvous(), result);
+		this.updateUser(result);
+
 		return result;
 	}
 	
@@ -112,6 +115,20 @@ public class CommentService {
 		padre.setReplies(replies);
 		this.commentRepository.saveAndFlush(padre);
 	}
+	
+	private void updateUser(Comment comment) {
+		User user;
+		user = userService.findByPrincipal();
+		
+		Collection<Comment> comments = new ArrayList<Comment>();
+		comments = user.getComment();
+		
+		comments.add(comment);
+		user.setComment(comments);
+		
+		userService.save(user);
+	}
+
 
 	public Collection<Comment> findCommentsByRendezvous(int id) {
 		Collection<Comment> res = new ArrayList<Comment>();

@@ -41,8 +41,8 @@
 		<form:hidden path="rendezvous"/>
 		<form:hidden path="parent"/>
 		<form:hidden path="id"/>
-		<acme:textbox code="comment.text" path="text" />
-		<acme:textbox code="comment.picture" path="picture" />
+		<acme:textbox code="comment.text" path="text" readonly="true"/>
+		<acme:textbox code="comment.picture" path="picture" readonly="true"/>
 		
 		<acme:cancel url="comment/list.do" code="comment.cancel" />
 		<acme:delete confirmationCode="comment.confirmationCode" buttonCode="comment.delete" id="${comment.id }" />
