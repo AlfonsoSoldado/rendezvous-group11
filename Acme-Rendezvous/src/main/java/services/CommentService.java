@@ -71,8 +71,8 @@ public class CommentService {
 			comment.setMomentMade(momentMade);
 		}
 		result = this.commentRepository.saveAndFlush(comment);
-		if (comment.getPadre() != null) {
-			this.updatePadre(comment.getPadre(), result);
+		if (comment.getParent() != null) {
+			this.updatePadre(comment.getParent(), result);
 		}
 		this.updateRendezvous(comment.getRendezvous(), result);
 		return result;
