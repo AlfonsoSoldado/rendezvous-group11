@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -61,6 +62,7 @@ public class Comment extends DomainEntity {
 	private Comment parent;
 	private Rendezvous rendezvous;
 
+	@Valid
 	@OneToMany
 	public Collection<Comment> getReplies() {
 		return replies;
@@ -70,6 +72,7 @@ public class Comment extends DomainEntity {
 		this.replies = replies;
 	}
 
+	@Valid
 	@ManyToOne(optional = true)
 	public Comment getParent() {
 		return parent;
@@ -78,6 +81,8 @@ public class Comment extends DomainEntity {
 	public void setParent(Comment parent) {
 		this.parent = parent;
 	}
+	
+	@Valid
 	@ManyToOne(optional=false)
 	public Rendezvous getRendezvous() {
 		return rendezvous;

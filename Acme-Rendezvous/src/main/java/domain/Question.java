@@ -10,6 +10,7 @@ import javax.persistence.Index;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -36,6 +37,7 @@ public class Question extends DomainEntity {
 	private Collection<Answer> answer;
 	private Rendezvous rendezvous;
 	
+	@Valid
 	@ManyToOne(optional=true)
 	public Rendezvous getRendezvous() {
 		return rendezvous;
@@ -45,6 +47,7 @@ public class Question extends DomainEntity {
 		this.rendezvous = rendezvous;
 	}
 
+	@Valid
 	@OneToMany(mappedBy = "question")
 	public Collection<Answer> getAnswer() {
 		return answer;

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -33,6 +34,7 @@ public class Answer extends DomainEntity {
 
 	private Question question;
 	
+	@Valid
 	@ManyToOne(optional = true)
 	public Question getQuestion() {
 		return question;
