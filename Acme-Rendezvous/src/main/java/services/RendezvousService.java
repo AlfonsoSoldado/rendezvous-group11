@@ -57,7 +57,6 @@ public class RendezvousService {
 	public Collection<Rendezvous> findAll() {
 		Collection<Rendezvous> res;
 		res = this.rendezvousRepository.findAll();
-		Assert.notNull(res);
 		return res;
 	}
 
@@ -111,6 +110,12 @@ public class RendezvousService {
 	public Rendezvous findRendezvousByQuestionId(final int questionId) {
 		Rendezvous res;
 		res = this.rendezvousRepository.findRendezvousByQuestionId(questionId);
+		return res;
+	}
+	
+	public Collection<Rendezvous> findRendezvousAdultOnly() {
+		Collection<Rendezvous> res;
+		res = this.rendezvousRepository.findRendezvousAdultOnly();
 		return res;
 	}
 

@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
+import services.AdministratorService;
 import services.RendezvousService;
 import services.UserService;
+import domain.Actor;
 import domain.Rendezvous;
 import domain.User;
 
@@ -27,6 +30,12 @@ public class RendezvousController extends AbstractController {
 
 	@Autowired
 	private RendezvousService	rendezvousService;
+	
+	@Autowired
+	private AdministratorService	administratorService;
+	
+	@Autowired
+	private ActorService	actorService;
 
 
 	// Constructors ---------------------------------------------------------
@@ -41,8 +50,25 @@ public class RendezvousController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Rendezvous> rendezvous;
-
+		
 		rendezvous = this.rendezvousService.findAll();
+		try {
+			if(userService.checkUserLogged()){
+				User user;
+				user = userService.findByPrincipal();
+				if(userService.is18(user)){
+					rendezvous = this.rendezvousService.findAll();
+				} else {
+					rendezvous.removeAll(rendezvousService.findRendezvousAdultOnly());
+				}
+			}
+			if(administratorService.checkAdminLogged()){
+				rendezvous = this.rendezvousService.findAll();
+			}
+			
+		} catch (Exception e) {
+			rendezvous.removeAll(rendezvousService.findRendezvousAdultOnly());
+		}
 
 		result = new ModelAndView("rendezvous/list");
 		result.addObject("rendezvous", rendezvous);
