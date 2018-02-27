@@ -48,7 +48,7 @@
 		<display:column property="deleted" title="${deleted}" sortable="false" class="${row.deleted }"/>
 		
 		<spring:message code="rendezvous.picture" var="picture"/>
-	<display:column><img class="imagenesComment" src="${row.picture}"></display:column>
+		<display:column><img class="imagenesComment" src="${row.picture}"></display:column>
 		
 		<display:column>
 			<jstl:if test="${row.deleted == false}">

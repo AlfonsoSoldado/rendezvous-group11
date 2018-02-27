@@ -35,10 +35,29 @@
 
 	</security:authorize>
 	
-	<acme:column code="rendezvous.name" property="name" />
-	<acme:column code="rendezvous.description" property="description" />
-	<acme:column code="rendezvous.moment" property="moment" />
-	<acme:column code="rendezvous.finalMode" property="finalMode" />
+	<spring:message code="rendezvous.name" var="name" />
+	<display:column property="name" title="${name }"
+		class="${row.deleted }" />
+
+	<spring:message code="rendezvous.description" var="description" />
+	<display:column property="description" title="${description }"
+		class="${row.deleted }" />
+
+	<spring:message code="rendezvous.moment" var="moment" />
+	<display:column property="moment" title="${moment }"
+		class="${row.deleted }" />
+		
+	<spring:message code="rendezvous.gpsCoordinate.name" var="gpsCoordinates"/>
+	<display:column property="gpsCoordinate.namePlace" title="${gpsCoordinates }" class="${row.deleted }"/>
+
+	<spring:message code="rendezvous.finalMode" var="finalMode" />
+	<display:column property="finalMode" title="${finalMode }"
+		class="${row.deleted }" />
+
+	<spring:message code="rendezvous.deleted" var="deleted" />
+	<display:column property="deleted" title="${deleted}" sortable="false"
+		class="${row.deleted }" />
+	
 	<display:column><acme:links url="rendezvous/listSimilar.do?rendezvousId=${row.id }" code="rendezvous.similar" /></display:column>
 	<display:column> <acme:links url="announcement/list.do?rendezvousId=${row.id}" code="rendezvous.announcement" /> </display:column>
 	<display:column> <acme:links url="user/displayByRendezvous.do?rendezvousId=${row.id}" code="rendezvous.user" /> </display:column>

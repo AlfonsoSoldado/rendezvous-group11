@@ -39,6 +39,9 @@
 	<spring:message code="rendezvous.moment" var="moment" />
 	<display:column property="moment" title="${moment }"
 		class="${row.deleted }" />
+		
+	<spring:message code="rendezvous.gpsCoordinate.name" var="gpsCoordinates"/>
+	<display:column property="gpsCoordinate.namePlace" title="${gpsCoordinates }" class="${row.deleted }"/>
 
 	<spring:message code="rendezvous.finalMode" var="finalMode" />
 	<display:column property="finalMode" title="${finalMode }"
@@ -47,6 +50,9 @@
 	<spring:message code="rendezvous.deleted" var="deleted" />
 	<display:column property="deleted" title="${deleted}" sortable="false"
 		class="${row.deleted }" />
+
+	<spring:message code="rendezvous.picture" var="picture"/>
+	<display:column><img class="imagenesComment" src="${row.picture}"></display:column>
 
 	<display:column>
 		<jstl:if test="${row.deleted == false}">
