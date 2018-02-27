@@ -30,7 +30,12 @@ public class RendezvousController extends AbstractController {
 	
 	@Autowired
 	private AdministratorService	administratorService;
+<<<<<<< HEAD
 	
+=======
+
+
+>>>>>>> 5ef41aab2f4f58608362d27906fab7184f19d621
 	// Constructors ---------------------------------------------------------
 
 	public RendezvousController() {
