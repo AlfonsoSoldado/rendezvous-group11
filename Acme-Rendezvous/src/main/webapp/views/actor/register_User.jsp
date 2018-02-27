@@ -46,7 +46,7 @@
    		<form:label path="terms">
 		<spring:message code="actor.legal.agree"/><a href="misc/legal.do"><spring:message code="actor.legal.info"/></a>
 		</form:label>
-		<form:checkbox id="terms" path="terms" />
+		<input type="checkbox" id="terms" name="terms" required /> <spring:message code="actor.legal.agree" /><br>
 		<form:errors cssClass="error" path="terms"/>
    </jstl:if>
 	
@@ -57,3 +57,16 @@
 	
 	<br />
 </form:form>
+
+<script type="text/javascript">
+$('#form input[type=checkbox]').on('change invalid', function() {
+    var campotexto = $(this).get(0);
+
+    campotexto.setCustomValidity('');
+
+    if (!campotexto.validity.valid) {
+      campotexto.setCustomValidity('<jstl:out value="${check}"/>');  
+    }
+});
+
+</script>
