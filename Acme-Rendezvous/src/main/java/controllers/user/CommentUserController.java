@@ -93,7 +93,7 @@ public class CommentUserController extends AbstractController {
 	@RequestMapping(value = "/createReply", method = RequestMethod.GET)
 	public ModelAndView createReply(@RequestParam final int commentId) {
 		ModelAndView res;
-		if (this.rendezvousService.findOne(commentId) == null) {
+		if (this.commentService.findOne(commentId) == null) {
 			res = new ModelAndView("redirect:../../");
 
 		} else {
