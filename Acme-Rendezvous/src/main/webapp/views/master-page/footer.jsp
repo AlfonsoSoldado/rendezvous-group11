@@ -7,6 +7,10 @@
  * TDG Licence, a copy of which you may download from 
  * http://www.tdg-seville.info/License.html
  --%>
+ 
+ <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
 
@@ -16,4 +20,9 @@
 
 <hr />
 
-<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> Acme-Rendezvous Co., Inc.</b>
+<spring:message var="nameProject" code="legal.nameProject" />
+<spring:message var="cookies" code="cookies" />
+
+
+<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> <jstl:out value="${nameProject }"/> </b>
+<b> <jstl:out value="${cookies }" /> <a href="misc/legal.do"> <spring:message code="legal.nameProject"/></a> </b>

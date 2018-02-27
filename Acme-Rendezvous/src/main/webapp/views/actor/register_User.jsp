@@ -41,9 +41,32 @@
 	<acme:textbox code="actor.postalAddress" path="user.postalAddress" />
 
 	<acme:date code="actor.dateBorn" path="user.dateBorn"  placeholder="dd/MM/yyyy"/>
-
+	
+	<jstl:if test="${userForm.user.id == 0}">
+   		<form:label path="terms">
+		<spring:message code="actor.legal.agree"/><a href="misc/legal.do"><spring:message code="actor.legal.info"/></a>
+		</form:label>
+		<input type="checkbox" id="terms" name="terms" required /> <spring:message code="actor.legal.agree" /><br>
+		<form:errors cssClass="error" path="terms"/>
+   </jstl:if>
+	
+	<br />
+	
 	<acme:submit name="save" code="actor.submit" />
 	<acme:cancel url="/" code="answer.cancel" />
 	
 	<br />
 </form:form>
+
+<script type="text/javascript">
+$('#form input[type=checkbox]').on('change invalid', function() {
+    var campotexto = $(this).get(0);
+
+    campotexto.setCustomValidity('');
+
+    if (!campotexto.validity.valid) {
+      campotexto.setCustomValidity('<jstl:out value="${check}"/>');  
+    }
+});
+
+</script>

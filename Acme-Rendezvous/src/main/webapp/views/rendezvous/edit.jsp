@@ -42,6 +42,8 @@
 			items="${finalModes}" />
 		<acme:selectBoolean code="rendezvous.adultOnly" path="adultOnly"
 			items="${finalModes}" />
+			
+		<acme:select items="${similar }" itemLabel="similar" code="rendezvous.similar" path="similar"/>
 
 		<!-- Buttons -->
 		<acme:submit name="save" code="rendezvous.save" />

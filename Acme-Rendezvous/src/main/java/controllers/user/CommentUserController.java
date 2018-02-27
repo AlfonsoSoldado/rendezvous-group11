@@ -91,7 +91,7 @@ public class CommentUserController extends AbstractController {
 		comment = commentService.findOne(commentId);
 
 		result = commentService.create();
-		result.setPadre(comment);
+		result.setParent(comment);
 		result.setRendezvous(comment.getRendezvous());
 		res = this.createEditModelAndView(result);
 		return res;
@@ -124,10 +124,10 @@ public class CommentUserController extends AbstractController {
 				save.setText(comment.getText());
 				save.setPicture(comment.getPicture());
 				Comment padre = null;
-				if (comment.getPadre() != null) {
-					int id = comment.getPadre().getId();
+				if (comment.getParent() != null) {
+					int id = comment.getParent().getId();
 					padre = this.commentService.findOne(id);
-					save.setPadre(padre);
+					save.setParent(padre);
 				}
 
 				Rendezvous rendezvous = this.rendezvousService.findOne(comment

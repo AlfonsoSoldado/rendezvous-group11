@@ -58,7 +58,7 @@ public class Comment extends DomainEntity {
 	// Relationships -----------------------------------------------
 
 	private Collection<Comment> replies;
-	private Comment padre;
+	private Comment parent;
 	private Rendezvous rendezvous;
 
 	@OneToMany
@@ -71,12 +71,12 @@ public class Comment extends DomainEntity {
 	}
 
 	@ManyToOne(optional = true)
-	public Comment getPadre() {
-		return padre;
+	public Comment getParent() {
+		return parent;
 	}
 
-	public void setPadre(Comment comment) {
-		this.padre = comment;
+	public void setParent(Comment parent) {
+		this.parent = parent;
 	}
 	@ManyToOne(optional=false)
 	public Rendezvous getRendezvous() {

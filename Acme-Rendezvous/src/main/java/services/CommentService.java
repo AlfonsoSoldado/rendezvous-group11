@@ -71,11 +71,18 @@ public class CommentService {
 			comment.setMomentMade(momentMade);
 		}
 		result = this.commentRepository.saveAndFlush(comment);
-		if (comment.getPadre() != null) {
-			this.updatePadre(comment.getPadre(), result);
+		if (comment.getParent() != null) {
+			this.updatePadre(comment.getParent(), result);
 		}
 		this.updateRendezvous(comment.getRendezvous(), result);
 		return result;
+	}
+	
+	public void delete(final Comment comment) {
+		Assert.notNull(comment);
+		Assert.isTrue(comment.getId() != 0);
+		System.out.println(comment);
+		this.commentRepository.delete(comment);
 	}
 	
 	// Other business method --------------------------------------------------
@@ -88,13 +95,6 @@ public class CommentService {
 		replies.add(hijo);
 		padre.setReplies(replies);
 		this.commentRepository.saveAndFlush(padre);
-	}
-
-	public void delete(final Comment comment) {
-		Assert.notNull(comment);
-		Assert.isTrue(comment.getId() != 0);
-		System.out.println(comment);
-		this.commentRepository.delete(comment);
 	}
 
 	public Collection<Comment> findCommentsByRendezvous(int id) {

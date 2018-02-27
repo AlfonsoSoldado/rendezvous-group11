@@ -1,6 +1,7 @@
 package forms;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import domain.User;
 
@@ -33,6 +34,8 @@ public class UserForm {
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
+	
+	@NotNull
 	public Boolean getTerms() {
 		return terms;
 	}

@@ -73,6 +73,8 @@ public class RendezvousService {
 		userService.checkAuthority();
 		Assert.notNull(rendezvous);
 		Rendezvous res;
+		Collection<Rendezvous> similar;
+		similar = rendezvous.getSimilar();
 		try {
 			res = this.rendezvousRepository.saveAndFlush(rendezvous);
 			return res;
@@ -80,7 +82,10 @@ public class RendezvousService {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		
 		res = this.rendezvousRepository.save(rendezvous);
+		for (final Rendezvous r : similar)
+			r.getSimilar().add(rendezvous);
 		return res;
 	}
 
@@ -125,15 +130,12 @@ public class RendezvousService {
 		if (rendezvous.getId() == 0) {
 			Collection<Comment> comment;
 			Collection<User> attendant;
-			Collection<Rendezvous> similar;
 			Collection<Announcement> announcement;
 			announcement = new ArrayList<Announcement>();
-			similar = new ArrayList<Rendezvous>();
 			attendant = new ArrayList<User>();
 			comment = new ArrayList<Comment>();
 			rendezvous.setAttendant(attendant);
 			rendezvous.setAnnouncement(announcement);
-			rendezvous.setSimilar(similar);
 			rendezvous.setDeleted(false);
 			rendezvous.setComment(comment);
 			res = rendezvous;
