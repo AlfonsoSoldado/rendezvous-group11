@@ -1,7 +1,6 @@
 
 package controllers;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ActorService;
 import services.AdministratorService;
 import services.RendezvousService;
 import services.UserService;
@@ -33,7 +31,6 @@ public class RendezvousController extends AbstractController {
 	@Autowired
 	private AdministratorService	administratorService;
 
-
 	// Constructors ---------------------------------------------------------
 
 	public RendezvousController() {
@@ -46,7 +43,6 @@ public class RendezvousController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Rendezvous> rendezvous;
-		
 		rendezvous = this.rendezvousService.findAll();
 		try {
 			if(userService.checkUserLogged()){
@@ -65,11 +61,9 @@ public class RendezvousController extends AbstractController {
 		} catch (Exception e) {
 			rendezvous.removeAll(rendezvousService.findRendezvousAdultOnly());
 		}
-
 		result = new ModelAndView("rendezvous/list");
 		result.addObject("rendezvous", rendezvous);
 		result.addObject("requestURI", "rendezvous/list.do");
-
 		return result;
 	}
 
@@ -77,44 +71,25 @@ public class RendezvousController extends AbstractController {
 	public ModelAndView listByUser(@RequestParam final int userId) {
 		ModelAndView result;
 		Collection<Rendezvous> rendezvous;
-
 		User user;
 		user = this.userService.findOne(userId);
-
 		rendezvous = user.getRendezvous();
-
 		result = new ModelAndView("rendezvous/listByUser");
 		result.addObject("rendezvous", rendezvous);
 		result.addObject("requestURI", "rendezvous/listByUser.do");
-
 		return result;
 	}
 
 	@RequestMapping(value = "/listSimilar", method = RequestMethod.GET)
 	public ModelAndView listSimilar(@RequestParam final int rendezvousId) {
 		ModelAndView result;
-		Collection<Rendezvous> rendezvous = new ArrayList<Rendezvous>();
-		final Rendezvous rv = this.rendezvousService.findOne(rendezvousId);
-		if (rv.getDeleted() == false) {
-
-			User creator;
-			creator = this.userService.findCreator(rendezvousId);
-
-			rendezvous = this.rendezvousService.findByCreator(creator.getId());
-			rendezvous.remove(rv);
-
-			Collection<Rendezvous> similar = new ArrayList<Rendezvous>();
-			rv.setSimilar(rendezvous);
-
-			similar = rv.getSimilar();
-
-			result = new ModelAndView("rendezvous/listSimilar");
-			result.addObject("rendezvous", similar);
-			result.addObject("requestURI", "rendezvous/listSimilar.do");
-		} else
-			result = new ModelAndView("redirect:list.do");
-
+		Collection<Rendezvous> similar;
+		Rendezvous rendezvous;
+		rendezvous = this.rendezvousService.findOne(rendezvousId);
+		similar = rendezvous.getSimilar();
+		result = new ModelAndView("rendezvous/listSimilar");
+		result.addObject("rendezvous", similar);
+		result.addObject("requestURI", "rendezvous/listSimilar.do");
 		return result;
 	}
-
 }
