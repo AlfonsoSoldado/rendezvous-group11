@@ -25,4 +25,4 @@
 
 
 <b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> <jstl:out value="${nameProject }"/> </b>
-<b> <jstl:out value="${cookies }" /> <a href="misc/legal.do"> <spring:message code="legal.nameProject"/></a> </b>
+<b> <jstl:out value="${cookies }" /> <a href="misc/legal.do"> <spring:message code="legal.terms"/></a> </b>
