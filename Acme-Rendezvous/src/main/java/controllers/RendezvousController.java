@@ -15,7 +15,6 @@ import services.ActorService;
 import services.AdministratorService;
 import services.RendezvousService;
 import services.UserService;
-import domain.Actor;
 import domain.Rendezvous;
 import domain.User;
 
@@ -33,9 +32,6 @@ public class RendezvousController extends AbstractController {
 	
 	@Autowired
 	private AdministratorService	administratorService;
-	
-	@Autowired
-	private ActorService	actorService;
 
 
 	// Constructors ---------------------------------------------------------
