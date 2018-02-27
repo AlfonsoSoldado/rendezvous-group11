@@ -18,6 +18,7 @@ import repositories.UserRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Answer;
 import domain.Comment;
 import domain.Question;
 import domain.RSVP;
@@ -50,6 +51,7 @@ public class UserService {
 		result = new User();
 		final UserAccount userAccount = new UserAccount();
 		final Authority authority = new Authority();
+		result.setAnswer(new ArrayList<Answer>());
 		result.setComment(new ArrayList<Comment>());
 		result.setRendezvous(new ArrayList<Rendezvous>());
 		result.setRsvp(new ArrayList<RSVP>());
@@ -133,6 +135,12 @@ public class UserService {
 	public User findUserByComment(final int commentId) {
 		User res;
 		res = this.userRepository.findUserByComment(commentId);
+		return res;
+	}
+	
+	public User findUserByAnswer(final int answerId) {
+		User res;
+		res = this.userRepository.findUserByAnswer(answerId);
 		return res;
 	}
 

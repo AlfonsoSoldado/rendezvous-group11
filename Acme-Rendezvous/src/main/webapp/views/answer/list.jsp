@@ -22,6 +22,7 @@
 	
 	<!-- Attributes -->
 	
+	<display:column> <acme:links url="user/displayByAnswer.do?answerId=${row.id}" code="comment.user" /> </display:column>
 	<acme:column property="text" code="answer.text"/>
 	
 </display:table>

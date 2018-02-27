@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -41,8 +42,9 @@ public class User extends Actor {
 	private Collection<Rendezvous>	rendezvous;
 	private Collection<RSVP>		rsvp;
 	private Collection<Question>	question;
+	private Collection<Answer>		answer;
 
-
+	@Valid
 	@OneToMany()
 	public Collection<Comment> getComment() {
 		return this.comment;
@@ -51,7 +53,8 @@ public class User extends Actor {
 	public void setComment(final Collection<Comment> comment) {
 		this.comment = comment;
 	}
-
+	
+	@Valid
 	@OneToMany
 	public Collection<Rendezvous> getRendezvous() {
 		return this.rendezvous;
@@ -61,6 +64,7 @@ public class User extends Actor {
 		this.rendezvous = rendezvous;
 	}
 
+	@Valid
 	@OneToMany
 	public Collection<RSVP> getRsvp() {
 		return this.rsvp;
@@ -69,7 +73,8 @@ public class User extends Actor {
 	public void setRsvp(final Collection<RSVP> rsvp) {
 		this.rsvp = rsvp;
 	}
-
+	
+	@Valid
 	@OneToMany
 	public Collection<Question> getQuestion() {
 		return this.question;
@@ -77,6 +82,16 @@ public class User extends Actor {
 
 	public void setQuestion(final Collection<Question> question) {
 		this.question = question;
+	}
+
+	@Valid
+	@OneToMany
+	public Collection<Answer> getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(Collection<Answer> answer) {
+		this.answer = answer;
 	}
 
 }

@@ -64,6 +64,9 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/misc/legal.do"
 			access="permitAll" />
+		<security:intercept-url pattern="/user/displayByAnswer.do"
+			access="permitAll" />
+			
 
 
 		

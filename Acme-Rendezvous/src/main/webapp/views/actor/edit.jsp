@@ -23,6 +23,7 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="userAccount" />
+	<form:hidden path="answer" />
 
 	<acme:textbox code="actor.name" path="name" />
 	<acme:textbox code="actor.surname" path="surname" />
@@ -36,6 +37,7 @@
 		<form:hidden path="rendezvous"/>
 		<form:hidden path="rsvp"/>
 		<form:hidden path="question"/>
+		<form:hidden path="answer" />
 		<acme:date code="actor.dateBorn" path="dateBorn"  placeholder="dd/MM/yyyy"/>
 
 	</security:authorize>
