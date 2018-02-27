@@ -30,8 +30,22 @@
 
 		<acme:submit name="save" code="comment.submit" />
 		<acme:cancel url="comment/list.do" code="comment.cancel" />
+	</security:authorize>
+
+</form:form>
+<form:form action="comment/administrator/edit.do" modelAttribute="comment">
+	<security:authorize access="hasRole('ADMIN')">
+	
+		<form:hidden path="momentMade" />
+		<form:hidden path="replies" />
+		<form:hidden path="rendezvous.id"/>
+		<form:hidden path="parent"/>
+		<form:hidden path="id"/>
+		<acme:textbox code="comment.text" path="text" />
+		<acme:textbox code="comment.picture" path="picture" />
+		
+		<acme:cancel url="comment/list.do" code="comment.cancel" />
 		<acme:delete confirmationCode="comment.confirmationCode" buttonCode="comment.delete" id="${comment.id }" />
 	</security:authorize>
 </form:form>
-
 

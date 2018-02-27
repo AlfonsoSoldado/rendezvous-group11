@@ -73,6 +73,8 @@
 	
 	<security:authorize access="hasRole('ADMIN')">
 	<display:column> <acme:links url="rendezvous/administrator/edit.do?rendezvousId=${row.id}" code="rendezvous.delete" /> </display:column>
+	<display:column> <acme:links url="comment/administrator/list.do?rendezvousId=${row.id}" code="rendezvous.comment" /> </display:column>
+	
 	</security:authorize>
 </display:table>
 
